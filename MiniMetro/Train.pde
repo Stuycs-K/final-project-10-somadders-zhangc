@@ -1,6 +1,6 @@
 import java.util.*;
 
-class Train{
+public class Train{
   
   private LinkedList<Station> trainLine;
   private int trainLineNum;
@@ -20,6 +20,6 @@ class Train{
   
   public void addStation(Station st){}
   
-  public void removeStation(Station st(){}
+  public void removeStation(Station st){}
   
 }

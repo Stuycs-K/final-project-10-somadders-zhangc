@@ -43,8 +43,23 @@ public class Train{
     return false;
   }
   
-  public void nextStation(){
-    
+  public Station nextStation(){
+    if(direction){
+      if(stationIndex + 1 >= trainLine.size()){
+        direction = false;
+        return nextStation();
+      }
+      stationIndex++;
+      return trainLine.get(stationIndex);
+      
+    } else {
+      if(stationIndex - 1 < 0){
+        direction = true;
+        return nextStation();
+      }
+      stationIndex--;
+      return trainLine.get(stationIndex);
+    }
   }
   
   private float calculateStationDist(Station st1, Station st2){

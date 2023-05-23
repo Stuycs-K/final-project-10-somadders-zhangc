@@ -1,8 +1,8 @@
 # Work Log
 
-## GROUP MEMBER 1
+## Siddhartha Somadder
 
-### date x
+### 5/22/2023
 
 info
 
@@ -11,9 +11,9 @@ info
 info
 
 
-## GROUP MEMBER 2
+## Cavin Zhang
 
-### date x
+### 5/22/2023
 
 info
 

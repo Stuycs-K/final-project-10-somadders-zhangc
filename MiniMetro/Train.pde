@@ -12,18 +12,6 @@ public class Train{
   
   public void visitStation(Station st){}
   
-  private void moveUpElements(Passenger[] arr){
-    Passenger[] temp = new Passenger[riders.length];
-    int k = 0;
-    for(int i = 0; i < riders.length; i++){
-      if(riders[i] != null){
-        temp[k] = riders[i];
-        k++;
-      }
-    }
-    riders = temp;
-  }
-  
   public void unload(Station st){
     for(int i = 0; i < riders.length; i++){
       if(riders[i].getType() == st.getType()){
@@ -33,6 +21,12 @@ public class Train{
   }
   
   public boolean add(Passenger p){
+    for(int i = 0; i < riders.length; i++){
+      if(riders[i] == null){
+        riders[i] = p;
+        return true;
+      }
+    }
     return false;
   }
   

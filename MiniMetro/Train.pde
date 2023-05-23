@@ -39,7 +39,13 @@ public class Train{
   }
   
   public void addStation(Station st){
-    
+    float distToFront = calculateStationDist(st, trainLine.peekFirst());
+    float distToLast = calculateStationDist(st, trainLine.peekLast());
+    if(distToFront > distToLast){
+      trainLine.addLast(st);
+    } else {
+      trainLine.addFirst(st);
+    }
   }
   
   public void removeStation(Station st){

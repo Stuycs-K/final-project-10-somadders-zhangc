@@ -12,6 +12,19 @@ public class Train{
   
   public void visitStation(Station st){}
   
+  public String toString(){
+    String str = "";
+    for(int i = 0; i < riders.length; i++){
+      if(i < riders.length-1){
+        str += riders[i] + ", ";
+      } else {
+        str += riders[i];
+      }
+    }
+    
+    return "[" + str + "]";
+  }
+  
   public void unload(Station st){
     for(int i = 0; i < riders.length; i++){
       if(riders[i].getType() == st.getType()){

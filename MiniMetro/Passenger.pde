@@ -1,4 +1,4 @@
-class Passenger{
+public class Passenger{
   private int pType;
   
   public Passenger(){

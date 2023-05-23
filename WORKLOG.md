@@ -4,14 +4,15 @@
 
 ### 5/22/2023
 
-info
+- Completed Passenger class with no-parameter constructor and accessor methods.
+- Completed UNTESTED Station class with accessors, constructor, and methods that interact with train class. Needs train class to be complete before proper testing ensues.
 
 ### date y
 
 info
 
 
-## Cavin Zhang
+## Calvin Zhang
 
 ### 5/22/2023
 

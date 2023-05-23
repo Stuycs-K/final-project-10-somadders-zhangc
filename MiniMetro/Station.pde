@@ -1,11 +1,12 @@
 import java.util.*;
+import java.io.*;
 
 public class Station{
   private int type;
   private float x;
   private float y;
   private int maxCapacity;
-  private Deque<Passenger> riders;
+  private ArrayDeque<Passenger> riders;
   private int overcrowdedTime;
   
   public Station(){
@@ -13,7 +14,7 @@ public class Station{
     y = (float) Math.random();
     maxCapacity = 6;
     overcrowdedTime = 0;
-    riders = new Deque<Passenger>();
+    riders = new ArrayDeque<Passenger>();
     
     int rand = (int) (Math.random() * 3);
     type = rand;
@@ -50,5 +51,9 @@ public class Station{
   
   public float getY(){
     return y;
+  }
+  
+  public String toString(){
+    return riders.toString();
   }
 }

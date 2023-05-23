@@ -48,7 +48,9 @@ public class Train{
     }
   }
   
+  // precondition: st is in trainLine
   public void removeStation(Station st){
+    trainLine.remove(trainLine.indexOf(st));
   }
   
   public Train (Station st){

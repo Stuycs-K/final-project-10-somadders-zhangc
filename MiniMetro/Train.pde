@@ -12,16 +12,27 @@ public class Train{
   
   public void visitStation(Station st){}
   
-  public void unload(Station st){}
+  public void unload(Station st){
+    for(int i = 0; i < riders.length; i++){
+      if(riders[i].getType() == st.getType()){
+        riders[i] = null;
+      }
+    }
+  }
   
-  public boolean add(){}
+  public boolean add(Passenger p){
+    return false;
+  }
   
-  public void nextStation(){}
+  public void nextStation(){
+    
+  }
   
   public void addStation(Station st){
   }
   
-  public void removeStation(Station st){}
+  public void removeStation(Station st){
+  }
   
   public Train (Station st){
     trainLine = new LinkedList<Station>();

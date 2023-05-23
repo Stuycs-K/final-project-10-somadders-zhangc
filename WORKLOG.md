@@ -16,7 +16,7 @@ info
 
 ### 5/22/2023
 
-info
+- Add skeleton code (instances and methods) to the main and Train classes based on our prototype.
 
 ### date y
 

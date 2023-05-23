@@ -7,18 +7,38 @@ public class Station{
   private int overcrowdedTime;
   
   public Station(){
-    x = Math.random();
-    y = Math.random();
+    x = (float) Math.random();
+    y = (float) Math.random();
     maxCapacity = 6;
     overcrowdedTime = 0;
     riders = new Deque<Passenger>();
+    
+    int rand = (int) (Math.random() * 3);
+    type = rand;
   }
   
-  public void addPassengers(){}
+  public void addPassengers(){
+    if(!overcrowded()){
+      riders.addFirst(new Passenger());
+    }
+    else{
+      overcrowdedTime++;
+    }
+  }
   
-  public void loadTrain(Train T){}
+  public void loadTrain(Train T){
+    if(riders.size() > 0){
+      while(T.add(riders.peekLast())){
+        riders.removeLast();
+      }
+    }
+  }
   
-  public boolean overcrowded(){}
+  public boolean overcrowded(){
+    return riders.size() >= maxCapacity;
+  }
   
-  public int getType{}
+  public int getType{
+    return type;
+  }
 }

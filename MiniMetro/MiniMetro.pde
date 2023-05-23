@@ -1,6 +1,7 @@
 import java.util.*;
 
 ArrayList<Train> trains;
+ArrayList<Station> stations;
 int totalPassengers;
 int selectedRoute;
 

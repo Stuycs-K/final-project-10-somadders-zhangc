@@ -18,8 +18,19 @@ public class Train{
   
   public void nextStation(){}
   
-  public void addStation(Station st){}
+  public void addStation(Station st){
+  }
   
   public void removeStation(Station st){}
+  
+  public Train (Station st){
+    trainLine = new LinkedList<Station>();
+    trainLineNum = stations.size();
+    direction = true;
+    stationIndex = 0;
+    riders = new Passenger[6];
+    x = st.getX();
+    y = st.getY();
+  }
   
 }

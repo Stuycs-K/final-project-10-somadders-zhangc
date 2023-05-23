@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class Station{
   private int type;
   private float x;
@@ -38,7 +40,15 @@ public class Station{
     return riders.size() >= maxCapacity;
   }
   
-  public int getType{
+  public int getType(){
     return type;
+  }
+  
+  public float getX(){
+    return x;
+  }
+  
+  public float getY(){
+    return y;
   }
 }

@@ -12,6 +12,19 @@ public class Train{
   
   public void visitStation(Station st){}
   
+  public String toString(){
+    String str = "";
+    for(int i = 0; i < riders.length; i++){
+      if(i < riders.length-1){
+        str += riders[i] + ", ";
+      } else {
+        str += riders[i];
+      }
+    }
+    
+    return "[" + str + "]";
+  }
+  
   public void unload(Station st){
     for(int i = 0; i < riders.length; i++){
       if(riders[i].getType() == st.getType()){
@@ -21,17 +34,51 @@ public class Train{
   }
   
   public boolean add(Passenger p){
+    for(int i = 0; i < riders.length; i++){
+      if(riders[i] == null){
+        riders[i] = p;
+        return true;
+      }
+    }
     return false;
   }
   
-  public void nextStation(){
-    
+  public Station nextStation(){
+    if(direction){
+      if(stationIndex + 1 >= trainLine.size()){
+        direction = false;
+        return nextStation();
+      }
+      stationIndex++;
+      return trainLine.get(stationIndex);
+      
+    } else {
+      if(stationIndex - 1 < 0){
+        direction = true;
+        return nextStation();
+      }
+      stationIndex--;
+      return trainLine.get(stationIndex);
+    }
+  }
+  
+  private float calculateStationDist(Station st1, Station st2){
+    return Math.abs(st1.getX() - st2.getY()) + Math.abs(st1.getY() - st2.getY());
   }
   
   public void addStation(Station st){
+    float distToFront = calculateStationDist(st, trainLine.peekFirst());
+    float distToLast = calculateStationDist(st, trainLine.peekLast());
+    if(distToFront > distToLast){
+      trainLine.addLast(st);
+    } else {
+      trainLine.addFirst(st);
+    }
   }
   
+  // precondition: st is in trainLine
   public void removeStation(Station st){
+    trainLine.remove(trainLine.indexOf(st));
   }
   
   public Train (Station st){

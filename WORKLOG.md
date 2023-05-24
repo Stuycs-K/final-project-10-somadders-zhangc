@@ -18,6 +18,13 @@ info
 
 - Add skeleton code (instances and methods) to the main and Train classes based on our prototype.
 
+### 5/23/2023
+
+- Completed Train class with constructor, instances, and methods as described in our prototype.
+- Add toString methods to Passenger and Train classes to help with debugging.
+- Begin debugging (testing) Train addStation(), removeStation(), and nextStation() methods.
+- Currently, addStation() will only add a Station to the end of the trainLine LinkedList, the complicated version has been commented out for now.
+
 ### date y
 
 info

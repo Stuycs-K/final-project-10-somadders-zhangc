@@ -101,4 +101,8 @@ public class Station{
   public int riderSize(){
     return riders.size();
   }
+  
+  public Passenger get(int index){
+    return null;
+  }
 }

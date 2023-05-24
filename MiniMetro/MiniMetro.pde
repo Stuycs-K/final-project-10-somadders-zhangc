@@ -13,11 +13,18 @@ void setup(){
   Passenger p = new Passenger();
   t.add(p);
   System.out.println(t);
+  System.out.println("add s2");
   t.addStation(s2);
   System.out.println(t.getStationIndex());
   t.nextStation();
   System.out.println(t.getStationIndex());
   t.nextStation();
+  System.out.println(t.getStationIndex());
+  t.nextStation();
+  System.out.println(t.getStationIndex());
+  
+  System.out.println("add s3");
+  t.addStation(s3);
   System.out.println(t.getStationIndex());
   t.nextStation();
   System.out.println(t.getStationIndex());

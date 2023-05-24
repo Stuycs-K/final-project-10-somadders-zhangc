@@ -4,6 +4,9 @@ ArrayList<Train> trains = new ArrayList<Train>();
 ArrayList<Station> stations = new ArrayList<Station>();
 int totalPassengers = 0;
 int selectedRoute = 0;
+LinkedList<Station> redLine;
+LinkedList<Station> blueLine;
+LinkedList<Station> yellowLine;
 
 void setup(){
   size(1000,800);
@@ -11,10 +14,16 @@ void setup(){
   stations.add(new Station(0));
   stations.add(new Station(1));
   stations.add(new Station(2));
-  /*
+
+  Station s1 = stations.get(0);
+  Station s2 = stations.get(1);
+  Station s3 = stations.get(2);
   Train t = new Train(s1);
   Passenger p = new Passenger();
   t.add(p);
+  t.addStation(s2);
+  
+  /*
   System.out.println(t);
   System.out.println("add s2");
   t.addStation(s2);
@@ -118,4 +127,8 @@ void displayStations(){
     text("S: " + numSq, target.getX(), target.getY()+5);
  */
   }
+}
+
+void drawLines(){
+  
 }

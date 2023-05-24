@@ -12,6 +12,10 @@ public class Train{
   
   public void visitStation(Station st){}
   
+  public int getStationIndex(){
+    return stationIndex;
+  }
+  
   public String toString(){
     String str = "";
     for(int i = 0; i < riders.length; i++){
@@ -44,6 +48,9 @@ public class Train{
   }
   
   public Station nextStation(){
+    if(trainLine.size() == 1){
+      return trainLine.get(stationIndex);
+    }
     if(direction){
       if(stationIndex + 1 >= trainLine.size()){
         direction = false;
@@ -67,6 +74,7 @@ public class Train{
   }
   
   public void addStation(Station st){
+    /*
     float distToFront = calculateStationDist(st, trainLine.peekFirst());
     float distToLast = calculateStationDist(st, trainLine.peekLast());
     if(distToFront > distToLast){
@@ -74,15 +82,26 @@ public class Train{
     } else {
       trainLine.addFirst(st);
     }
+    */
+    trainLine.addFirst(st);
   }
   
   // precondition: st is in trainLine
   public void removeStation(Station st){
-    trainLine.remove(trainLine.indexOf(st));
+    int stIndex = trainLine.indexOf(st);
+    trainLine.remove(stIndex);
+    if (stIndex == stationIndex){
+      if(direction){
+        stationIndex--;
+      } else {
+        stationIndex++;
+      }
+    }
   }
   
   public Train (Station st){
     trainLine = new LinkedList<Station>();
+    trainLine.addFirst(st);
     trainLineNum = stations.size();
     direction = true;
     stationIndex = 0;

@@ -74,6 +74,7 @@ public class Train{
   }
   
   public void addStation(Station st){
+    /*
     float distToFront = calculateStationDist(st, trainLine.peekFirst());
     float distToLast = calculateStationDist(st, trainLine.peekLast());
     if(distToFront > distToLast){
@@ -81,6 +82,8 @@ public class Train{
     } else {
       trainLine.addFirst(st);
     }
+    */
+    trainLine.addFirst(st);
   }
   
   // precondition: st is in trainLine

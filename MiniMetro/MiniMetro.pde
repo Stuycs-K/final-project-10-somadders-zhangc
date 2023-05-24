@@ -58,7 +58,7 @@ void draw(){
     }
   }
   
-  if(frameCount % 1000 == 0){
+  if(frameCount % 1500 == 0){
     spawnStation();
   }
 }
@@ -77,7 +77,7 @@ void spawnStation(){
   while(newST){
     newST = false;
     for(int i = 0; i < stations.size(); i++){
-      if(ST.getX() > stations.get(i).getX()-40 && ST.getX() < stations.get(i).getX()+40 && ST.getY() > stations.get(i).getY()-40 && ST.getY() < stations.get(i).getY()+40){
+      if(ST.getX() > stations.get(i).getX()-50 && ST.getX() < stations.get(i).getX()+50 && ST.getY() > stations.get(i).getY()-50 && ST.getY() < stations.get(i).getY()+50){
         ST = new Station();
         newST = true;
       }
@@ -92,13 +92,34 @@ void displayStations(){
   for(int i = 0; i < stations.size(); i++){
     Station target = stations.get(i);
     if(target.getType() == 0){
-      circle(target.getX(), target.getY(), 40);
+      circle(target.getX(), target.getY(), 50);
     }
     if(target.getType() == 1){
-      triangle(target.getX()+20, target.getY()+20, target.getX(), target.getY()-20, target.getX()-20, target.getY()+20);
+      triangle(target.getX()+25, target.getY()+25, target.getX(), target.getY()-25, target.getX()-25, target.getY()+25);
     }
     if(target.getType() == 2){
-      square(target.getX()-10, target.getY()-10, 40);
+      square(target.getX()-10, target.getY()-10, 50);
     }
+    /*
+    textSize(6);
+    int numCirc = 0;
+    int numTri = 0;
+    int numSq = 0;
+    for(int j = 0; j < target.riderSize(); i++){
+      if(target.get(i).getType() == 0){
+        numCirc++;
+      }
+      if(target.get(i).getType() == 1){
+        numTri++;
+      }
+      if(target.get(i).getType() == 2){
+        numSq++;
+      }
+    }
+    
+    text("C: " + numCirc, target.getX(), target.getY()-5);
+    text("T: " + numTri, target.getX(), target.getY());
+    text("S: " + numSq, target.getX(), target.getY()+5);
+ */
   }
 }

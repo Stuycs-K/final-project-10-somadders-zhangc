@@ -15,8 +15,8 @@ public class Station{
     if(x < 50){
       x = 50;
     }
-    if(x > width-50){
-      x = width-50;
+    if(x > width-100){
+      x = width-100;
     }
     if(y < 50){
       y = 50;
@@ -75,5 +75,9 @@ public class Station{
   
   public String toString(){
     return riders.toString();
+  }
+  
+  public int riderSize(){
+    return riders.size();
   }
 }

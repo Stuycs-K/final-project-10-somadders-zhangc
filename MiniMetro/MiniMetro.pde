@@ -6,6 +6,7 @@ int totalPassengers;
 int selectedRoute;
 
 void setup(){
+  /*
   Station s1 = new Station();
   Station s2 = new Station();
   Station s3 = new Station();
@@ -38,10 +39,10 @@ void setup(){
   System.out.println(t.getStationIndex());
   t.nextStation();
   System.out.println(t.getStationIndex());
+  */
 }
 
 void draw(){
-  /*
   if(frameCount % 600 == 0){
     for(int i = 0; i <= (stations.size()/2) + 1; i++){
       spawn();
@@ -51,7 +52,6 @@ void draw(){
   if(frameCount % 1800 == 0){
     spawnStation();
   }
-  */
 }
 
 void mousePressed(){}

@@ -10,7 +10,7 @@ LinkedList<Station> yellowLine;
 
 void setup(){
   size(1000,800);
-  
+
   stations.add(new Station(0));
   stations.add(new Station(1));
   stations.add(new Station(2));
@@ -22,7 +22,7 @@ void setup(){
   Passenger p = new Passenger();
   t.add(p);
   t.addStation(s2);
-  
+
   /*
   System.out.println(t);
   System.out.println("add s2");
@@ -34,13 +34,13 @@ void setup(){
   System.out.println(t.getStationIndex());
   t.nextStation();
   System.out.println(t.getStationIndex());
-  
+
   System.out.println("add s3");
   t.addStation(s3);
   System.out.println(t.getStationIndex());
   t.nextStation();
   System.out.println(t.getStationIndex());
-  
+
   System.out.println("test removeStation");
   t.removeStation(s1);
   System.out.println(t.getStationIndex());
@@ -62,7 +62,7 @@ void draw(){
       spawn();
     }
   }
-  
+
   if(frameCount % 1500 == 0){
     spawnStation();
   }
@@ -87,7 +87,23 @@ void spawnStation(){
         newST = true;
       }
     }
-  } 
+  }
+  ST.addPassengers();
+  stations.add(ST);
+}
+
+void spawnStation(int type){
+  boolean newST = true;
+  Station ST = new Station(type);
+  while(newST){
+    newST = false;
+    for(int i = 0; i < stations.size(); i++){
+      if(ST.getX() > stations.get(i).getX()-50 && ST.getX() < stations.get(i).getX()+50 && ST.getY() > stations.get(i).getY()-50 && ST.getY() < stations.get(i).getY()+50){
+        ST = new Station(type);
+        newST = true;
+      }
+    }
+  }
   ST.addPassengers();
   stations.add(ST);
 }
@@ -121,7 +137,7 @@ void displayStations(){
         numSq++;
       }
     }
-    
+
     text("C: " + numCirc, target.getX(), target.getY()-5);
     text("T: " + numTri, target.getX(), target.getY());
     text("S: " + numSq, target.getX(), target.getY()+5);
@@ -130,5 +146,5 @@ void displayStations(){
 }
 
 void drawLines(){
-  
+
 }

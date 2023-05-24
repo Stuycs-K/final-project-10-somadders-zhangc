@@ -10,7 +10,9 @@ public class Train{
   private float x;
   private float y;
   
-  public void visitStation(Station st){}
+  public void visitStation(Station st){
+    
+  }
   
   public int getStationIndex(){
     return stationIndex;

@@ -8,13 +8,9 @@ int selectedRoute = 0;
 void setup(){
   size(1000,800);
   
-  Station s1 = new Station();
-  Station s2 = new Station();
-  Station s3 = new Station();
-  
-  stations.add(s1);
-  stations.add(s2);
-  stations.add(s3);
+  stations.add(new Station(0));
+  stations.add(new Station(1));
+  stations.add(new Station(2));
   /*
   Train t = new Train(s1);
   Passenger p = new Passenger();

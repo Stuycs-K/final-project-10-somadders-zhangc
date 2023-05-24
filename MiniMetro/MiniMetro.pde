@@ -8,9 +8,9 @@ int selectedRoute = 0;
 void setup(){
   size(1000,800);
   
-  stations.add(new Station(0));
-  stations.add(new Station(1));
-  stations.add(new Station(2));
+  spawnStation(0);
+  spawnStation(1);
+  spawnStation(2);
   /*
   Train t = new Train(s1);
   Passenger p = new Passenger();
@@ -75,6 +75,22 @@ void spawnStation(){
     for(int i = 0; i < stations.size(); i++){
       if(ST.getX() > stations.get(i).getX()-50 && ST.getX() < stations.get(i).getX()+50 && ST.getY() > stations.get(i).getY()-50 && ST.getY() < stations.get(i).getY()+50){
         ST = new Station();
+        newST = true;
+      }
+    }
+  } 
+  ST.addPassengers();
+  stations.add(ST);
+}
+
+void spawnStation(int type){
+  boolean newST = true;
+  Station ST = new Station(type);
+  while(newST){
+    newST = false;
+    for(int i = 0; i < stations.size(); i++){
+      if(ST.getX() > stations.get(i).getX()-50 && ST.getX() < stations.get(i).getX()+50 && ST.getY() > stations.get(i).getY()-50 && ST.getY() < stations.get(i).getY()+50){
+        ST = new Station(type);
         newST = true;
       }
     }

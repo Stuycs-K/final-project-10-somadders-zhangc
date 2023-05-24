@@ -10,8 +10,20 @@ public class Station{
   private int overcrowdedTime;
   
   public Station(){
-    x = (float) Math.random();
-    y = (float) Math.random();
+    x = (float) Math.random() * width;
+    y = (float) Math.random() * height;
+    if(x < 50){
+      x = 50;
+    }
+    if(x > width-100){
+      x = width-100;
+    }
+    if(y < 50){
+      y = 50;
+    }
+    if(y > height-50){
+      y = height -50;
+    }
     maxCapacity = 6;
     overcrowdedTime = 0;
     riders = new ArrayDeque<Passenger>();
@@ -53,7 +65,19 @@ public class Station{
     return y;
   }
   
+  public void setX(float X){
+    x = X;
+  }
+  
+  public void setY(float Y){
+    y = Y;
+  }
+  
   public String toString(){
     return riders.toString();
+  }
+  
+  public int riderSize(){
+    return riders.size();
   }
 }

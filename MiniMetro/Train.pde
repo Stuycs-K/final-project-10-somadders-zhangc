@@ -12,11 +12,14 @@ public class Train{
   
   public void visitStation(Station st){
     // implement drawing train later
-    if(Math.abs(x-st.getX()) < 0.001 && Math.abs(y-st.getY()) < 0.001){
+    if(Math.abs(x-st.getX()) < 0.00001 && Math.abs(y-st.getY()) < 0.00001){
       Station nextSt = nextStation();
+      unload(st);
+      st.loadTrain(this);
     }
     else {
       Station nextSt = peekNextStation();
+      PVector displacement = new PVector(st.getX() - x,st.getY() - y);
     }
   }
   

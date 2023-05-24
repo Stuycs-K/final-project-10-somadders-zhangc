@@ -11,7 +11,13 @@ public class Train{
   private float y;
   
   public void visitStation(Station st){
-    
+    // implement drawing train later
+    if(Math.abs(x-st.getX()) < 0.001 && Math.abs(y-st.getY()) < 0.001){
+      Station nextSt = nextStation();
+    }
+    else {
+      Station nextSt = peekNextStation();
+    }
   }
   
   public int getStationIndex(){
@@ -47,6 +53,24 @@ public class Train{
       }
     }
     return false;
+  }
+  
+  public Station peekNextStation(){
+    if(trainLine.size() == 1){
+      return trainLine.get(stationIndex);
+    }
+    if(direction){
+      if(stationIndex + 1 >= trainLine.size()){
+        return peekNextStation();
+      }
+      return trainLine.get(stationIndex);
+      
+    } else {
+      if(stationIndex - 1 < 0){
+        return nextStation();
+      }
+      return trainLine.get(stationIndex);
+    }
   }
   
   public Station nextStation(){

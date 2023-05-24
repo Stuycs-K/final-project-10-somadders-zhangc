@@ -103,6 +103,10 @@ public class Station{
   }
   
   public Passenger get(int index){
-    return null;
+    ArrayDeque<Passenger> cloned = riders.clone();
+    for(int i = 0; i < index-1; i++){
+      cloned.removeLast();
+    }
+    return cloned.removeLast();
   }
 }

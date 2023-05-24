@@ -42,6 +42,14 @@ void setup(){
   t.nextStation();
   System.out.println(t.getStationIndex());
   */
+  
+  Station S = new Station();
+  S.addPassengers();
+  S.addPassengers();
+  S.addPassengers();
+  S.addPassengers();
+  System.out.println(S);
+  System.out.println(S.get(1));
 }
 
 void draw(){
@@ -132,6 +140,6 @@ void displayStations(){
     text("C: " + numCirc, target.getX(), target.getY()-5);
     text("T: " + numTri, target.getX(), target.getY());
     text("S: " + numSq, target.getX(), target.getY()+5);
- */
-  }
+  */  
+}
 }

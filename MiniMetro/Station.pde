@@ -32,6 +32,27 @@ public class Station{
     type = rand;
   }
   
+  public Station(int Type){
+    x = (float) Math.random() * width;
+    y = (float) Math.random() * height;
+    if(x < 50){
+      x = 50;
+    }
+    if(x > width-100){
+      x = width-100;
+    }
+    if(y < 50){
+      y = 50;
+    }
+    if(y > height-50){
+      y = height -50;
+    }
+    maxCapacity = 6;
+    overcrowdedTime = 0;
+    riders = new ArrayDeque<Passenger>();
+    type = Type;
+  }
+  
   public void addPassengers(){
     if(!overcrowded()){
       riders.addFirst(new Passenger());

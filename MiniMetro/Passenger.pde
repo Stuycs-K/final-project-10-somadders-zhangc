@@ -9,4 +9,14 @@ public class Passenger{
   public int getType(){
     return pType;
   }
+  
+  public String toString(){
+    if(pType == 0){
+      return "circle";
+    } else if (pType == 1){
+      return "triangle";
+    } else {
+      return "square";
+    }
+  }
 }

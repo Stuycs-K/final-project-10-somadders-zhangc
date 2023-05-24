@@ -12,6 +12,10 @@ public class Train{
   
   public void visitStation(Station st){}
   
+  public int getStationIndex(){
+    return stationIndex;
+  }
+  
   public String toString(){
     String str = "";
     for(int i = 0; i < riders.length; i++){
@@ -83,6 +87,7 @@ public class Train{
   
   public Train (Station st){
     trainLine = new LinkedList<Station>();
+    trainLine.addFirst(st);
     trainLineNum = stations.size();
     direction = true;
     stationIndex = 0;

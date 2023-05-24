@@ -7,9 +7,12 @@
 - Completed Passenger class with no-parameter constructor and accessor methods.
 - Completed UNTESTED Station class with accessors, constructor, and methods that interact with train class. Needs train class to be complete before proper testing ensues.
 
-### date y
+### 5/23/2023
 
-info
+- Debugged some issues in the station class.
+- Added more accessors and a few mutators to the instances of station class.
+- Developed MiniMetro.pde to have a proper drawStations() function that displays the current set of stations in accordance to stations array list, being wary of the type of station being displayed.
+- Changed station spawning such that overlap is minimized, may need a little more work because it still happens rarely.
 
 
 ## Calvin Zhang

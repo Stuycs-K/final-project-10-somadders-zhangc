@@ -48,6 +48,9 @@ public class Train{
   }
   
   public Station nextStation(){
+    if(trainLine.size() == 1){
+      return trainLine.get(stationIndex);
+    }
     if(direction){
       if(stationIndex + 1 >= trainLine.size()){
         direction = false;
@@ -82,7 +85,15 @@ public class Train{
   
   // precondition: st is in trainLine
   public void removeStation(Station st){
-    trainLine.remove(trainLine.indexOf(st));
+    int stIndex = trainLine.indexOf(st);
+    trainLine.remove(stIndex);
+    if (stIndex == stationIndex){
+      if(direction){
+        stationIndex--;
+      } else {
+        stationIndex++;
+      }
+    }
   }
   
   public Train (Station st){

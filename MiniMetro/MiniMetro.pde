@@ -14,13 +14,23 @@ void setup(){
   t.add(p);
   System.out.println(t);
   t.addStation(s2);
-  System.out.println(t.stationIndex);
+  System.out.println(t.getStationIndex());
   t.nextStation();
-  System.out.println(t.stationIndex);
+  System.out.println(t.getStationIndex());
   t.nextStation();
-  System.out.println(t.stationIndex);
+  System.out.println(t.getStationIndex());
   t.nextStation();
-  System.out.println(t.stationIndex);
+  System.out.println(t.getStationIndex());
+  
+  System.out.println("test removeStation");
+  t.removeStation(s1);
+  System.out.println(t.getStationIndex());
+  t.nextStation();
+  System.out.println(t.getStationIndex());
+  t.nextStation();
+  System.out.println(t.getStationIndex());
+  t.nextStation();
+  System.out.println(t.getStationIndex());
 }
 
 void draw(){

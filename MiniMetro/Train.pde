@@ -17,6 +17,7 @@ public class Train{
       nextSt = nextStation();
       unload(nextSt);
       nextSt.loadTrain(this);
+      // set train position to station position when train is close to the station to avoid float errors
       position = new PVector(nextSt.getX(), nextSt.getY());
       return true;
     }

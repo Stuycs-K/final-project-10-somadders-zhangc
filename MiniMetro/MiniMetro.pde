@@ -4,9 +4,9 @@ ArrayList<Train> trains = new ArrayList<Train>();
 ArrayList<Station> stations = new ArrayList<Station>();
 int totalPassengers = 0;
 int selectedRoute = 0;
-LinkedList<Station> redLine;
-LinkedList<Station> blueLine;
-LinkedList<Station> yellowLine;
+LinkedList<Station> redLine = new LinkedList<Station>();
+LinkedList<Station> blueLine = new LinkedList<Station>();
+LinkedList<Station> yellowLine = new LinkedList<Station>();
 color RED = color(178,34,34);
 color BLUE = color(0,0,205);
 color YELLOW = color(255,215,0);
@@ -26,8 +26,6 @@ void setup(){
   Passenger p = new Passenger();
   t.add(p);
   t.addStation(s2);
-  
-  drawLines(s1,s2);
   
   /*
   System.out.println(t.position);
@@ -81,12 +79,15 @@ void draw(){
     spawnStation();
   }
   
-  // loop through trains and draw all train lines between connected stations;
-  for(int i = 0; i < trains.size(); i++){
-    LinkedList<Station> t = trains.get(i).trainLine;
-    for(int j = 0; j < t.size()-1; j++){
-      drawLines(t.get(j),t.get(j+1));
-    }
+  // go through all three lines and draw connected stations
+  for(int i = 0; i < redLine.size()-1; i++){
+    drawLine(redLine.get(i),redLine.get(i+1),RED);
+  }
+  for(int i = 0; i < blueLine.size()-1; i++){
+    drawLine(blueLine.get(i),blueLine.get(i+1),BLUE);
+  }
+  for(int i = 0; i < yellowLine.size()-1; i++){
+    drawLine(yellowLine.get(i),yellowLine.get(i+1),YELLOW);
   }
 }
 
@@ -168,15 +169,9 @@ void displayStations(){
 }
 
 // edit method to use redLine, blueLine, and yellowLine linkedlists
-void drawLines(Station s1, Station s2){
+void drawLine(Station s1, Station s2, color c){
   strokeWeight(10);
-  if(selectedRoute == 0){
-    stroke(RED);
-  } else if (selectedRoute == 1){
-    stroke(BLUE);
-  } else if (selectedRoute == 2){
-    stroke(YELLOW);
-  }
+  stroke(c);
   
   line(s1.getX(), s1.getY(), s2.getX(), s2.getY());
   

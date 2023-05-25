@@ -121,6 +121,13 @@ public class Train{
     }
     */
     trainLine.addFirst(st);
+    if(selectedRoute == 0){
+      redLine.addFirst(st);
+    } else if (selectedRoute == 1){
+      blueLine.addFirst(st);
+    } else if (selectedRoute == 2){
+      yellowLine.addFirst(st);
+    }
   }
   
   // precondition: st is in trainLine
@@ -138,7 +145,7 @@ public class Train{
   
   public Train (Station st){
     trainLine = new LinkedList<Station>();
-    trainLine.addFirst(st);
+    this.addStation(st);
     trainLineNum = stations.size();
     direction = true;
     stationIndex = 0;

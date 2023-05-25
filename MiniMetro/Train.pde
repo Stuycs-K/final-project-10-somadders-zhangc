@@ -10,19 +10,23 @@ public class Train{
   private PVector position;
   private float speed;
   
-  public void visitStation(){
+  public boolean visitStation(){
     // implement drawing train later
     Station nextSt = peekNextStation();
-    if(Math.abs(position.x-nextSt.getX()) < 0.01 && Math.abs(position.y-nextSt.getY()) < 0.01){
+    if(Math.abs(position.x-nextSt.getX()) < 1 && Math.abs(position.y-nextSt.getY()) < 1){
       nextSt = nextStation();
       unload(nextSt);
       nextSt.loadTrain(this);
+      position = new PVector(nextSt.getX(), nextSt.getY());
+      return true;
     }
     else {
-      PVector displacement = new PVector(nextSt.getX() - position.x,nextSt.getY() - position.y);
+      PVector stPosition = new PVector(nextSt.getX(), nextSt.getY());
+      PVector displacement = PVector.sub(stPosition, position);
       displacement.normalize();
       displacement.mult(speed);
       position.add(displacement);
+      return false;
     }
   }
   
@@ -45,7 +49,7 @@ public class Train{
   
   public void unload(Station st){
     for(int i = 0; i < riders.length; i++){
-      if(riders[i].getType() == st.getType()){
+      if(riders[i] != null && riders[i].getType() == st.getType()){
         riders[i] = null;
       }
     }
@@ -67,13 +71,13 @@ public class Train{
     }
     if(direction){
       if(stationIndex + 1 >= trainLine.size()){
-        return peekNextStation();
+        return trainLine.get(stationIndex-1);
       }
       return trainLine.get(stationIndex);
       
     } else {
       if(stationIndex - 1 < 0){
-        return nextStation();
+        return trainLine.get(stationIndex+1);
       }
       return trainLine.get(stationIndex);
     }
@@ -139,7 +143,7 @@ public class Train{
     stationIndex = 0;
     riders = new Passenger[6];
     position = new PVector(st.getX(),st.getY());
-    speed = 0.1;
+    speed = 1;
   }
   
 }

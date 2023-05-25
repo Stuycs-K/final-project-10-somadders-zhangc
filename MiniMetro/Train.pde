@@ -131,33 +131,44 @@ public class Train{
   }
   
   // precondition: st is in trainLine
+  
+  // NOTE TO SELF: snap train back to previous station when station is removed
+  // special cases: 2 stations, removed station is at very start or end (in which case, continue to next station)
   public void removeStation(Station st){
-    int stIndex = trainLine.indexOf(st);
-    int stIndexInMain = redLine.indexOf(st);
-    int route = 0;
-    if (stIndexInMain == -1){
-      stIndexInMain = blueLine.indexOf(st);
-      route = 1;
+    if(trainLine.size() <= 2){
+      // delete train line and train
     }
-    if (stIndexInMain == -1){
-      stIndexInMain = yellowLine.indexOf(st);
-      route = 2;
-    }
-    
-    if(route == 0){
-      redLine.remove(stIndexInMain);
-    } else if (route == 1){
-      blueLine.remove(stIndexInMain);
-    } else if (route == 2){
-      yellowLine.remove(stIndexInMain);
-    }
-    
-    trainLine.remove(stIndex);
-    if (stIndex == stationIndex){
-      if(direction){
-        stationIndex--;
-      } else {
-        stationIndex++;
+    else {
+      int stIndex = trainLine.indexOf(st);
+      int stIndexInMain = redLine.indexOf(st);
+      int route = 0;
+      if (stIndexInMain == -1){
+        stIndexInMain = blueLine.indexOf(st);
+        route = 1;
+      }
+      if (stIndexInMain == -1){
+        stIndexInMain = yellowLine.indexOf(st);
+        route = 2;
+      }
+      System.out.println(route);
+      
+      if(stIndexInMain != -1){
+        if(route == 0){
+          redLine.remove(stIndexInMain);
+        } else if (route == 1){
+          blueLine.remove(stIndexInMain);
+        } else if (route == 2){
+          yellowLine.remove(stIndexInMain);
+        }
+      }
+      
+      trainLine.remove(stIndex);
+      if (stIndex == stationIndex){
+        if(direction){
+          stationIndex--;
+        } else {
+          stationIndex++;
+        }
       }
     }
   }

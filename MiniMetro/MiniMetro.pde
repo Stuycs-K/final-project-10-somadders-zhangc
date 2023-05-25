@@ -80,7 +80,7 @@ void draw(){
     }
   }
 
-  if(frameCount % 500 == 0){
+  if(frameCount % 200 == 0){
     spawnStation();
   }
   
@@ -99,7 +99,11 @@ void draw(){
 
 }
 
-void mousePressed(){}
+void mousePressed(){
+  for(int i = 0; i < trains.size(); i++){
+    trains.get(i).removeStation(stations.get(0));
+  }
+}
 
 void spawn(){
    int randSt = (int) (Math.random() * stations.size());

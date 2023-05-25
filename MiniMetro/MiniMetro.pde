@@ -73,7 +73,6 @@ void setup(){
 
 void draw(){
   background(255);
-  displayStations();
   int decline = frameCount/200;
   if(frameCount % 200 - decline == 0){
     for(int i = 0; i <= (stations.size()/2) + 1; i++){
@@ -95,8 +94,9 @@ void draw(){
   for(int i = 0; i < yellowLine.size()-1; i++){
     drawLine(yellowLine.get(i),yellowLine.get(i+1),YELLOW);
   }
-  
+  displayStations();
   drawTrains();
+
 }
 
 void mousePressed(){}
@@ -144,6 +144,7 @@ void displayStations(){
   stroke(0);
   for(int i = 0; i < stations.size(); i++){
     Station target = stations.get(i);
+    fill(255);
     if(target.getType() == 0){
       circle(target.getX(), target.getY(), 50);
     }
@@ -153,27 +154,39 @@ void displayStations(){
     if(target.getType() == 2){
       square(target.getX()-10, target.getY()-10, 50);
     }
-    /*
-    textSize(6);
     int numCirc = 0;
     int numTri = 0;
     int numSq = 0;
-    for(int j = 0; j < target.riderSize(); i++){
-      if(target.get(i).getType() == 0){
+    for(int j = 0; j < target.riderSize(); j++){
+      if(target.get(j).getType() == 0){
         numCirc++;
       }
-      if(target.get(i).getType() == 1){
+      if(target.get(j).getType() == 1){
         numTri++;
       }
-      if(target.get(i).getType() == 2){
+      if(target.get(j).getType() == 2){
         numSq++;
       }
     }
-
-    text("C: " + numCirc, target.getX(), target.getY()-5);
-    text("T: " + numTri, target.getX(), target.getY());
-    text("S: " + numSq, target.getX(), target.getY()+5);
-  */  
+    fill(0);
+    if(target.getType() == 0){
+      textSize(13);
+      text("C: " + numCirc, target.getX()-9, target.getY()-5);
+      text("T: " + numTri, target.getX()-9, target.getY()+5);
+      text("S: " + numSq, target.getX()-9, target.getY()+15);
+    }
+    if(target.getType() == 1){
+      textSize(10);
+      text("C: " + numCirc, target.getX()-7, target.getY());
+      text("T: " + numTri, target.getX()-7, target.getY()+10);
+      text("S: " + numSq, target.getX()-7, target.getY()+20);
+    }
+    if(target.getType() == 2){
+      textSize(13);
+      text("C: " + numCirc, target.getX()-18, target.getY()-15);
+      text("T: " + numTri, target.getX()-18, target.getY()-5);
+      text("S: " + numSq, target.getX()-18, target.getY()+5);
+    }
 }
 }
 
@@ -188,6 +201,7 @@ void drawLine(Station s1, Station s2, color c){
 }
 
 void drawTrains(){
+  fill(255);
   rectMode(CENTER);
   for(int i = 0; i < trains.size(); i++){
     Train t = trains.get(i);

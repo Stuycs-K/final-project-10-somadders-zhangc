@@ -63,10 +63,8 @@ public class Station{
   }
   
   public void loadTrain(Train T){
-    if(riders.size() > 0){
-      while(T.add(riders.peekLast())){
-        riders.removeLast();
-      }
+    while(riders.size() > 0 && T.add(riders.peekLast())){
+      riders.removeLast();
     }
   }
   

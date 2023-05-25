@@ -14,11 +14,11 @@ public class Train{
     // implement drawing train later
     Station nextSt = peekNextStation();
     if(Math.abs(position.x-nextSt.getX()) < 1 && Math.abs(position.y-nextSt.getY()) < 1){
+      // set train position to station position when train is close to the station to avoid float errors
+      position = new PVector(nextSt.getX(), nextSt.getY());
       nextSt = nextStation();
       unload(nextSt);
       nextSt.loadTrain(this);
-      // set train position to station position when train is close to the station to avoid float errors
-      position = new PVector(nextSt.getX(), nextSt.getY());
       return true;
     }
     else {
@@ -71,16 +71,16 @@ public class Train{
       return trainLine.get(stationIndex);
     }
     if(direction){
-      if(stationIndex + 1 >= trainLine.size()){
-        return trainLine.get(stationIndex-1);
+      if(stationIndex >= trainLine.size()-1){
+        return trainLine.get(stationIndex - 1);
       }
-      return trainLine.get(stationIndex);
+      return trainLine.get(stationIndex + 1);
       
     } else {
       if(stationIndex - 1 < 0){
-        return trainLine.get(stationIndex+1);
+        return trainLine.get(stationIndex + 1);
       }
-      return trainLine.get(stationIndex);
+      return trainLine.get(stationIndex - 1);
     }
   }
   
@@ -89,19 +89,19 @@ public class Train{
       return trainLine.get(stationIndex);
     }
     if(direction){
+      stationIndex++;
       if(stationIndex + 1 >= trainLine.size()){
         direction = false;
-        return nextStation();
+        return trainLine.get(stationIndex);
       }
-      stationIndex++;
       return trainLine.get(stationIndex);
       
     } else {
+      stationIndex--;
       if(stationIndex - 1 < 0){
         direction = true;
-        return nextStation();
+        return trainLine.get(stationIndex);
       }
-      stationIndex--;
       return trainLine.get(stationIndex);
     }
   }

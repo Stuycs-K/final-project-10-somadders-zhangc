@@ -17,7 +17,8 @@
 ### 5/24/2023
 
 - Each station now has a label for its current set of passengers.
-- New get method for station class that returns a specific index of the stations riders respective to order.
+- New get(index i) method for station class that returns a specific index of the stations riders respective to order.
+- When printed, station returns set of passengers in an array.
 
 
 ## Calvin Zhang

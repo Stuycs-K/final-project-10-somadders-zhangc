@@ -14,6 +14,11 @@
 - Developed MiniMetro.pde to have a proper drawStations() function that displays the current set of stations in accordance to stations array list, being wary of the type of station being displayed.
 - Changed station spawning such that overlap is minimized, may need a little more work because it still happens rarely.
 
+### 5/24/2023
+
+- Each station now has a label for its current set of passengers.
+- New get method for station class that returns a specific index of the stations riders respective to order.
+
 
 ## Calvin Zhang
 

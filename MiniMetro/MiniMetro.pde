@@ -34,7 +34,7 @@ void setup(){
   System.out.println(t.position);
   */
 
-  //TESTING ADD AND REMOVE STATION
+  /*//TESTING ADD AND REMOVE STATION
   System.out.println(t);
   System.out.println("add s2");
   //t.addStation(s2);
@@ -51,7 +51,6 @@ void setup(){
   System.out.println(t.getStationIndex());
   t.nextStation();
   System.out.println(t.getStationIndex());
- /*
   System.out.println("test removeStation");
   t.removeStation(s1);
   System.out.println(t.getStationIndex());
@@ -114,6 +113,7 @@ void spawnStation(){
   }
   ST.addPassengers();
   stations.add(ST);
+  trains.get(0).addStation(ST);
 }
 
 void spawnStation(int type){
@@ -184,6 +184,6 @@ void drawTrains(){
   for(int i = 0; i < trains.size(); i++){
     Train t = trains.get(i);
     t.visitStation();
-    rect(t.position.x, t.position.y, 20, 20, 10, 10, 10, 10);
+    rect(t.position.x, t.position.y, 20, 20, 2, 2, 2, 2);
   }
 }

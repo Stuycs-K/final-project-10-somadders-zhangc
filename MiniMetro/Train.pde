@@ -120,13 +120,13 @@ public class Train{
       trainLine.addFirst(st);
     }
     */
-    trainLine.addFirst(st);
+    trainLine.addLast(st);
     if(selectedRoute == 0){
-      redLine.addFirst(st);
+      redLine.addLast(st);
     } else if (selectedRoute == 1){
-      blueLine.addFirst(st);
+      blueLine.addLast(st);
     } else if (selectedRoute == 2){
-      yellowLine.addFirst(st);
+      yellowLine.addLast(st);
     }
   }
   

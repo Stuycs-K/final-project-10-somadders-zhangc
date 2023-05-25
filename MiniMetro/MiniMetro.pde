@@ -73,7 +73,7 @@ void draw(){
     }
   }
 
-  if(frameCount % 1500 == 0){
+  if(frameCount % 1000 == 0){
     spawnStation();
   }
   

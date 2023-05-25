@@ -71,14 +71,14 @@ public class Train{
       return trainLine.get(stationIndex);
     }
     if(direction){
-      if(stationIndex + 1 >= trainLine.size()){
-        return trainLine.get(stationIndex-1);
+      if(stationIndex >= trainLine.size()-1){
+        return trainLine.get(stationIndex - 1);
       }
       return trainLine.get(stationIndex + 1);
       
     } else {
       if(stationIndex - 1 < 0){
-        return trainLine.get(stationIndex+1);
+        return trainLine.get(stationIndex + 1);
       }
       return trainLine.get(stationIndex - 1);
     }
@@ -89,19 +89,21 @@ public class Train{
       return trainLine.get(stationIndex);
     }
     if(direction){
+      stationIndex++;
       if(stationIndex + 1 >= trainLine.size()){
         direction = false;
-        return nextStation();
+            System.out.println("a");
+        return trainLine.get(stationIndex);
       }
-      stationIndex++;
       return trainLine.get(stationIndex);
       
     } else {
+      stationIndex--;
       if(stationIndex - 1 < 0){
         direction = true;
-        return nextStation();
+            System.out.println("b");
+        return trainLine.get(stationIndex);
       }
-      stationIndex--;
       return trainLine.get(stationIndex);
     }
   }

@@ -7,19 +7,22 @@ public class Train{
   private boolean direction;
   private int stationIndex;
   private Passenger[] riders;
-  private float x;
-  private float y;
+  private PVector position;
+  private float speed;
   
-  public void visitStation(Station st){
+  public void visitStation(){
     // implement drawing train later
-    if(Math.abs(x-st.getX()) < 0.00001 && Math.abs(y-st.getY()) < 0.00001){
-      Station nextSt = nextStation();
-      unload(st);
-      st.loadTrain(this);
+    Station nextSt = peekNextStation();
+    if(Math.abs(position.x-nextSt.getX()) < 0.01 && Math.abs(position.y-nextSt.getY()) < 0.01){
+      nextSt = nextStation();
+      unload(nextSt);
+      nextSt.loadTrain(this);
     }
     else {
-      Station nextSt = peekNextStation();
-      PVector displacement = new PVector(st.getX() - x,st.getY() - y);
+      PVector displacement = new PVector(nextSt.getX() - position.x,nextSt.getY() - position.y);
+      displacement.normalize();
+      displacement.mult(speed);
+      position.add(displacement);
     }
   }
   
@@ -135,8 +138,8 @@ public class Train{
     direction = true;
     stationIndex = 0;
     riders = new Passenger[6];
-    x = st.getX();
-    y = st.getY();
+    position = new PVector(st.getX(),st.getY());
+    speed = 0.1;
   }
   
 }

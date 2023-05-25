@@ -22,6 +22,14 @@ void setup(){
   Passenger p = new Passenger();
   t.add(p);
   t.addStation(s2);
+  
+  System.out.println(t.position);
+  System.out.println(s1.x + " " + s1.y);
+  System.out.println(s2.x + " " + s2.y);
+  for(int i = 0; i < 1000; i++){
+  t.visitStation();
+  }
+  System.out.println(t.position);
 
   /*
   System.out.println(t);

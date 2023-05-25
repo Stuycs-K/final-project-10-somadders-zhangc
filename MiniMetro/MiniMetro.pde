@@ -4,20 +4,40 @@ ArrayList<Train> trains = new ArrayList<Train>();
 ArrayList<Station> stations = new ArrayList<Station>();
 int totalPassengers = 0;
 int selectedRoute = 0;
+LinkedList<Station> redLine = new LinkedList<Station>();
+LinkedList<Station> blueLine = new LinkedList<Station>();
+LinkedList<Station> yellowLine = new LinkedList<Station>();
+color RED = color(178,34,34);
+color BLUE = color(0,0,205);
+color YELLOW = color(255,215,0);
 
 void setup(){
   size(1000,800);
-  
-  spawnStation(0);
-  spawnStation(1);
-  spawnStation(2);
-  /*
+
+  stations.add(new Station(0));
+  stations.add(new Station(1));
+  stations.add(new Station(2));
+
+  Station s1 = stations.get(0);
+  Station s2 = stations.get(1);
+  Station s3 = stations.get(2);
   Train t = new Train(s1);
   Passenger p = new Passenger();
   t.add(p);
+  t.addStation(s2);
+  
+  /* //TESTING VISIT STATION
+  System.out.println(t.position);
+  System.out.println(s1.x + " " + s1.y);
+  System.out.println(s2.x + " " + s2.y);
+  while(!t.visitStation()){}
+  System.out.println(t.position);
+  */
+
+  /* //TESTING ADD AND REMOVE STATION
   System.out.println(t);
   System.out.println("add s2");
-  t.addStation(s2);
+  //t.addStation(s2);
   System.out.println(t.getStationIndex());
   t.nextStation();
   System.out.println(t.getStationIndex());
@@ -25,13 +45,13 @@ void setup(){
   System.out.println(t.getStationIndex());
   t.nextStation();
   System.out.println(t.getStationIndex());
-  
+
   System.out.println("add s3");
   t.addStation(s3);
   System.out.println(t.getStationIndex());
   t.nextStation();
   System.out.println(t.getStationIndex());
-  
+
   System.out.println("test removeStation");
   t.removeStation(s1);
   System.out.println(t.getStationIndex());
@@ -61,9 +81,20 @@ void draw(){
       spawn();
     }
   }
-  
+
   if(frameCount % 1500 == 0){
     spawnStation();
+  }
+  
+  // go through all three lines and draw connected stations
+  for(int i = 0; i < redLine.size()-1; i++){
+    drawLine(redLine.get(i),redLine.get(i+1),RED);
+  }
+  for(int i = 0; i < blueLine.size()-1; i++){
+    drawLine(blueLine.get(i),blueLine.get(i+1),BLUE);
+  }
+  for(int i = 0; i < yellowLine.size()-1; i++){
+    drawLine(yellowLine.get(i),yellowLine.get(i+1),YELLOW);
   }
 }
 
@@ -86,7 +117,7 @@ void spawnStation(){
         newST = true;
       }
     }
-  } 
+  }
   ST.addPassengers();
   stations.add(ST);
 }
@@ -102,7 +133,7 @@ void spawnStation(int type){
         newST = true;
       }
     }
-  } 
+  }
   ST.addPassengers();
   stations.add(ST);
 }
@@ -136,10 +167,20 @@ void displayStations(){
         numSq++;
       }
     }
-    
+
     text("C: " + numCirc, target.getX(), target.getY()-5);
     text("T: " + numTri, target.getX(), target.getY());
     text("S: " + numSq, target.getX(), target.getY()+5);
   */  
 }
+}
+
+void drawLine(Station s1, Station s2, color c){
+  strokeWeight(10);
+  stroke(c);
+  
+  line(s1.getX(), s1.getY(), s2.getX(), s2.getY());
+  
+  strokeWeight(4);
+  stroke(0);
 }

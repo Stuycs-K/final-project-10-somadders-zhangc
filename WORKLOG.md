@@ -14,6 +14,12 @@
 - Developed MiniMetro.pde to have a proper drawStations() function that displays the current set of stations in accordance to stations array list, being wary of the type of station being displayed.
 - Changed station spawning such that overlap is minimized, may need a little more work because it still happens rarely.
 
+### 5/24/2023
+
+- Each station now has a label for its current set of passengers.
+- New get(index i) method for station class that returns a specific index of the stations riders respective to order.
+- When printed, station returns set of passengers in an array.
+
 
 ## Calvin Zhang
 
@@ -27,6 +33,12 @@
 - Add toString methods to Passenger and Train classes to help with debugging.
 - Begin debugging (testing) Train addStation(), removeStation(), and nextStation() methods.
 - Currently, addStation() will only add a Station to the end of the trainLine LinkedList, the complicated version has been commented out for now.
+
+### 5/24/2023
+- Implement visitStation() method for Train. Replace x and y of Train with a PVector for position. visitStation() moves the Train from one station to the next over time until it reaches the station and then unloads/loads passengers.
+- Add drawLine() method to MiniMetro.pde to connect connected stations visually using the line LinkedLists in the same file.
+- Update addStation() and removeStation() methods to work with red, blue, and yellow line LinkedLists.
+- Update Train constructor to remove unnecessary code when testing and add Train object to ArrayList of all trains.
 
 ### date y
 

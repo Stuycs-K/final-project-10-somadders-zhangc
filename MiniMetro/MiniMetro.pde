@@ -22,12 +22,11 @@ void setup(){
   Station s2 = stations.get(1);
   Station s3 = stations.get(2);
   Train t = new Train(s1);
-  trains.add(t);
   Passenger p = new Passenger();
   t.add(p);
   t.addStation(s2);
   
-  /*
+  /* TESTING VISIT STATION
   System.out.println(t.position);
   System.out.println(s1.x + " " + s1.y);
   System.out.println(s2.x + " " + s2.y);
@@ -35,7 +34,7 @@ void setup(){
   System.out.println(t.position);
   */
 
-  /*
+  /* TESTING ADD AND REMOVE STATION
   System.out.println(t);
   System.out.println("add s2");
   t.addStation(s2);
@@ -168,7 +167,6 @@ void displayStations(){
   }
 }
 
-// edit method to use redLine, blueLine, and yellowLine linkedlists
 void drawLine(Station s1, Station s2, color c){
   strokeWeight(10);
   stroke(c);

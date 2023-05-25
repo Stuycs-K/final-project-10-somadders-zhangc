@@ -152,6 +152,7 @@ public class Train{
     riders = new Passenger[6];
     position = new PVector(st.getX(),st.getY());
     speed = 1;
+    trains.add(this);
   }
   
 }

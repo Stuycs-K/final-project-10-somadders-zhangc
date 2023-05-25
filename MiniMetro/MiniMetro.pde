@@ -26,7 +26,7 @@ void setup(){
   t.add(p);
   t.addStation(s2);
   
-  /* TESTING VISIT STATION
+  /* //TESTING VISIT STATION
   System.out.println(t.position);
   System.out.println(s1.x + " " + s1.y);
   System.out.println(s2.x + " " + s2.y);
@@ -34,10 +34,10 @@ void setup(){
   System.out.println(t.position);
   */
 
-  /* TESTING ADD AND REMOVE STATION
+  /* //TESTING ADD AND REMOVE STATION
   System.out.println(t);
   System.out.println("add s2");
-  t.addStation(s2);
+  //t.addStation(s2);
   System.out.println(t.getStationIndex());
   t.nextStation();
   System.out.println(t.getStationIndex());

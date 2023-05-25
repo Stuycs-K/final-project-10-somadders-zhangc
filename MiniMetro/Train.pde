@@ -120,19 +120,38 @@ public class Train{
       trainLine.addFirst(st);
     }
     */
-    trainLine.addFirst(st);
+    trainLine.addLast(st);
     if(selectedRoute == 0){
-      redLine.addFirst(st);
+      redLine.addLast(st);
     } else if (selectedRoute == 1){
-      blueLine.addFirst(st);
+      blueLine.addLast(st);
     } else if (selectedRoute == 2){
-      yellowLine.addFirst(st);
+      yellowLine.addLast(st);
     }
   }
   
   // precondition: st is in trainLine
   public void removeStation(Station st){
     int stIndex = trainLine.indexOf(st);
+    int stIndexInMain = redLine.indexOf(st);
+    int route = 0;
+    if (stIndexInMain == -1){
+      stIndexInMain = blueLine.indexOf(st);
+      route = 1;
+    }
+    if (stIndexInMain == -1){
+      stIndexInMain = yellowLine.indexOf(st);
+      route = 2;
+    }
+    
+    if(route == 0){
+      redLine.remove(stIndexInMain);
+    } else if (route == 1){
+      blueLine.remove(stIndexInMain);
+    } else if (route == 2){
+      yellowLine.remove(stIndexInMain);
+    }
+    
     trainLine.remove(stIndex);
     if (stIndex == stationIndex){
       if(direction){

@@ -7,10 +7,29 @@ public class Train{
   private boolean direction;
   private int stationIndex;
   private Passenger[] riders;
-  private float x;
-  private float y;
+  private PVector position;
+  private float speed;
   
-  public void visitStation(Station st){}
+  public boolean visitStation(){
+    // implement drawing train later
+    Station nextSt = peekNextStation();
+    if(Math.abs(position.x-nextSt.getX()) < 1 && Math.abs(position.y-nextSt.getY()) < 1){
+      nextSt = nextStation();
+      unload(nextSt);
+      nextSt.loadTrain(this);
+      // set train position to station position when train is close to the station to avoid float errors
+      position = new PVector(nextSt.getX(), nextSt.getY());
+      return true;
+    }
+    else {
+      PVector stPosition = new PVector(nextSt.getX(), nextSt.getY());
+      PVector displacement = PVector.sub(stPosition, position);
+      displacement.normalize();
+      displacement.mult(speed);
+      position.add(displacement);
+      return false;
+    }
+  }
   
   public int getStationIndex(){
     return stationIndex;
@@ -31,7 +50,7 @@ public class Train{
   
   public void unload(Station st){
     for(int i = 0; i < riders.length; i++){
-      if(riders[i].getType() == st.getType()){
+      if(riders[i] != null && riders[i].getType() == st.getType()){
         riders[i] = null;
       }
     }
@@ -45,6 +64,24 @@ public class Train{
       }
     }
     return false;
+  }
+  
+  public Station peekNextStation(){
+    if(trainLine.size() == 1){
+      return trainLine.get(stationIndex);
+    }
+    if(direction){
+      if(stationIndex + 1 >= trainLine.size()){
+        return trainLine.get(stationIndex-1);
+      }
+      return trainLine.get(stationIndex);
+      
+    } else {
+      if(stationIndex - 1 < 0){
+        return trainLine.get(stationIndex+1);
+      }
+      return trainLine.get(stationIndex);
+    }
   }
   
   public Station nextStation(){
@@ -83,12 +120,38 @@ public class Train{
       trainLine.addFirst(st);
     }
     */
-    trainLine.addFirst(st);
+    trainLine.addLast(st);
+    if(selectedRoute == 0){
+      redLine.addLast(st);
+    } else if (selectedRoute == 1){
+      blueLine.addLast(st);
+    } else if (selectedRoute == 2){
+      yellowLine.addLast(st);
+    }
   }
   
   // precondition: st is in trainLine
   public void removeStation(Station st){
     int stIndex = trainLine.indexOf(st);
+    int stIndexInMain = redLine.indexOf(st);
+    int route = 0;
+    if (stIndexInMain == -1){
+      stIndexInMain = blueLine.indexOf(st);
+      route = 1;
+    }
+    if (stIndexInMain == -1){
+      stIndexInMain = yellowLine.indexOf(st);
+      route = 2;
+    }
+    
+    if(route == 0){
+      redLine.remove(stIndexInMain);
+    } else if (route == 1){
+      blueLine.remove(stIndexInMain);
+    } else if (route == 2){
+      yellowLine.remove(stIndexInMain);
+    }
+    
     trainLine.remove(stIndex);
     if (stIndex == stationIndex){
       if(direction){
@@ -101,13 +164,14 @@ public class Train{
   
   public Train (Station st){
     trainLine = new LinkedList<Station>();
-    trainLine.addFirst(st);
+    this.addStation(st);
     trainLineNum = stations.size();
     direction = true;
     stationIndex = 0;
     riders = new Passenger[6];
-    x = st.getX();
-    y = st.getY();
+    position = new PVector(st.getX(),st.getY());
+    speed = 1;
+    trains.add(this);
   }
   
 }

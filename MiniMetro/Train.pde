@@ -14,11 +14,11 @@ public class Train{
     // implement drawing train later
     Station nextSt = peekNextStation();
     if(Math.abs(position.x-nextSt.getX()) < 1 && Math.abs(position.y-nextSt.getY()) < 1){
+      // set train position to station position when train is close to the station to avoid float errors
+      position = new PVector(nextSt.getX(), nextSt.getY());
       nextSt = nextStation();
       unload(nextSt);
       nextSt.loadTrain(this);
-      // set train position to station position when train is close to the station to avoid float errors
-      position = new PVector(nextSt.getX(), nextSt.getY());
       return true;
     }
     else {
@@ -74,13 +74,13 @@ public class Train{
       if(stationIndex + 1 >= trainLine.size()){
         return trainLine.get(stationIndex-1);
       }
-      return trainLine.get(stationIndex);
+      return trainLine.get(stationIndex + 1);
       
     } else {
       if(stationIndex - 1 < 0){
         return trainLine.get(stationIndex+1);
       }
-      return trainLine.get(stationIndex);
+      return trainLine.get(stationIndex - 1);
     }
   }
   
@@ -120,13 +120,13 @@ public class Train{
       trainLine.addFirst(st);
     }
     */
-    trainLine.addLast(st);
+    trainLine.addFirst(st);
     if(selectedRoute == 0){
-      redLine.addLast(st);
+      redLine.addFirst(st);
     } else if (selectedRoute == 1){
-      blueLine.addLast(st);
+      blueLine.addFirst(st);
     } else if (selectedRoute == 2){
-      yellowLine.addLast(st);
+      yellowLine.addFirst(st);
     }
   }
   

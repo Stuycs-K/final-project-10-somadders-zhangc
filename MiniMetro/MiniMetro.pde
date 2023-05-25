@@ -34,7 +34,7 @@ void setup(){
   System.out.println(t.position);
   */
 
-  /* //TESTING ADD AND REMOVE STATION
+  //TESTING ADD AND REMOVE STATION
   System.out.println(t);
   System.out.println("add s2");
   //t.addStation(s2);
@@ -45,13 +45,13 @@ void setup(){
   System.out.println(t.getStationIndex());
   t.nextStation();
   System.out.println(t.getStationIndex());
-
+ 
   System.out.println("add s3");
   t.addStation(s3);
   System.out.println(t.getStationIndex());
   t.nextStation();
   System.out.println(t.getStationIndex());
-
+ /*
   System.out.println("test removeStation");
   t.removeStation(s1);
   System.out.println(t.getStationIndex());
@@ -88,6 +88,8 @@ void draw(){
   for(int i = 0; i < yellowLine.size()-1; i++){
     drawLine(yellowLine.get(i),yellowLine.get(i+1),YELLOW);
   }
+  
+  drawTrains();
 }
 
 void mousePressed(){}
@@ -175,4 +177,13 @@ void drawLine(Station s1, Station s2, color c){
   
   strokeWeight(4);
   stroke(0);
+}
+
+void drawTrains(){
+  rectMode(CENTER);
+  for(int i = 0; i < trains.size(); i++){
+    Train t = trains.get(i);
+    t.visitStation();
+    rect(t.position.x, t.position.y, 20, 20, 10, 10, 10, 10);
+  }
 }

@@ -92,7 +92,6 @@ public class Train{
       stationIndex++;
       if(stationIndex + 1 >= trainLine.size()){
         direction = false;
-            System.out.println("a");
         return trainLine.get(stationIndex);
       }
       return trainLine.get(stationIndex);
@@ -101,7 +100,6 @@ public class Train{
       stationIndex--;
       if(stationIndex - 1 < 0){
         direction = true;
-            System.out.println("b");
         return trainLine.get(stationIndex);
       }
       return trainLine.get(stationIndex);

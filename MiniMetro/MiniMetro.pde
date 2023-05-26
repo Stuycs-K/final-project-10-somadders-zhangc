@@ -11,10 +11,11 @@ color RED = color(178,34,34);
 color BLUE = color(0,0,205);
 color YELLOW = color(255,215,0);
 int screen = 0; //0 = ongoing game, 1 = winscreen, 2 = lose screen, more screens can be added later;
+int overcrowdedCount;
 
 void setup(){
   size(1000,800);
-
+  overcrowdedCount = 0;
   stations.add(new Station(0));
   stations.add(new Station(1));
   stations.add(new Station(2));
@@ -73,6 +74,17 @@ void setup(){
 }
 
 void draw(){
+  int count = 0;
+  for(int i = 0; i < stations.size(); i++){
+    count+= stations.get(i).getOvercrowded();
+  }
+  overcrowdedCount = count;
+  if(overcrowdedCount > 50){
+    screen = 2;
+  }
+  if(stations.size() > 60){
+    screen = 1;
+  }
   if(screen == 0){
     background(255);
     int decline = frameCount/200;

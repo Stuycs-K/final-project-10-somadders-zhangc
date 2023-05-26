@@ -11,10 +11,11 @@ color RED = color(178,34,34);
 color BLUE = color(0,0,205);
 color YELLOW = color(255,215,0);
 int screen = 0; //0 = ongoing game, 1 = winscreen, 2 = lose screen, more screens can be added later;
+int overcrowdedCount;
 
 void setup(){
   size(1000,800);
-
+  overcrowdedCount = 0;
   stations.add(new Station(0));
   stations.add(new Station(1));
   stations.add(new Station(2));
@@ -26,7 +27,7 @@ void setup(){
   Passenger p = new Passenger();
   t.add(p);
   t.addStation(s2);
-  
+
   /* //TESTING VISIT STATION
   System.out.println(t.position);
   System.out.println(s1.x + " " + s1.y);
@@ -46,7 +47,7 @@ void setup(){
   System.out.println(t.getStationIndex());
   t.nextStation();
   System.out.println(t.getStationIndex());
- 
+
   System.out.println("add s3");
   t.addStation(s3);
   System.out.println(t.getStationIndex());
@@ -62,7 +63,7 @@ void setup(){
   t.nextStation();
   System.out.println(t.getStationIndex());
   */
-  
+
   Station S = new Station();
   S.addPassengers();
   S.addPassengers();
@@ -73,6 +74,17 @@ void setup(){
 }
 
 void draw(){
+  int count = 0;
+  for(int i = 0; i < stations.size(); i++){
+    count+= stations.get(i).getOvercrowded();
+  }
+  overcrowdedCount = count;
+  if(overcrowdedCount > 50){
+    screen = 2;
+  }
+  if(stations.size() > 60){
+    screen = 1;
+  }
   if(screen == 0){
     background(255);
     int decline = frameCount/200;
@@ -81,11 +93,11 @@ void draw(){
           spawn();
       }
      }
-    
-    if(frameCount % 2700 == 0){
+
+    if(frameCount % 500 == 0){
       spawnStation();
     }
-    
+
     // go through all three lines and draw connected stations
     for(int i = 0; i < redLine.size()-1; i++){
       drawLine(redLine.get(i),redLine.get(i+1),RED);
@@ -116,6 +128,9 @@ void draw(){
 }
 
 void mousePressed(){
+  for(int i = 0; i < trains.size(); i++){
+    trains.get(i).removeStation(redLine.get(0));
+  }
 }
 
 void spawn(){
@@ -210,9 +225,9 @@ void displayStations(){
 void drawLine(Station s1, Station s2, color c){
   strokeWeight(10);
   stroke(c);
-  
+
   line(s1.getX(), s1.getY(), s2.getX(), s2.getY());
-  
+
   strokeWeight(4);
   stroke(0);
 }
@@ -224,5 +239,15 @@ void drawTrains(){
     Train t = trains.get(i);
     t.visitStation();
     rect(t.position.x, t.position.y, 20, 20, 2, 2, 2, 2);
+  }
+}
+
+LinkedList<Station> getTrainLine(int type){
+  if(type == 0){
+    return redLine;
+  } else if (type == 1){
+    return blueLine;
+  } else {
+    return yellowLine;
   }
 }

@@ -2,7 +2,6 @@ import java.util.*;
 
 public class Train{
   
-  private LinkedList<Station> trainLine;
   private int trainLineNum;
   private boolean direction;
   private int stationIndex;
@@ -67,43 +66,42 @@ public class Train{
   }
   
   public Station peekNextStation(){
+    LinkedList<Station> trainLine = getTrainLine(trainLineNum);
     if(trainLine.size() == 1){
       return trainLine.get(stationIndex);
     }
-    if(direction){
-      if(stationIndex >= trainLine.size()-1){
-        return trainLine.get(stationIndex - 1);
-      }
-      return trainLine.get(stationIndex + 1);
-      
-    } else {
-      if(stationIndex - 1 < 0){
-        return trainLine.get(stationIndex + 1);
-      }
-      return trainLine.get(stationIndex - 1);
-    }
+    if(direction == true && stationIndex != trainLine.size()-1){
+      return trainLine.get(stationIndex+1);
+    } else if (direction == false && stationIndex != 0){
+      return trainLine.get(stationIndex-1);
+    } else if (direction == true && stationIndex == trainLine.size()-1){
+      return trainLine.get(stationIndex-1);
+    } else if (direction == false && stationIndex == 0){
+      return trainLine.get(stationIndex+1);
+    } else {return null;}
   }
   
   public Station nextStation(){
+    LinkedList<Station> trainLine = getTrainLine(trainLineNum);
     if(trainLine.size() == 1){
       return trainLine.get(stationIndex);
     }
-    if(direction){
+    if(direction == true && stationIndex != trainLine.size()-1){
       stationIndex++;
-      if(stationIndex + 1 >= trainLine.size()){
-        direction = false;
-        return trainLine.get(stationIndex);
-      }
       return trainLine.get(stationIndex);
       
-    } else {
+    } else if (direction == false && stationIndex != 0){
       stationIndex--;
-      if(stationIndex - 1 < 0){
-        direction = true;
-        return trainLine.get(stationIndex);
-      }
       return trainLine.get(stationIndex);
-    }
+    } else if (direction == true && stationIndex == trainLine.size()-1){
+      stationIndex--;
+      direction = false;
+      return trainLine.get(stationIndex);
+    } else if (direction == false && stationIndex == 0){
+      stationIndex++;
+      direction = true;
+      return trainLine.get(stationIndex);
+    } else {return null;}
   }
   
   private float calculateStationDist(Station st1, Station st2){
@@ -120,7 +118,6 @@ public class Train{
       trainLine.addFirst(st);
     }
     */
-    trainLine.addLast(st);
     if(selectedRoute == 0){
       redLine.addLast(st);
     } else if (selectedRoute == 1){
@@ -131,41 +128,47 @@ public class Train{
   }
   
   // precondition: st is in trainLine
+  
+  // NOTE TO SELF: snap train back to previous station when station is removed
+  // special cases: 2 stations, removed station is at very start or end (in which case, continue to next station)
   public void removeStation(Station st){
-    int stIndex = trainLine.indexOf(st);
-    int stIndexInMain = redLine.indexOf(st);
-    int route = 0;
-    if (stIndexInMain == -1){
-      stIndexInMain = blueLine.indexOf(st);
-      route = 1;
+    LinkedList<Station> trainLine = getTrainLine(trainLineNum);
+    if(trainLine.size() <= 2){
+      // delete train line and train
+      if(trainLineNum == 0){
+        redLine = new LinkedList<Station>();
+      } else if (trainLineNum == 1){
+        blueLine = new LinkedList<Station>();
+      } else if (trainLineNum == 2){
+        yellowLine = new LinkedList<Station>();
+      }
+      trains.remove(this);
+      
     }
-    if (stIndexInMain == -1){
-      stIndexInMain = yellowLine.indexOf(st);
-      route = 2;
-    }
-    
-    if(route == 0){
-      redLine.remove(stIndexInMain);
-    } else if (route == 1){
-      blueLine.remove(stIndexInMain);
-    } else if (route == 2){
-      yellowLine.remove(stIndexInMain);
-    }
-    
-    trainLine.remove(stIndex);
-    if (stIndex == stationIndex){
-      if(direction){
-        stationIndex--;
+    else {
+      int stIndex = trainLine.indexOf(st);
+      System.out.println(stIndex);
+      boolean flag = false;
+      if(stIndex != -1){
+        trainLine.remove(stIndex);
+        flag = true;
+      }
+      if(direction && flag){
+        if(stationIndex == 0){
+          Station nextSt = nextStation();
+          position = new PVector(nextSt.getX(), nextSt.getY());
+          stationIndex = 0;
+        }
+        //stationIndex--;
       } else {
-        stationIndex++;
+        //stationIndex++;
       }
     }
   }
   
   public Train (Station st){
-    trainLine = new LinkedList<Station>();
     this.addStation(st);
-    trainLineNum = stations.size();
+    trainLineNum = selectedRoute;
     direction = true;
     stationIndex = 0;
     riders = new Passenger[6];

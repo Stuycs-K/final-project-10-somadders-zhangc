@@ -70,18 +70,15 @@ public class Train{
     if(trainLine.size() == 1){
       return trainLine.get(stationIndex);
     }
-    if(direction){
-      if(stationIndex >= trainLine.size()-1){
-        return trainLine.get(stationIndex - 1);
-      }
-      return trainLine.get(stationIndex + 1);
-      
-    } else {
-      if(stationIndex - 1 < 0){
-        return trainLine.get(stationIndex + 1);
-      }
-      return trainLine.get(stationIndex - 1);
-    }
+    if(direction == true && stationIndex != trainLine.size()-1){
+      return trainLine.get(stationIndex+1);
+    } else if (direction == false && stationIndex != 0){
+      return trainLine.get(stationIndex-1);
+    } else if (direction == true && stationIndex == trainLine.size()-1){
+      return trainLine.get(stationIndex-1);
+    } else if (direction == false && stationIndex == 0){
+      return trainLine.get(stationIndex+1);
+    } else {return null;}
   }
   
   public Station nextStation(){
@@ -89,23 +86,22 @@ public class Train{
     if(trainLine.size() == 1){
       return trainLine.get(stationIndex);
     }
-    if(direction){
+    if(direction == true && stationIndex != trainLine.size()-1){
       stationIndex++;
-      System.out.println(stationIndex + "a");
-      if(stationIndex + 1>= trainLine.size()){
-        direction = false;
-        return trainLine.get(stationIndex);
-      }
       return trainLine.get(stationIndex);
       
-    } else {
+    } else if (direction == false && stationIndex != 0){
       stationIndex--;
-      if(stationIndex - 1 < 0){
-        direction = true;
-        return trainLine.get(stationIndex);
-      }
       return trainLine.get(stationIndex);
-    }
+    } else if (direction == true && stationIndex == trainLine.size()-1){
+      stationIndex--;
+      direction = false;
+      return trainLine.get(stationIndex);
+    } else if (direction == false && stationIndex == 0){
+      stationIndex++;
+      direction = true;
+      return trainLine.get(stationIndex);
+    } else {return null;}
   }
   
   private float calculateStationDist(Station st1, Station st2){
@@ -151,12 +147,15 @@ public class Train{
     }
     else {
       int stIndex = trainLine.indexOf(st);
+      System.out.println(stIndex);
+      boolean flag = false;
       if(stIndex != -1){
         trainLine.remove(stIndex);
+        flag = true;
       }
-      if(direction){
+      if(direction && flag){
         if(stationIndex == 0){
-          Station nextSt = peekNextStation();
+          Station nextSt = nextStation();
           position = new PVector(nextSt.getX(), nextSt.getY());
           stationIndex = 0;
         }

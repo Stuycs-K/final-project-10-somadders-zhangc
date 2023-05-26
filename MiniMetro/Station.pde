@@ -15,14 +15,14 @@ public class Station{
     if(x < 50){
       x = 50;
     }
-    if(x > width-100){
-      x = width-100;
+    if(x > width-50){
+      x = width-50;
     }
-    if(y < 50){
-      y = 50;
+    if(y < 125){
+      y = 125;
     }
     if(y > height-50){
-      y = height -50;
+      y = height-50;
     }
     maxCapacity = 6;
     overcrowdedTime = 0;
@@ -38,11 +38,11 @@ public class Station{
     if(x < 50){
       x = 50;
     }
-    if(x > width-100){
-      x = width-100;
+    if(x > width-125){
+      x = width-125;
     }
-    if(y < 50){
-      y = 50;
+    if(y < 100){
+      y = 100;
     }
     if(y > height-50){
       y = height -50;

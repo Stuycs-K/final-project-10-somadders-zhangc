@@ -75,10 +75,17 @@ void setup(){
 
 void draw(){
   int count = 0;
+  int scoreCount = 0;
   for(int i = 0; i < stations.size(); i++){
     count+= stations.get(i).getOvercrowded();
   }
   overcrowdedCount = count;
+  
+  for(int i = 0; i < trains.size(); i++){
+    scoreCount+= trains.get(i).getDrop();
+  }
+  totalPassengers = scoreCount;
+  
   if(overcrowdedCount > 50){
     screen = 2;
   }
@@ -89,12 +96,12 @@ void draw(){
     background(255);
     int decline = frameCount/200;
     if(frameCount % 600 - decline == 0){
-      for(int i = 0; i <= (stations.size()/2) + 1; i++){
+      for(int i = 0; i < (stations.size()/2) + 1; i++){
           spawn();
       }
      }
 
-    if(frameCount % 500 == 0){
+    if(frameCount % 200 == 0){
       spawnStation();
     }
 
@@ -110,7 +117,12 @@ void draw(){
     }
     displayStations();
     drawTrains();
-  }
+    fill(0);
+    textSize(32);
+    text("Total Score: " + totalPassengers, 3*width/4, height/24);
+    text("Overcrowded Counter: " + overcrowdedCount, width/25, height/24);
+    line(0, 60, width, 60);
+   }
   if(screen == 2){
     fill(255);
     rect(width/2, height/2, 3 * width/4, height/3);

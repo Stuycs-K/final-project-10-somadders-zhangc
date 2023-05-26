@@ -26,6 +26,11 @@
 - Created a border in which stations cannot spawn so that map of stations does not look disorganized and places hard end to game after 2 hours.
 - When game reaches a certain number of stations while the overcrowded threshold is not reached, win screen is displayed.
 
+### 5/26/2023
+- Worked on crowdedCount, total passenger, and win/lose screen processing so that it works smoothly.
+- Slightly changed train unload method to keep count of TOTAL number of riders that the train has unloaded in its time.
+- Game now displays the overCrowdedcount and the total passenger score.
+
 
 ## Calvin Zhang
 

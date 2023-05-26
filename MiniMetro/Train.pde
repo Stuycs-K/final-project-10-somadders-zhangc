@@ -8,6 +8,7 @@ public class Train{
   private Passenger[] riders;
   private PVector position;
   private float speed;
+  private int totalDropped = 0;
   
   public boolean visitStation(){
     // implement drawing train later
@@ -51,6 +52,7 @@ public class Train{
     for(int i = 0; i < riders.length; i++){
       if(riders[i] != null && riders[i].getType() == st.getType()){
         riders[i] = null;
+        totalDropped++;
       }
     }
   }
@@ -183,4 +185,7 @@ public class Train{
     trains.add(this);
   }
   
+  public int getDrop(){
+    return totalDropped;
+  }
 }

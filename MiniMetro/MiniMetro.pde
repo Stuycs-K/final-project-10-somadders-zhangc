@@ -229,3 +229,13 @@ void drawTrains(){
     rect(t.position.x, t.position.y, 20, 20, 2, 2, 2, 2);
   }
 }
+
+LinkedList<Station> getTrainLine(int type){
+  if(type == 0){
+    return redLine;
+  } else if (type == 1){
+    return blueLine;
+  } else {
+    return yellowLine;
+  }
+}

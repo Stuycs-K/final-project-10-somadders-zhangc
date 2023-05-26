@@ -2,7 +2,6 @@ import java.util.*;
 
 public class Train{
   
-  private LinkedList<Station> trainLine;
   private int trainLineNum;
   private boolean direction;
   private int stationIndex;
@@ -67,6 +66,7 @@ public class Train{
   }
   
   public Station peekNextStation(){
+    LinkedList<Station> trainLine = getTrainLine(trainLineNum);
     if(trainLine.size() == 1){
       return trainLine.get(stationIndex);
     }
@@ -85,6 +85,7 @@ public class Train{
   }
   
   public Station nextStation(){
+    LinkedList<Station> trainLine = getTrainLine(trainLineNum);
     if(trainLine.size() == 1){
       return trainLine.get(stationIndex);
     }
@@ -120,7 +121,6 @@ public class Train{
       trainLine.addFirst(st);
     }
     */
-    trainLine.addLast(st);
     if(selectedRoute == 0){
       redLine.addLast(st);
     } else if (selectedRoute == 1){
@@ -135,8 +135,12 @@ public class Train{
   // NOTE TO SELF: snap train back to previous station when station is removed
   // special cases: 2 stations, removed station is at very start or end (in which case, continue to next station)
   public void removeStation(Station st){
+    /*
     if(trainLine.size() <= 2){
       // delete train line and train
+      trainLine = null;
+      trains.remove(this);
+      
     }
     else {
       int stIndex = trainLine.indexOf(st);
@@ -171,12 +175,12 @@ public class Train{
         }
       }
     }
+    */
   }
   
   public Train (Station st){
-    trainLine = new LinkedList<Station>();
     this.addStation(st);
-    trainLineNum = stations.size();
+    trainLineNum = selectedRoute;
     direction = true;
     stationIndex = 0;
     riders = new Passenger[6];

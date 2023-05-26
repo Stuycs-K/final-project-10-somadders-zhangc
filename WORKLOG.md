@@ -40,6 +40,14 @@
 - Update addStation() and removeStation() methods to work with red, blue, and yellow line LinkedLists.
 - Update Train constructor to remove unnecessary code when testing and add Train object to ArrayList of all trains.
 
+### 5/25/2023
+
+- Create drawTrains() method to display the trains.
+- Modify and fix visitStation() and nextStation() method for Train to visually and logically get a train from one station to the next.
+- Fix loadTrain() NoSuchElementException bug.
+- Remove unnecessary trainLine LinkedList in Train class and adjust methods as needed.
+- Begin reworking on removeStation() which will visually and logically remove stations from a train line.
+
 ### date y
 
 info

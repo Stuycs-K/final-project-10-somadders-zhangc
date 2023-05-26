@@ -91,7 +91,8 @@ public class Train{
     }
     if(direction){
       stationIndex++;
-      if(stationIndex + 1 >= trainLine.size()){
+      System.out.println(stationIndex + "a");
+      if(stationIndex + 1>= trainLine.size()){
         direction = false;
         return trainLine.get(stationIndex);
       }
@@ -150,35 +151,18 @@ public class Train{
     }
     else {
       int stIndex = trainLine.indexOf(st);
-      int stIndexInMain = redLine.indexOf(st);
-      int route = 0;
-      if (stIndexInMain == -1){
-        stIndexInMain = blueLine.indexOf(st);
-        route = 1;
+      if(stIndex != -1){
+        trainLine.remove(stIndex);
       }
-      if (stIndexInMain == -1){
-        stIndexInMain = yellowLine.indexOf(st);
-        route = 2;
-      }
-      System.out.println(route);
-      
-      if(stIndexInMain != -1){
-        if(route == 0){
-          redLine.remove(stIndexInMain);
-        } else if (route == 1){
-          blueLine.remove(stIndexInMain);
-        } else if (route == 2){
-          yellowLine.remove(stIndexInMain);
+      if(direction){
+        if(stationIndex == 0){
+          Station nextSt = peekNextStation();
+          position = new PVector(nextSt.getX(), nextSt.getY());
+          stationIndex = 0;
         }
-      }
-      
-      trainLine.remove(stIndex);
-      if (stIndex == stationIndex){
-        if(direction){
-          stationIndex--;
-        } else {
-          stationIndex++;
-        }
+        //stationIndex--;
+      } else {
+        //stationIndex++;
       }
     }
   }

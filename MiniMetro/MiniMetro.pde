@@ -82,7 +82,7 @@ void draw(){
       }
      }
 
-    if(frameCount % 2700 == 0){
+    if(frameCount % 100 == 0){
       spawnStation();
     }
 
@@ -117,7 +117,7 @@ void draw(){
 
 void mousePressed(){
   for(int i = 0; i < trains.size(); i++){
-    trains.get(i).removeStation(stations.get(0));
+    trains.get(i).removeStation(redLine.get(0));
   }
 }
 

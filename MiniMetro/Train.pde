@@ -135,10 +135,16 @@ public class Train{
   // NOTE TO SELF: snap train back to previous station when station is removed
   // special cases: 2 stations, removed station is at very start or end (in which case, continue to next station)
   public void removeStation(Station st){
-    /*
+    LinkedList<Station> trainLine = getTrainLine(trainLineNum);
     if(trainLine.size() <= 2){
       // delete train line and train
-      trainLine = null;
+      if(trainLineNum == 0){
+        redLine = new LinkedList<Station>();
+      } else if (trainLineNum == 1){
+        blueLine = new LinkedList<Station>();
+      } else if (trainLineNum == 2){
+        yellowLine = new LinkedList<Station>();
+      }
       trains.remove(this);
       
     }
@@ -175,7 +181,6 @@ public class Train{
         }
       }
     }
-    */
   }
   
   public Train (Station st){

@@ -20,6 +20,12 @@
 - New get(index i) method for station class that returns a specific index of the stations riders respective to order.
 - When printed, station returns set of passengers in an array.
 
+### 5/25/2023
+- Properly formatted the display of passengers per station and re-ordered the order of display methods so that display looks good.
+- Created WIN screen and LOSE screen and continuing to work on how they are activated.
+- Created a border in which stations cannot spawn so that map of stations does not look disorganized and places hard end to game after 2 hours.
+- When game reaches a certain number of stations while the overcrowded threshold is not reached, win screen is displayed.
+
 
 ## Calvin Zhang
 

@@ -56,6 +56,10 @@ public class Station{
   public void addPassengers(){
     if(!overcrowded()){
       riders.addFirst(new Passenger());
+      overcrowdedTime--;
+      if(overcrowdedTime < 0){
+        overcrowdedTime = 0;
+      }
     }
     else{
       overcrowdedTime++;
@@ -106,5 +110,9 @@ public class Station{
       cloned.removeFirst();
     }
     return cloned.removeFirst();
+  }
+  
+  public int getOvercrowded(){
+    return overcrowdedTime;
   }
 }

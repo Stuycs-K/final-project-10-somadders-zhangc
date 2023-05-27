@@ -142,7 +142,7 @@ void draw(){
 }
 
 void mousePressed(){
-  trains.get(0).removeStation(redLine.get(2));
+  trains.get(0).removeStation(redLine.get(1));
   /*
   for(int i = 0; i < trains.size(); i++){
     trains.get(i).removeStation(redLine.get(0));

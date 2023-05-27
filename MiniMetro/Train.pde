@@ -156,19 +156,41 @@ public class Train{
       if(stIndex != -1){
         flag = true;
       }
+      // train is moving forward
       if(direction == true && flag){
+        // train is approaching the last station and the station to be removed is the last station
         if(stationIndex == trainLine.size()-2 && stIndex == trainLine.size()-1){
           trainLine.remove(stIndex);
           stationIndex = trainLine.size();
           direction = false;
         }
+        // train is approaching a station and the station to be removed is ahead of it
+        if(stationIndex < stIndex){
+          trainLine.remove(stIndex);
+        }
+        // train is approaching a station but the station to be removed is behind it
+        if(stationIndex >= stIndex){
+          trainLine.remove(stIndex);
+          stationIndex--;
+        }
+      // train is moving backward
       } else if (direction == false && flag) {
+        // train is approaching the first station and the station to be removed is the first station
         if(stationIndex == 1 && stIndex == 0){
           trainLine.remove(stIndex);
           stationIndex = -1;
           direction = true;
         }
-      }
+        // train is approaching a station and the station to be removed is behind it
+        if(stationIndex <= stIndex){
+          trainLine.remove(stIndex);
+        }
+        // train is approaching a station but the station to be removed is ahead of it
+        if(stationIndex > stIndex){
+          trainLine.remove(stIndex);
+          stationIndex--;
+        }
+      } 
     }
   }
   

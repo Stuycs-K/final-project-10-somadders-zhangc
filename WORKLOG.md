@@ -59,6 +59,10 @@
 - Remove unnecessary trainLine LinkedList in Train class and adjust methods as needed.
 - Begin reworking on removeStation() which will visually and logically remove stations from a train line.
 
+### 5/26/2023
+
+- Redo and fix the code for adding new stations and allowing the train to move to these new stations. I mainly worked on the methods nextStation() and peekNextStation(). The new code allows the train to visually move to the next station as we would expect and allows the variables that control this to change as expected.
+
 ### date y
 
 info

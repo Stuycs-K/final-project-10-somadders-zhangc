@@ -11,7 +11,6 @@ public class Train{
   private int totalDropped = 0;
   
   public boolean visitStation(){
-    // implement drawing train later
     Station nextSt = peekNextStation();
     if(Math.abs(position.x-nextSt.getX()) < 1 && Math.abs(position.y-nextSt.getY()) < 1){
       // set train position to station position when train is close to the station to avoid float errors
@@ -131,14 +130,12 @@ public class Train{
     }
   }
   
-  // precondition: st is in trainLine
-  
-  // NOTE TO SELF: snap train back to previous station when station is removed
+  // NOTE:
   // special cases: 2 stations, removed station is at very start or end (in which case, continue to next station)
   public void removeStation(Station st){
     LinkedList<Station> trainLine = getTrainLine(trainLineNum);
+    // delete train line and train when train line is too small
     if(trainLine.size() <= 2){
-      // delete train line and train
       if(trainLineNum == 0){
         redLine = new LinkedList<Station>();
       } else if (trainLineNum == 1){

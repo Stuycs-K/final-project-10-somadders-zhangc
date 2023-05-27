@@ -9,15 +9,25 @@ public class Train{
   private PVector position;
   private float speed;
   private int totalDropped = 0;
+  private int stopTime = 0;
+  private int stopTimeLimit = 30;
   
   public boolean visitStation(){
     Station nextSt = peekNextStation();
+    if(stopTime != 0){
+      stopTime++;
+      if(stopTime == stopTimeLimit){
+        stopTime = 0;
+      } else {return false;}
+    }
+    
     if(Math.abs(position.x-nextSt.getX()) < 1 && Math.abs(position.y-nextSt.getY()) < 1){
       // set train position to station position when train is close to the station to avoid float errors
       position = new PVector(nextSt.getX(), nextSt.getY());
       nextSt = nextStation();
       unload(nextSt);
       nextSt.loadTrain(this);
+      stopTime = 1;
       return true;
     }
     else {

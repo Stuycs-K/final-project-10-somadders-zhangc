@@ -11,7 +11,6 @@ public class Train{
   private int totalDropped = 0;
   
   public boolean visitStation(){
-    // implement drawing train later
     Station nextSt = peekNextStation();
     if(Math.abs(position.x-nextSt.getX()) < 1 && Math.abs(position.y-nextSt.getY()) < 1){
       // set train position to station position when train is close to the station to avoid float errors
@@ -131,14 +130,12 @@ public class Train{
     }
   }
   
-  // precondition: st is in trainLine
-  
-  // NOTE TO SELF: snap train back to previous station when station is removed
+  // NOTE:
   // special cases: 2 stations, removed station is at very start or end (in which case, continue to next station)
   public void removeStation(Station st){
     LinkedList<Station> trainLine = getTrainLine(trainLineNum);
+    // delete train line and train when train line is too small
     if(trainLine.size() <= 2){
-      // delete train line and train
       if(trainLineNum == 0){
         redLine = new LinkedList<Station>();
       } else if (trainLineNum == 1){
@@ -154,19 +151,43 @@ public class Train{
       System.out.println(stIndex);
       boolean flag = false;
       if(stIndex != -1){
-        trainLine.remove(stIndex);
         flag = true;
       }
-      if(direction && flag){
-        if(stationIndex == 0){
-          Station nextSt = nextStation();
-          position = new PVector(nextSt.getX(), nextSt.getY());
-          stationIndex = 0;
+      // train is moving forward
+      if(direction == true && flag){
+        // train is approaching the last station and the station to be removed is the last station
+        if(stationIndex == trainLine.size()-2 && stIndex == trainLine.size()-1){
+          trainLine.remove(stIndex);
+          stationIndex = trainLine.size();
+          direction = false;
         }
-        //stationIndex--;
-      } else {
-        //stationIndex++;
-      }
+        // train is approaching a station and the station to be removed is ahead of it
+        if(stationIndex < stIndex){
+          trainLine.remove(stIndex);
+        }
+        // train is approaching a station but the station to be removed is behind it
+        if(stationIndex >= stIndex){
+          trainLine.remove(stIndex);
+          stationIndex--;
+        }
+      // train is moving backward
+      } else if (direction == false && flag) {
+        // train is approaching the first station and the station to be removed is the first station
+        if(stationIndex == 1 && stIndex == 0){
+          trainLine.remove(stIndex);
+          stationIndex = -1;
+          direction = true;
+        }
+        // train is approaching a station and the station to be removed is behind it
+        if(stationIndex <= stIndex){
+          trainLine.remove(stIndex);
+        }
+        // train is approaching a station but the station to be removed is ahead of it
+        if(stationIndex > stIndex){
+          trainLine.remove(stIndex);
+          stationIndex--;
+        }
+      } 
     }
   }
   
@@ -177,7 +198,7 @@ public class Train{
     stationIndex = 0;
     riders = new Passenger[6];
     position = new PVector(st.getX(),st.getY());
-    speed = 1;
+    speed = 2;
     trains.add(this);
   }
   

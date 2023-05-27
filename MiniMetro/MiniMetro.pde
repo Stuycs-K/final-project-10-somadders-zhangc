@@ -27,6 +27,8 @@ void setup(){
   Passenger p = new Passenger();
   t.add(p);
   t.addStation(s2);
+  t.addStation(s3);
+  
 
   /* //TESTING VISIT STATION
   System.out.println(t.position);
@@ -140,9 +142,12 @@ void draw(){
 }
 
 void mousePressed(){
+  trains.get(0).removeStation(redLine.get(1));
+  /*
   for(int i = 0; i < trains.size(); i++){
     trains.get(i).removeStation(redLine.get(0));
   }
+  */
 }
 
 void spawn(){
@@ -165,7 +170,7 @@ void spawnStation(){
   }
   ST.addPassengers();
   stations.add(ST);
-  trains.get(0).addStation(ST);
+  //trains.get(0).addStation(ST);
 }
 
 void spawnStation(int type){

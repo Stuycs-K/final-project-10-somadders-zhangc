@@ -170,7 +170,7 @@ void spawnStation(){
   }
   ST.addPassengers();
   stations.add(ST);
-  //trains.get(0).addStation(ST);
+  trains.get(0).addStation(ST);
 }
 
 void spawnStation(int type){
@@ -201,7 +201,8 @@ void displayStations(){
       triangle(target.getX()+25, target.getY()+25, target.getX(), target.getY()-25, target.getX()-25, target.getY()+25);
     }
     if(target.getType() == 2){
-      square(target.getX()-10, target.getY()-10, 50);
+      rectMode(CENTER);
+      square(target.getX(), target.getY(), 50);
     }
     int numCirc = 0;
     int numTri = 0;
@@ -232,9 +233,9 @@ void displayStations(){
     }
     if(target.getType() == 2){
       textSize(13);
-      text("C: " + numCirc, target.getX()-18, target.getY()-15);
-      text("T: " + numTri, target.getX()-18, target.getY()-5);
-      text("S: " + numSq, target.getX()-18, target.getY()+5);
+      text("C: " + numCirc, target.getX()-18, target.getY()-10);
+      text("T: " + numTri, target.getX()-18, target.getY());
+      text("S: " + numSq, target.getX()-18, target.getY()+10);
     }
 }
 }

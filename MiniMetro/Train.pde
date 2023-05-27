@@ -154,18 +154,20 @@ public class Train{
       System.out.println(stIndex);
       boolean flag = false;
       if(stIndex != -1){
-        trainLine.remove(stIndex);
         flag = true;
       }
-      if(direction && flag){
-        if(stationIndex == 0){
-          Station nextSt = nextStation();
-          position = new PVector(nextSt.getX(), nextSt.getY());
-          stationIndex = 0;
+      if(direction == true && flag){
+        if(stationIndex == trainLine.size()-2 && stIndex == trainLine.size()-1){
+          trainLine.remove(stIndex);
+          stationIndex = trainLine.size();
+          direction = false;
         }
-        //stationIndex--;
-      } else {
-        //stationIndex++;
+      } else if (direction == false && flag) {
+        if(stationIndex == 1 && stIndex == 0){
+          trainLine.remove(stIndex);
+          stationIndex = -1;
+          direction = true;
+        }
       }
     }
   }
@@ -177,7 +179,7 @@ public class Train{
     stationIndex = 0;
     riders = new Passenger[6];
     position = new PVector(st.getX(),st.getY());
-    speed = 1;
+    speed = 2;
     trains.add(this);
   }
   

@@ -89,30 +89,18 @@ public class Train{
       return trainLine.get(stationIndex);
     }
     if(direction == true && stationIndex + 1 != trainLine.size() - 1){
-      System.out.println(trainLine.size());
-      System.out.println(stationIndex);
-      System.out.println("a");
       stationIndex++;
       return trainLine.get(stationIndex);
       
     } else if (direction == false && stationIndex - 1 != 0){
-      System.out.println(trainLine.size());
-      System.out.println(stationIndex);
-      System.out.println("b");
       stationIndex--;
       return trainLine.get(stationIndex);
     } else if (direction == true && stationIndex + 1 == trainLine.size() - 1){
-      System.out.println(trainLine.size());
-      System.out.println(stationIndex);
-      System.out.println("c");
       Station current = trainLine.get(stationIndex);
       stationIndex++;
       direction = false;
       return current;
     } else if (direction == false && stationIndex - 1 == 0){
-      System.out.println(trainLine.size());
-      System.out.println(stationIndex);
-      System.out.println("d");
       Station current = trainLine.get(stationIndex);
       stationIndex--;
       direction = true;

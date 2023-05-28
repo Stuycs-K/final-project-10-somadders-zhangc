@@ -63,6 +63,14 @@
 
 - Redo and fix the code for adding new stations and allowing the train to move to these new stations. I mainly worked on the methods nextStation() and peekNextStation(). The new code allows the train to visually move to the next station as we would expect and allows the variables that control this to change as expected.
 
+### 5/27/2023
+
+- Complete removeStation() method to correctly remove stations from a train line and adjust which station the train should go to next depending on where the train is.
+- Have each train stop at a station for a certain amount of time before going to the next station.
+- Fix off-centered square stations.
+- Reorganize the code, using helper methods, that draws train lines so that the draw() method isn't too crowded with code.
+- Create graphics that indicate what train line is currently selected and allow the player to change train lines using the space bar.
+
 ### date y
 
 info

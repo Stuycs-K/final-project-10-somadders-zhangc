@@ -28,11 +28,6 @@ void setup(){
   t.add(p);
   t.addStation(s2);
   t.addStation(s3);
-  
-  selectedRoute = 1;
-  Train t2 = new Train(s3);
-  t2.addStation(s1);
-  
 
   /* //TESTING VISIT STATION
   System.out.println(t.position);
@@ -119,6 +114,7 @@ void draw(){
     text("Total Score: " + totalPassengers, 3*width/4, height/24);
     text("Overcrowded Counter: " + overcrowdedCount, width/25, height/24);
     line(0, 60, width, 60);
+    drawSelectedLines();
    }
   if(screen == 2){
     fill(255);
@@ -137,12 +133,18 @@ void draw(){
 }
 
 void mousePressed(){
-  trains.get(0).removeStation(redLine.get(1));
+  //trains.get(0).removeStation(redLine.get(1));
   /*
   for(int i = 0; i < trains.size(); i++){
     trains.get(i).removeStation(redLine.get(0));
   }
   */
+}
+
+void keyPressed(){
+  if(keyCode == ' '){
+    selectedRoute = (selectedRoute + 1) % 3;
+  }
 }
 
 void spawn(){
@@ -277,4 +279,25 @@ LinkedList<Station> getTrainLine(int type){
   } else {
     return yellowLine;
   }
+}
+
+void drawSelectedLines(){
+  fill(0);
+  stroke(255);
+  if(selectedRoute == 0){
+    circle((float)width/4, height-60, 40);
+  } else if (selectedRoute == 1){
+    circle((float)width/2, height-60, 40);
+  } else if (selectedRoute == 2){
+    circle((float)width*3/4, height-60, 40);
+  }
+  noStroke();
+  fill(RED);
+  circle((float)width/4, height-60, 30);
+  fill(BLUE);
+  circle((float)width/2, height-60, 30);
+  fill(YELLOW);
+  circle((float)width*3/4, height-60, 30);
+  fill(255);
+  stroke(255);
 }

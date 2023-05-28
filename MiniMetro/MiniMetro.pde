@@ -29,6 +29,10 @@ void setup(){
   t.addStation(s2);
   t.addStation(s3);
   
+  selectedRoute = 1;
+  Train t2 = new Train(s3);
+  t2.addStation(s1);
+  
 
   /* //TESTING VISIT STATION
   System.out.println(t.position);
@@ -107,16 +111,7 @@ void draw(){
       spawnStation();
     }
 
-    // go through all three lines and draw connected stations
-    for(int i = 0; i < redLine.size()-1; i++){
-      drawLine(redLine.get(i),redLine.get(i+1),RED);
-    }
-    for(int i = 0; i < blueLine.size()-1; i++){
-      drawLine(blueLine.get(i),blueLine.get(i+1),BLUE);
-    }
-    for(int i = 0; i < yellowLine.size()-1; i++){
-      drawLine(yellowLine.get(i),yellowLine.get(i+1),YELLOW);
-    }
+    drawLines();
     displayStations();
     drawTrains();
     fill(0);
@@ -240,6 +235,20 @@ void displayStations(){
 }
 }
 
+void drawLines(){
+  // go through all three lines and draw connected stations
+  for(int i = 0; i < redLine.size()-1; i++){
+    drawLine(redLine.get(i),redLine.get(i+1),RED);
+  }
+  for(int i = 0; i < blueLine.size()-1; i++){
+    drawLine(blueLine.get(i),blueLine.get(i+1),BLUE);
+  }
+  for(int i = 0; i < yellowLine.size()-1; i++){
+    drawLine(yellowLine.get(i),yellowLine.get(i+1),YELLOW);
+  }
+}
+
+// helper for drawLines()
 void drawLine(Station s1, Station s2, color c){
   strokeWeight(10);
   stroke(c);

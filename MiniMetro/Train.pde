@@ -108,15 +108,13 @@ public class Train{
       stationIndex--;
       return trainLine.get(stationIndex);
     } else if (direction == true && stationIndex + 1 == trainLine.size() - 1){
-      Station current = trainLine.get(stationIndex);
       stationIndex++;
       direction = false;
-      return current;
+      return trainLine.get(stationIndex);
     } else if (direction == false && stationIndex - 1 == 0){
-      Station current = trainLine.get(stationIndex);
       stationIndex--;
       direction = true;
-      return current;
+      return trainLine.get(stationIndex);
     } else {return null;}
   }
   

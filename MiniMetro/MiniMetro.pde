@@ -268,6 +268,23 @@ void drawTrains(){
     Train t = trains.get(i);
     t.visitStation();
     rect(t.position.x, t.position.y, 20, 20, 2, 2, 2, 2);
+    Passenger[] riders = t.riders;
+    int riderCount = 0;
+    for(int j = 0; j < riders.length; j++){
+      float adjustment = -10*(riderCount+2);
+      if(riders[j] != null){
+        if(riders[j].getType() == 0){
+          circle(t.position.x+adjustment, t.position.y, 3);
+        } else if (riders[j].getType() == 1){
+          triangle(t.position.x+adjustment, t.position.y+1.5,
+            t.position.x+adjustment+1.5*(float)Math.sin(PI/3), t.position.y-1.5*(float)Math.cos(PI/3),
+            t.position.x+adjustment-1.5*(float)Math.sin(PI/3), t.position.y-1.5*(float)Math.cos(PI/3));
+        } else if (riders[j].getType() == 2){
+          square(t.position.x+adjustment, t.position.y, 3);
+        }
+        riderCount++;
+      }
+    }
   }
 }
 

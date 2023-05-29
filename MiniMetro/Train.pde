@@ -16,6 +16,9 @@ public class Train{
     Station nextSt = peekNextStation();
     if(stopTime != 0){
       stopTime++;
+      // load train when stopped at a station
+      LinkedList<Station> trainLine = getTrainLine(trainLineNum);
+      trainLine.get(stationIndex).loadTrain(this);
       if(stopTime == stopTimeLimit){
         stopTime = 0;
       } else {return false;}

@@ -71,6 +71,13 @@
 - Reorganize the code, using helper methods, that draws train lines so that the draw() method isn't too crowded with code.
 - Create graphics that indicate what train line is currently selected and allow the player to change train lines using the space bar.
 
+### 5/29/2023
+
+- Modified drawTrains() to display the passengers in the train.
+- Have the train load passengers for the entire time when it is stopped at a station.
+- Fix the issue where the first and last stations do not load/unload passengers.
+- Modified visitStation() to unload passengers one at a time.
+
 ### date y
 
 info

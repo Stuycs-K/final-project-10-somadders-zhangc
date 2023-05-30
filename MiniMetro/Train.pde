@@ -16,20 +16,22 @@ public class Train{
     Station nextSt = peekNextStation();
     if(stopTime != 0){
       stopTime++;
-      // load train when stopped at a station
-      LinkedList<Station> trainLine = getTrainLine(trainLineNum);
-      trainLine.get(stationIndex).loadTrain(this);
+      // unload train when stopped at a station one passenger at a time
+      if(stopTime % 4 == 0){
+        unload(nextSt);
+      }
+      // set next station once time limit is up and load the train
       if(stopTime == stopTimeLimit){
         stopTime = 0;
+        nextSt.loadTrain(this);
+        nextStation();
+        return true;
       } else {return false;}
     }
     
     if(Math.abs(position.x-nextSt.getX()) < 1 && Math.abs(position.y-nextSt.getY()) < 1){
       // set train position to station position when train is close to the station to avoid float errors
       position = new PVector(nextSt.getX(), nextSt.getY());
-      nextSt = nextStation();
-      unload(nextSt);
-      nextSt.loadTrain(this);
       stopTime = 1;
       return true;
     }
@@ -65,6 +67,7 @@ public class Train{
       if(riders[i] != null && riders[i].getType() == st.getType()){
         riders[i] = null;
         totalDropped++;
+        i = riders.length;
       }
     }
   }

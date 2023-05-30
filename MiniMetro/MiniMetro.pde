@@ -10,7 +10,7 @@ LinkedList<Station> yellowLine = new LinkedList<Station>();
 color RED = color(178,34,34);
 color BLUE = color(0,0,205);
 color YELLOW = color(255,215,0);
-int screen = 0; //0 = ongoing game, 1 = winscreen, 2 = lose screen, more screens can be added later;
+int screen = -1; //0 = ongoing game, 1 = winscreen, 2 = lose screen, -1 = start screen, more screens can be added later;
 int overcrowdedCount;
 
 void setup(){
@@ -93,6 +93,28 @@ void draw(){
   if(stations.size() > 60){
     screen = 1;
   }
+  
+  // DRAW START SCREEN
+  if(screen == -1){
+    rectMode(CENTER);
+    strokeWeight(10);
+    stroke(RED);
+    line(width/5,height/3,width*6/7,height/2);
+    stroke(YELLOW);
+    line(width*6/7,height/2,width*1/7,height*2/3);
+    stroke(BLUE);
+    line(width/5,height/3,width*1/7,height*2/3);
+    stroke(0);
+    strokeWeight(4);
+    circle(width/5,height/3,50);
+    square(width*6/7,height/2,50);
+    triangle(width*1/7+25,height*2/3+25,width*1/7,height*2/3-25,width*1/7-25,height*2/3+25);
+    fill(200,180);
+    rectMode(CORNER);
+    rect(0,0,width,height);
+    fill(255);
+  }
+  
   if(screen == 0){
     background(255);
     int decline = frameCount/200;

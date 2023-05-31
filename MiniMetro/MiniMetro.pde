@@ -96,6 +96,7 @@ void draw(){
   
   // DRAW START SCREEN
   if(screen == -1){
+    // stations and train line display on start screen
     rectMode(CENTER);
     strokeWeight(10);
     stroke(RED);
@@ -109,15 +110,26 @@ void draw(){
     circle(width/5,height/3,50);
     square(width*6/7,height/2,50);
     triangle(width*1/7+25,height*2/3+25,width*1/7,height*2/3-25,width*1/7-25,height*2/3+25);
+    
+    // create cover over background objects
     fill(200,180);
     rectMode(CORNER);
     rect(0,0,width,height);
+    
+    // text on screen
     fill(0);
     stroke(0);
     textSize(120);
     String MM = "Mini Metro";
     float sw = textWidth(MM);
-    text(MM,(width-sw)/2,height/4);
+    text(MM,(width-sw)/2,height*3/11);
+    String b1 = "Game remade by Calvin Zhang and Siddhartha Somadder";
+    textSize(15);
+    text(b1,(width-sw)/2+10,height*3/11+20);
+    String b2 = "Play";
+    textSize(50);
+    text(b2,(width-sw)/2+40,height*3/11+80);
+    triangle((width-sw)/2+20+5,height*3/11+63,(width-sw)/2+20-5*(float)Math.cos(PI/3),height*3/11+63-5*(float)Math.sin(PI/3),(width-sw)/2+20-5*(float)Math.cos(PI/3),height*3/11+63+5*(float)Math.sin(PI/3));
     fill(255);
   }
   

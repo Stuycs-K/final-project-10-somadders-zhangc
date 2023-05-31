@@ -78,6 +78,10 @@
 - Fix the issue where the first and last stations do not load/unload passengers.
 - Modified visitStation() to unload passengers one at a time.
 
+### 5/30/2023
+
+- Create a starting screen with objects, text, and a play button to start the game.
+
 ### date y
 
 info

@@ -201,10 +201,12 @@ void mousePressed(){
         + 50 && mouseY > stations.get(savedStIndex).getY() - 50 && mouseY < stations.get(savedStIndex).getY() + 50){
             stations.get(savedStIndex).setStatus(false);
             numClick = 0;
-            for(int j = 0; j < trains.size(); j++){
-                if(selectedRoute == trains.get(j).trainLineNum){
-                 trains.get(j).removeStation(stations.get(savedStIndex));
-                }
+            if(getTrainLine(selectedRoute).size() > 2){
+              for(int j = 0; j < trains.size(); j++){
+                  if(selectedRoute == trains.get(j).trainLineNum){
+                     trains.get(j).removeStation(stations.get(savedStIndex));
+                  }
+              }
             }
         }
         else{
@@ -213,7 +215,7 @@ void mousePressed(){
               if(stations.get(savedStIndex) == redLine.get(0)){
                 trains.get(j).addStationFIRST(target);
               }
-              else{
+              else if(stations.get(savedStIndex) == redLine.get(redLine.size()-1)){
                 trains.get(j).addStation(target);
               }
               stations.get(savedStIndex).setStatus(false);

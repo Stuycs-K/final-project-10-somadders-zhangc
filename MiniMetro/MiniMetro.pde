@@ -112,13 +112,13 @@ void draw(){
     fill(200,180);
     rectMode(CORNER);
     rect(0,0,width,height);
-    fill(255);
+    fill(0);
     stroke(0);
-    textSize(128);
-    textAlign(CENTER, BOTTOM);
+    textSize(120);
     String MM = "Mini Metro";
     float sw = textWidth(MM);
-    text(MM,width-sw/2,height/3);
+    text(MM,(width-sw)/2,height/4);
+    fill(255);
   }
   
   if(screen == 0){

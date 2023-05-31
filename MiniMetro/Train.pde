@@ -143,6 +143,24 @@ public class Train{
       yellowLine.addLast(st);
     }
   }
+    public void addStationFIRST(Station st){
+    /*
+    float distToFront = calculateStationDist(st, trainLine.peekFirst());
+    float distToLast = calculateStationDist(st, trainLine.peekLast());
+    if(distToFront > distToLast){
+      trainLine.addLast(st);
+    } else {
+      trainLine.addFirst(st);
+    }
+    */
+    if(selectedRoute == 0){
+      redLine.addFirst(st);
+    } else if (selectedRoute == 1){
+      blueLine.addFirst(st);
+    } else if (selectedRoute == 2){
+      yellowLine.addFirst(st);
+    }
+  }
   
   // NOTE:
   // special cases: 2 stations, removed station is at very start or end (in which case, continue to next station)

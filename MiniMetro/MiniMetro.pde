@@ -12,12 +12,9 @@ color BLUE = color(0,0,205);
 color YELLOW = color(255,215,0);
 int screen = -1; //0 = ongoing game, 1 = winscreen, 2 = lose screen, -1 = start screen, more screens can be added later;
 int overcrowdedCount;
-<<<<<<< HEAD
 int numClick = 0;
 int savedStIndex = -1;
-=======
 float textWidthMM = 0;
->>>>>>> 459066133a819dbfac3ffbd89ad0cd06243979ef
 
 void setup(){
   size(1000,800);
@@ -31,6 +28,7 @@ void setup(){
   Station s3 = stations.get(2);
 
   Train t = new Train(s1);
+  t.addStation(s2);
   Passenger p = new Passenger();
   t.add(p);
   /* //TESTING VISIT STATION
@@ -194,20 +192,32 @@ void mousePressed(){
     Station target = stations.get(i);
     if(mouseX > target.getX() - 50 && mouseX < target.getX() + 50 && mouseY > target.getY() - 50 && mouseY < target.getY() + 50){
       if(numClick == 0){
-        stations.get(i).setStatus();
+        stations.get(i).setStatus(true);
         numClick++;
         savedStIndex = i;
       }
       else if(numClick == 1){
         if(mouseX > stations.get(savedStIndex).getX() - 50 && mouseX < stations.get(savedStIndex).getX() 
         + 50 && mouseY > stations.get(savedStIndex).getY() - 50 && mouseY < stations.get(savedStIndex).getY() + 50){
-            stations.get(savedStIndex).setStatus();
+            stations.get(savedStIndex).setStatus(false);
             numClick = 0;
+            for(int j = 0; j < trains.size(); j++){
+                if(selectedRoute == trains.get(j).trainLineNum){
+                 trains.get(j).removeStation(stations.get(savedStIndex));
+                }
+            }
         }
         else{
           for(int j = 0; j < trains.size(); j++){
-            if(selectedRoute == trains.get(j).getLineNum()){
-              trains.get(j).addStation()
+            if(selectedRoute == trains.get(j).trainLineNum){
+              if(stations.get(savedStIndex) == redLine.get(0)){
+                trains.get(j).addStationFIRST(target);
+              }
+              else{
+                trains.get(j).addStation(target);
+              }
+              stations.get(savedStIndex).setStatus(false);
+              numClick = 0;
             }
           }
           //add stations;
@@ -243,7 +253,7 @@ void spawnStation(){
   }
   ST.addPassengers();
   stations.add(ST);
-  trains.get(0).addStation(ST);
+  //trains.get(0).addStation(ST);
 }
 
 void spawnStation(int type){

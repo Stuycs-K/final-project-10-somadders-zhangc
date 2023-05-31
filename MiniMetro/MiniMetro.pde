@@ -12,6 +12,7 @@ color BLUE = color(0,0,205);
 color YELLOW = color(255,215,0);
 int screen = -1; //0 = ongoing game, 1 = winscreen, 2 = lose screen, -1 = start screen, more screens can be added later;
 int overcrowdedCount;
+float textWidthMM = 0;
 
 void setup(){
   size(1000,800);
@@ -112,7 +113,7 @@ void draw(){
     triangle(width*1/7+25,height*2/3+25,width*1/7,height*2/3-25,width*1/7-25,height*2/3+25);
     
     // create cover over background objects
-    fill(200,180);
+    fill(200,200);
     rectMode(CORNER);
     rect(0,0,width,height);
     
@@ -122,14 +123,24 @@ void draw(){
     textSize(120);
     String MM = "Mini Metro";
     float sw = textWidth(MM);
+    textWidthMM = sw;
     text(MM,(width-sw)/2,height*3/11);
     String b1 = "Game remade by Calvin Zhang and Siddhartha Somadder";
     textSize(15);
     text(b1,(width-sw)/2+10,height*3/11+20);
+    
+    // button for play
+    fill(100,100);
+    if(mouseX > (width-sw)/2 && mouseX < (width-sw)/2+sw && mouseY < height*3/11+95 && mouseY > height*3/11+40){
+      noStroke();
+      rect((width-sw)/2,height*3/11+40,sw,55);
+    }
+    fill(0);
     String b2 = "Play";
     textSize(50);
     text(b2,(width-sw)/2+40,height*3/11+80);
-    triangle((width-sw)/2+20+5,height*3/11+63,(width-sw)/2+20-5*(float)Math.cos(PI/3),height*3/11+63-5*(float)Math.sin(PI/3),(width-sw)/2+20-5*(float)Math.cos(PI/3),height*3/11+63+5*(float)Math.sin(PI/3));
+    triangle((width-sw)/2+20+5,height*3/11+67.5,(width-sw)/2+20-5*(float)Math.cos(PI/3),height*3/11+67.5-5*(float)Math.sin(PI/3),(width-sw)/2+20-5*(float)Math.cos(PI/3),height*3/11+67.5+5*(float)Math.sin(PI/3));
+    stroke(0);
     fill(255);
   }
   
@@ -173,6 +184,11 @@ void draw(){
 }
 
 void mousePressed(){
+  // start the game if screen is start screen and pressed in the right region
+  if(screen == -1 && mouseX > (width-textWidthMM)/2 && mouseX < (width-textWidthMM)/2+textWidthMM && mouseY < height*3/11+95 && mouseY > height*3/11+40){
+    screen = 0;
+  }
+  
   //trains.get(0).removeStation(redLine.get(1));
   /*
   for(int i = 0; i < trains.size(); i++){

@@ -121,13 +121,8 @@ public class Station{
     return selected;
   }
   
-  public void setStatus(){
-    if(selected){
-      selected = false;
-    }
-    else{
-      selected = true;
-    }
+  public void setStatus(boolean b){
+    selected = b;
   }
   
 }

@@ -218,10 +218,11 @@ void mousePressed(){
           for(int j = 0; j < trains.size(); j++){
             if(selectedRoute == trains.get(j).trainLineNum){
               flag = false;
-              if(stations.get(savedStIndex) == redLine.get(0)){
+              
+              if(stations.get(savedStIndex) == getTrainLine(selectedRoute).get(0)){
                 trains.get(j).addStationFIRST(target);
               }
-              else if(stations.get(savedStIndex) == redLine.get(redLine.size()-1)){
+              else if(stations.get(savedStIndex) == getTrainLine(selectedRoute).get(redLine.size()-1)){
                 trains.get(j).addStation(target);
               }
               stations.get(savedStIndex).setStatus(false);

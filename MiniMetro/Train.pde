@@ -159,11 +159,9 @@ public class Train{
         yellowLine = new LinkedList<Station>();
       }
       trains.remove(this);
-      
     }
     else {
       int stIndex = trainLine.indexOf(st);
-      System.out.println(stIndex);
       boolean flag = false;
       if(stIndex != -1){
         flag = true;
@@ -177,13 +175,11 @@ public class Train{
           direction = false;
         }
         // train is approaching a station and the station to be removed is ahead of it
-        if(stationIndex < stIndex){
+        else if(stationIndex < stIndex){
           trainLine.remove(stIndex);
         }
         // train is approaching a station but the station to be removed is behind it
-        if(stationIndex >= stIndex){
-          System.out.println(stationIndex);
-          System.out.println(trainLine.size());
+        else if(stationIndex >= stIndex){
           trainLine.remove(stIndex); //<>//
           stationIndex--;
         }
@@ -196,11 +192,11 @@ public class Train{
           direction = true;
         }
         // train is approaching a station and the station to be removed is behind it
-        if(stationIndex <= stIndex){
+        else if(stationIndex <= stIndex){
           trainLine.remove(stIndex);
         }
         // train is approaching a station but the station to be removed is ahead of it
-        if(stationIndex > stIndex){
+        else if(stationIndex > stIndex){
           trainLine.remove(stIndex);
           stationIndex--;
         }

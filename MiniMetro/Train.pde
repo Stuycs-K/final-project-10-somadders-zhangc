@@ -126,15 +126,6 @@ public class Train{
   }
   
   public void addStation(Station st){
-    /*
-    float distToFront = calculateStationDist(st, trainLine.peekFirst());
-    float distToLast = calculateStationDist(st, trainLine.peekLast());
-    if(distToFront > distToLast){
-      trainLine.addLast(st);
-    } else {
-      trainLine.addFirst(st);
-    }
-    */
     if(selectedRoute == 0){
       redLine.addLast(st);
     } else if (selectedRoute == 1){
@@ -142,17 +133,9 @@ public class Train{
     } else if (selectedRoute == 2){
       yellowLine.addLast(st);
     }
-  }
+  } //<>// //<>//
     public void addStationFIRST(Station st){
-    /*
-    float distToFront = calculateStationDist(st, trainLine.peekFirst());
-    float distToLast = calculateStationDist(st, trainLine.peekLast());
-    if(distToFront > distToLast){
-      trainLine.addLast(st);
-    } else {
-      trainLine.addFirst(st);
-    }
-    */
+    stationIndex++;
     if(selectedRoute == 0){
       redLine.addFirst(st);
     } else if (selectedRoute == 1){
@@ -199,7 +182,9 @@ public class Train{
         }
         // train is approaching a station but the station to be removed is behind it
         if(stationIndex >= stIndex){
-          trainLine.remove(stIndex);
+          System.out.println(stationIndex);
+          System.out.println(trainLine.size());
+          trainLine.remove(stIndex); //<>//
           stationIndex--;
         }
       // train is moving backward

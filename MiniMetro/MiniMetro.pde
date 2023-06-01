@@ -12,6 +12,8 @@ color BLUE = color(0,0,205);
 color YELLOW = color(255,215,0);
 int screen = -1; //0 = ongoing game, 1 = winscreen, 2 = lose screen, -1 = start screen, more screens can be added later;
 int overcrowdedCount;
+int numClick = 0;
+int savedStIndex = -1;
 float textWidthMM = 0;
 
 void setup(){
@@ -24,12 +26,11 @@ void setup(){
   Station s1 = stations.get(0);
   Station s2 = stations.get(1);
   Station s3 = stations.get(2);
+
   Train t = new Train(s1);
+  t.addStation(s2);
   Passenger p = new Passenger();
   t.add(p);
-  t.addStation(s2);
-  t.addStation(s3);
-
   /* //TESTING VISIT STATION
   System.out.println(t.position);
   System.out.println(s1.x + " " + s1.y);
@@ -65,14 +66,6 @@ void setup(){
   t.nextStation();
   System.out.println(t.getStationIndex());
   */
-
-  Station S = new Station();
-  S.addPassengers();
-  S.addPassengers();
-  S.addPassengers();
-  S.addPassengers();
-  System.out.println(S);
-  System.out.println(S.get(1));
 }
 
 void draw(){
@@ -195,6 +188,45 @@ void mousePressed(){
     trains.get(i).removeStation(redLine.get(0));
   }
   */
+  for(int i = 0; i < stations.size(); i++){
+    Station target = stations.get(i);
+    if(mouseX > target.getX() - 50 && mouseX < target.getX() + 50 && mouseY > target.getY() - 50 && mouseY < target.getY() + 50){
+      if(numClick == 0){
+        stations.get(i).setStatus(true);
+        numClick++;
+        savedStIndex = i;
+      }
+      else if(numClick == 1){
+        if(mouseX > stations.get(savedStIndex).getX() - 50 && mouseX < stations.get(savedStIndex).getX() 
+        + 50 && mouseY > stations.get(savedStIndex).getY() - 50 && mouseY < stations.get(savedStIndex).getY() + 50){
+            stations.get(savedStIndex).setStatus(false);
+            numClick = 0;
+            if(getTrainLine(selectedRoute).size() > 2){
+              for(int j = 0; j < trains.size(); j++){
+                  if(selectedRoute == trains.get(j).trainLineNum){
+                     trains.get(j).removeStation(stations.get(savedStIndex));
+                  }
+              }
+            }
+        }
+        else{
+          for(int j = 0; j < trains.size(); j++){
+            if(selectedRoute == trains.get(j).trainLineNum){
+              if(stations.get(savedStIndex) == redLine.get(0)){
+                trains.get(j).addStationFIRST(target);
+              }
+              else if(stations.get(savedStIndex) == redLine.get(redLine.size()-1)){
+                trains.get(j).addStation(target);
+              }
+              stations.get(savedStIndex).setStatus(false);
+              numClick = 0;
+            }
+          }
+          //add stations;
+        }
+      }
+    }
+  }
 }
 
 void keyPressed(){
@@ -223,7 +255,7 @@ void spawnStation(){
   }
   ST.addPassengers();
   stations.add(ST);
-  trains.get(0).addStation(ST);
+  //trains.get(0).addStation(ST);
 }
 
 void spawnStation(int type){
@@ -247,14 +279,29 @@ void displayStations(){
   for(int i = 0; i < stations.size(); i++){
     Station target = stations.get(i);
     fill(255);
+    stroke(0);
     if(target.getType() == 0){
-      circle(target.getX(), target.getY(), 50);
+      if(target.getSelected()){
+       fill(YELLOW);
+       circle(target.getX(), target.getY(), 50);
+      }
+      else{
+        circle(target.getX(), target.getY(), 50);
+      }
     }
     if(target.getType() == 1){
+      if(target.getSelected()){
+         fill(YELLOW);
+         triangle(target.getX()+25, target.getY()+25, target.getX(), target.getY()-25, target.getX()-25, target.getY()+25);
+      }
       triangle(target.getX()+25, target.getY()+25, target.getX(), target.getY()-25, target.getX()-25, target.getY()+25);
     }
     if(target.getType() == 2){
       rectMode(CENTER);
+       if(target.getSelected()){
+         fill(YELLOW);
+          square(target.getX(), target.getY(), 50);
+      }
       square(target.getX(), target.getY(), 50);
     }
     int numCirc = 0;

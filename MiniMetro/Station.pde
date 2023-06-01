@@ -8,6 +8,7 @@ public class Station{
   private int maxCapacity;
   private ArrayDeque<Passenger> riders;
   private int overcrowdedTime;
+  private boolean selected = false;
   
   public Station(){
     x = (float) Math.random() * width;
@@ -115,4 +116,13 @@ public class Station{
   public int getOvercrowded(){
     return overcrowdedTime;
   }
+  
+  public boolean getSelected(){
+    return selected;
+  }
+  
+  public void setStatus(boolean b){
+    selected = b;
+  }
+  
 }

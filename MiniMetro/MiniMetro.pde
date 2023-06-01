@@ -222,7 +222,7 @@ void mousePressed(){
               if(stations.get(savedStIndex) == getTrainLine(selectedRoute).get(0)){
                 trains.get(j).addStationFIRST(target);
               }
-              else if(stations.get(savedStIndex) == getTrainLine(selectedRoute).get(redLine.size()-1)){
+              else if(stations.get(savedStIndex) == getTrainLine(selectedRoute).get(getTrainLine(selectedRoute).size()-1)){
                 trains.get(j).addStation(target);
               }
               stations.get(savedStIndex).setStatus(false);

@@ -82,6 +82,10 @@
 
 - Create a starting screen with objects, text, and a play button to start the game.
 
+### 5/31/2023
+
+- Work on debugging code, specifically new problems in removeStation, addStation, and nextStation/visitStation. Problems were not resolved.
+
 ### date y
 
 info

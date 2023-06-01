@@ -26,11 +26,15 @@ void setup(){
   Station s1 = stations.get(0);
   Station s2 = stations.get(1);
   Station s3 = stations.get(2);
-
+  
+  /*
+  // below is for fast testing purposes
   Train t = new Train(s1);
   t.addStation(s2);
   Passenger p = new Passenger();
   t.add(p);
+  */
+  
   /* //TESTING VISIT STATION
   System.out.println(t.position);
   System.out.println(s1.x + " " + s1.y);
@@ -210,12 +214,15 @@ void mousePressed(){
             }
         }
         else{
+          boolean flag = true;
           for(int j = 0; j < trains.size(); j++){
             if(selectedRoute == trains.get(j).trainLineNum){
-              if(stations.get(savedStIndex) == redLine.get(0)){
+              flag = false;
+              
+              if(stations.get(savedStIndex) == getTrainLine(selectedRoute).get(0)){
                 trains.get(j).addStationFIRST(target);
               }
-              else if(stations.get(savedStIndex) == redLine.get(redLine.size()-1)){
+              else if(stations.get(savedStIndex) == getTrainLine(selectedRoute).get(redLine.size()-1)){
                 trains.get(j).addStation(target);
               }
               stations.get(savedStIndex).setStatus(false);
@@ -223,6 +230,13 @@ void mousePressed(){
             }
           }
           //add stations;
+          // below adds a new train line if no train line currently exists
+          if(flag){
+            Train t = new Train(stations.get(savedStIndex));
+            t.addStation(target);
+            numClick = 0;
+            stations.get(savedStIndex).setStatus(false);
+          }
         }
       }
     }

@@ -86,6 +86,11 @@
 
 - Work on debugging code, specifically new problems in removeStation, addStation, and nextStation/visitStation. Problems were not resolved.
 
+### 6/1/2023
+
+- Fix the add and remove station bug where the train would not go to the right station.
+- Allow the player to switch between train lines and add a new train line if the selected line does not already exist.
+
 ### date y
 
 info

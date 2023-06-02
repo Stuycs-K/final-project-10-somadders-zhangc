@@ -31,6 +31,22 @@
 - Slightly changed train unload method to keep count of TOTAL number of riders that the train has unloaded in its time.
 - Game now displays the overCrowdedcount and the total passenger score.
 
+### 5/27-29/2023
+- Worked on mousePressed() for selecting stations in order for player to add/remove stations. High severity of bugs requires whiteboarding/discussion w/ Calvin.
+- New 'selected' instance and respective accessor/mutators for station class that determines if station is mousePressed().
+- Implemented system of savedStIndex to save last clicked on station to determine if player is adding/removing station. Some edge cases need to be addressed.
+
+### 5/30/2023
+- mousePressed() now has conditions to determine if adding/removing station is possible with the selected station(s).
+- Fixed some bugs surrounding mousePressed(), significant issue with Train class remains.
+
+### 5/31/2023
+- Discussion w Calvin and investigation into issue regarding how stations are stored with addStation and removeStation.
+- Added more edge cases to mousePressed and fixed some bugs in how stations are highlighted with mousePressed.
+
+### 6/1/2023
+- Tested new code both with print statements and playtested demo. Worked on separate doc for demo presentation.
+
 
 ## Calvin Zhang
 

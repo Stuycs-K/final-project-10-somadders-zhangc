@@ -15,6 +15,7 @@ int overcrowdedCount;
 int numClick = 0;
 int savedStIndex = -1;
 float textWidthMM = 0;
+boolean paused = true;
 
 void setup(){
   size(1000,800);
@@ -177,6 +178,23 @@ void draw(){
     text("Overcrowded Counter: " + overcrowdedCount, width/25, height/24);
     line(0, 60, width, 60);
     drawSelectedLines();
+    
+    // pause button
+    if(paused == true){
+      stroke(0);
+      strokeWeight(2);
+      circle(width/2,30,30);
+      triangle(width/2+10,30,width/2-10*(float)Math.cos(PI/3),30+10*(float)Math.sin(PI/3),width/2-10*(float)Math.cos(PI/3),30-10*(float)Math.sin(PI/3));
+      strokeWeight(4);
+    }
+    if(paused == false){
+      stroke(0);
+      strokeWeight(2);
+      circle(width/2,30,30);
+      line(width/2-5,22,width/2-5,38);
+      line(width/2+5,22,width/2+5,38);
+      strokeWeight(4);
+    }
    }
   if(screen == 2){
     fill(255);

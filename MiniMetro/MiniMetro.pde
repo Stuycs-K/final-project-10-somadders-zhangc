@@ -15,6 +15,7 @@ int overcrowdedCount;
 int numClick = 0;
 int savedStIndex = -1;
 float textWidthMM = 0;
+boolean paused = false;
 
 void setup(){
   size(1000,800);
@@ -139,6 +140,20 @@ void draw(){
     triangle((width-sw)/2+20+5,height*3/11+67.5,(width-sw)/2+20-5*(float)Math.cos(PI/3),height*3/11+67.5-5*(float)Math.sin(PI/3),(width-sw)/2+20-5*(float)Math.cos(PI/3),height*3/11+67.5+5*(float)Math.sin(PI/3));
     stroke(0);
     fill(255);
+    
+    // button for tutorial
+    fill(100,100);
+    if(mouseX > (width-sw)/2 && mouseX < (width-sw)/2+sw && mouseY < height*3/11+155 && mouseY > height*3/11+100){
+      noStroke();
+      rect((width-sw)/2,height*3/11+100,sw,55);
+    }
+    fill(0);
+    String b3 = "Tutorial";
+    textSize(50);
+    text(b3,(width-sw)/2+40,height*3/11+140);
+    triangle((width-sw)/2+20+5,height*3/11+127.5,(width-sw)/2+20-5*(float)Math.cos(PI/3),height*3/11+127.5-5*(float)Math.sin(PI/3),(width-sw)/2+20-5*(float)Math.cos(PI/3),height*3/11+127.5+5*(float)Math.sin(PI/3));
+    stroke(0);
+    fill(255);
   }
   
   if(screen == 0){
@@ -156,6 +171,7 @@ void draw(){
 
     drawLines();
     displayStations();
+    
     drawTrains();
     fill(0);
     textSize(32);
@@ -163,6 +179,23 @@ void draw(){
     text("Overcrowded Counter: " + overcrowdedCount, width/25, height/24);
     line(0, 60, width, 60);
     drawSelectedLines();
+    
+    // pause button
+    if(paused == true){
+      stroke(0);
+      strokeWeight(2);
+      circle(width/2,30,30);
+      triangle(width/2+10,30,width/2-10*(float)Math.cos(PI/3),30+10*(float)Math.sin(PI/3),width/2-10*(float)Math.cos(PI/3),30-10*(float)Math.sin(PI/3));
+      strokeWeight(4);
+    }
+    if(paused == false){
+      stroke(0);
+      strokeWeight(2);
+      circle(width/2,30,30);
+      line(width/2-5,22,width/2-5,38);
+      line(width/2+5,22,width/2+5,38);
+      strokeWeight(4);
+    }
    }
   if(screen == 2){
     fill(255);
@@ -184,6 +217,15 @@ void mousePressed(){
   // start the game if screen is start screen and pressed in the right region
   if(screen == -1 && mouseX > (width-textWidthMM)/2 && mouseX < (width-textWidthMM)/2+textWidthMM && mouseY < height*3/11+95 && mouseY > height*3/11+40){
     screen = 0;
+  }
+  
+  // pause the game
+  if(screen == 0 && mouseX > width/2-15 && mouseX < width/2+15 && mouseY > 15 && mouseY < 45){
+    if(paused){
+      paused = false;
+    } else {
+      paused = true;
+    }
   }
   
   //trains.get(0).removeStation(redLine.get(1));
@@ -383,7 +425,7 @@ void drawTrains(){
   rectMode(CENTER);
   for(int i = 0; i < trains.size(); i++){
     Train t = trains.get(i);
-    t.visitStation();
+    if(paused == false){ t.visitStation(); }
     rect(t.position.x, t.position.y, 20, 20, 2, 2, 2, 2);
     Passenger[] riders = t.riders;
     int riderCount = 0;

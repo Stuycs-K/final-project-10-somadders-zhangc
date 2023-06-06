@@ -16,6 +16,7 @@ int numClick = 0;
 int savedStIndex = -1;
 float textWidthMM = 0;
 boolean paused = false;
+int internalClock = 0;
 
 void setup(){
   size(1000,800);
@@ -158,14 +159,15 @@ void draw(){
   
   if(screen == 0){
     background(255);
-    int decline = frameCount/200;
-    if(frameCount % 600 - decline == 0){
+    if(!paused) { internalClock += 1; }
+    int decline = internalClock/200;
+    if(internalClock % 600 - decline == 0){
       for(int i = 0; i < (stations.size()/2) + 1; i++){
           spawn();
       }
      }
 
-    if(frameCount % 400 == 0){
+    if(internalClock % 400 == 0){
       spawnStation();
     }
 

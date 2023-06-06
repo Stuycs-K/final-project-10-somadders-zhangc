@@ -139,6 +139,20 @@ void draw(){
     triangle((width-sw)/2+20+5,height*3/11+67.5,(width-sw)/2+20-5*(float)Math.cos(PI/3),height*3/11+67.5-5*(float)Math.sin(PI/3),(width-sw)/2+20-5*(float)Math.cos(PI/3),height*3/11+67.5+5*(float)Math.sin(PI/3));
     stroke(0);
     fill(255);
+    
+    // button for tutorial
+    fill(100,100);
+    if(mouseX > (width-sw)/2 && mouseX < (width-sw)/2+sw && mouseY < height*3/11+155 && mouseY > height*3/11+100){
+      noStroke();
+      rect((width-sw)/2,height*3/11+100,sw,55);
+    }
+    fill(0);
+    String b3 = "Tutorial";
+    textSize(50);
+    text(b3,(width-sw)/2+40,height*3/11+140);
+    triangle((width-sw)/2+20+5,height*3/11+127.5,(width-sw)/2+20-5*(float)Math.cos(PI/3),height*3/11+127.5-5*(float)Math.sin(PI/3),(width-sw)/2+20-5*(float)Math.cos(PI/3),height*3/11+127.5+5*(float)Math.sin(PI/3));
+    stroke(0);
+    fill(255);
   }
   
   if(screen == 0){

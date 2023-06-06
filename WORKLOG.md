@@ -107,6 +107,11 @@
 - Fix the add and remove station bug where the train would not go to the right station.
 - Allow the player to switch between train lines and add a new train line if the selected line does not already exist.
 
+### 6/5/2023
+
+- Add a tutorial button.
+- Add a working pause button that toggles a paused boolean. Currently, only the trains stop moving but everything else still moves. This is more complicated than anticipated due to us using frame rate as a measurement of time.
+
 ### date y
 
 info

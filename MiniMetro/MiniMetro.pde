@@ -15,7 +15,7 @@ int overcrowdedCount;
 int numClick = 0;
 int savedStIndex = -1;
 float textWidthMM = 0;
-boolean paused = true;
+boolean paused = false;
 
 void setup(){
   size(1000,800);
@@ -171,6 +171,7 @@ void draw(){
 
     drawLines();
     displayStations();
+    
     drawTrains();
     fill(0);
     textSize(32);
@@ -216,6 +217,15 @@ void mousePressed(){
   // start the game if screen is start screen and pressed in the right region
   if(screen == -1 && mouseX > (width-textWidthMM)/2 && mouseX < (width-textWidthMM)/2+textWidthMM && mouseY < height*3/11+95 && mouseY > height*3/11+40){
     screen = 0;
+  }
+  
+  // pause the game
+  if(screen == 0 && mouseX > width/2-15 && mouseX < width/2+15 && mouseY > 15 && mouseY < 45){
+    if(paused){
+      paused = false;
+    } else {
+      paused = true;
+    }
   }
   
   //trains.get(0).removeStation(redLine.get(1));
@@ -415,7 +425,7 @@ void drawTrains(){
   rectMode(CENTER);
   for(int i = 0; i < trains.size(); i++){
     Train t = trains.get(i);
-    t.visitStation();
+    if(paused == false){ t.visitStation(); }
     rect(t.position.x, t.position.y, 20, 20, 2, 2, 2, 2);
     Passenger[] riders = t.riders;
     int riderCount = 0;

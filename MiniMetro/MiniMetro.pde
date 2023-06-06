@@ -189,6 +189,9 @@ void draw(){
       circle(width/2,30,30);
       triangle(width/2+10,30,width/2-10*(float)Math.cos(PI/3),30+10*(float)Math.sin(PI/3),width/2-10*(float)Math.cos(PI/3),30-10*(float)Math.sin(PI/3));
       strokeWeight(4);
+      rectMode(CORNER);
+      fill(0,60);
+      rect(0,60,width,height-60);
     }
     if(paused == false){
       stroke(0);

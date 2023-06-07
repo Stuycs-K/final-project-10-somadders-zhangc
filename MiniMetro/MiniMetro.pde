@@ -16,6 +16,7 @@ int numClick = 0;
 int savedStIndex = -1;
 float textWidthMM = 0;
 boolean paused = false;
+int internalClock = 0;
 
 void setup(){
   size(1000,800);
@@ -158,14 +159,15 @@ void draw(){
   
   if(screen == 0){
     background(255);
-    int decline = frameCount/200;
-    if(frameCount % 600 - decline == 0){
+    if(!paused) { internalClock += 1; }
+    int decline = internalClock/200;
+    if(internalClock % 600 - decline == 0){
       for(int i = 0; i < (stations.size()/2) + 1; i++){
           spawn();
       }
      }
 
-    if(frameCount % 400 == 0){
+    if(internalClock % 400 == 0){
       spawnStation();
     }
 
@@ -187,6 +189,9 @@ void draw(){
       circle(width/2,30,30);
       triangle(width/2+10,30,width/2-10*(float)Math.cos(PI/3),30+10*(float)Math.sin(PI/3),width/2-10*(float)Math.cos(PI/3),30-10*(float)Math.sin(PI/3));
       strokeWeight(4);
+      rectMode(CORNER);
+      fill(0,60);
+      rect(0,60,width,height-60);
     }
     if(paused == false){
       stroke(0);
@@ -479,8 +484,43 @@ void drawLines(){
 void drawLine(Station s1, Station s2, color c){
   strokeWeight(10);
   stroke(c);
-
-  line(s1.getX(), s1.getY(), s2.getX(), s2.getY());
+  
+  if(s2.getX() >= s1.getX() && s2.getY() >= s1.getY()){
+    if(s2.getX() - s1.getX() > s2.getY() - s1.getY()){
+      line(s1.getX(),s1.getY(), s1.getX()+s2.getY()-s1.getY(),s2.getY());
+      line(s1.getX()+s2.getY()-s1.getY(),s2.getY(), s2.getX(),s2.getY());
+    } else {
+      line(s1.getX(),s1.getY(), s2.getX(),s1.getY()+s2.getX()-s1.getX());
+      line(s2.getX(),s1.getY()+s2.getX()-s1.getX(), s2.getX(),s2.getY());
+    }
+  }
+  else if(s2.getX() >= s1.getX() && s2.getY() <= s1.getY()){
+    if(s2.getX() - s1.getX() > s1.getY() - s2.getY()){
+      line(s1.getX(),s1.getY(), s1.getX()-(s2.getY()-s1.getY()),s2.getY());
+      line(s1.getX()-(s2.getY()-s1.getY()),s2.getY(), s2.getX(),s2.getY());
+    } else {
+      line(s1.getX(),s1.getY(), s2.getX(),s1.getY()-s2.getX()+s1.getX());
+      line(s2.getX(),s1.getY()-s2.getX()+s1.getX(), s2.getX(),s2.getY());
+    }
+  }
+  else if(s2.getX() <= s1.getX() && s2.getY() >= s1.getY()){
+    if(s1.getX() - s2.getX() > s2.getY() - s1.getY()){
+      line(s1.getX(),s1.getY(), s1.getX()-(s2.getY()-s1.getY()),s2.getY());
+      line(s1.getX()-(s2.getY()-s1.getY()),s2.getY(), s2.getX(),s2.getY());
+    } else {
+      line(s1.getX(),s1.getY(), s2.getX(),s1.getY()-s2.getX()+s1.getX());
+      line(s2.getX(),s1.getY()-s2.getX()+s1.getX(), s2.getX(),s2.getY());
+    }
+  }
+  else if(s2.getX() <= s1.getX() && s2.getY() <= s1.getY()){
+    if(s1.getX() - s2.getX() > s1.getY() - s2.getY()){
+      line(s1.getX(),s1.getY(), s1.getX()+s2.getY()-s1.getY(),s2.getY());
+      line(s1.getX()+s2.getY()-s1.getY(),s2.getY(), s2.getX(),s2.getY());
+    } else {
+      line(s1.getX(),s1.getY(), s2.getX(),s1.getY()+s2.getX()-s1.getX());
+      line(s2.getX(),s1.getY()+s2.getX()-s1.getX(), s2.getX(),s2.getY());
+    }
+  }
 
   strokeWeight(4);
   stroke(0);

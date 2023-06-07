@@ -38,7 +38,6 @@ public class Train{
       return true;
     }
     else {
-      // PVector stPosition = new PVector(nextSt.getX(), nextSt.getY());
       float nextX = nextSt.getX();
       float nextY = nextSt.getY();
       PVector displacement = new PVector(0,0);
@@ -82,7 +81,6 @@ public class Train{
       else if(!direction && !visitFlag){
         if(Math.abs((position.y-nextY)/(position.x-nextX)) < 1.01 && Math.abs((position.y-nextY)/(position.x-nextX)) > 0.99){
           visitFlag = true;
-          //position = new PVector(nextX, position.y); // set train x position to station x to align the train correctly
         }
         else if(nextX > position.x && nextY > position.y){
           if(nextX-position.x > nextY-position.y){
@@ -116,6 +114,8 @@ public class Train{
       else if(!direction && visitFlag){
         displacement = PVector.sub(new PVector(nextX,nextY), position);
       }
+      
+      // correctly scale the displacement vector
       displacement.normalize();
       displacement.mult(speed);
       position.add(displacement);

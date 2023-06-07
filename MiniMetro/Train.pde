@@ -11,6 +11,7 @@ public class Train{
   private int totalDropped = 0;
   private int stopTime = 0;
   private int stopTimeLimit = 30;
+  private boolean visitFlag = false;
   
   public boolean visitStation(){
     Station nextSt = peekNextStation();
@@ -32,15 +33,60 @@ public class Train{
     if(Math.abs(position.x-nextSt.getX()) < 1 && Math.abs(position.y-nextSt.getY()) < 1){
       // set train position to station position when train is close to the station to avoid float errors
       position = new PVector(nextSt.getX(), nextSt.getY());
+      visitFlag = false;
       stopTime = 1;
       return true;
     }
     else {
-      PVector stPosition = new PVector(nextSt.getX(), nextSt.getY());
+      // PVector stPosition = new PVector(nextSt.getX(), nextSt.getY());
+      float nextX = nextSt.getX();
+      float nextY = nextSt.getY();
+      PVector displacement = new PVector(0,0);
+      if(direction && !visitFlag){
+        if(Math.abs(position.x-nextSt.getX()) < 1){
+          visitFlag = true;
+          position = new PVector(nextX, position.y); // set train x position to station x to align the train correctly
+        }
+        else if(Math.abs(position.y-nextSt.getY()) < 1){
+          visitFlag = true;
+          position = new PVector(position.x, nextY); // set train y position to station y to align the train correctly
+        }
+        else if(nextX >= position.x && nextY >= position.y){
+          displacement = new PVector(1,1);
+        }
+        else if(nextX >= position.x && nextY <= position.y){
+          displacement = new PVector(1,-1);
+        }
+        else if(nextX <= position.x && nextY >= position.y){
+          displacement = new PVector(-1,1);
+        }
+        else if(nextX <= position.x && nextY <= position.y){
+          displacement = new PVector(-1,-1);
+        }
+      }
+      if(direction && visitFlag){
+        if(nextX > position.x){
+          displacement = new PVector(1,0);
+        }
+        else if(nextX < position.x){
+          displacement = new PVector(-1,0);
+        }
+        else if(nextY > position.y){
+          displacement = new PVector(0,1);
+        }
+        else if(nextY < position.y){
+          displacement = new PVector(0,-1);
+        }
+      }
+      displacement.normalize();
+      displacement.mult(speed);
+      position.add(displacement);
+      /*
       PVector displacement = PVector.sub(stPosition, position);
       displacement.normalize();
       displacement.mult(speed);
       position.add(displacement);
+      */
       return false;
     }
   }

@@ -211,7 +211,7 @@ public class Train{
     } else if (selectedRoute == 2){
       yellowLine.addLast(st);
     }
-  } //<>// //<>//
+  } //<>// //<>// //<>//
     public void addStationFIRST(Station st){
     stationIndex++;
     if(selectedRoute == 0){
@@ -226,6 +226,8 @@ public class Train{
   // NOTE:
   // special cases: 2 stations, removed station is at very start or end (in which case, continue to next station)
   public void removeStation(Station st){
+    // TEMP SOLUTION STILL BUGGY ELSEWHERE
+    visitFlag = false;
     LinkedList<Station> trainLine = getTrainLine(trainLineNum);
     // delete train line and train when train line is too small
     if(trainLine.size() <= 2){
@@ -256,7 +258,7 @@ public class Train{
         else if(stationIndex < stIndex){
           trainLine.remove(stIndex);
         }
-        // train is approaching a station but the station to be removed is behind it
+        // train is approaching a station but the station to be removed is behind it //<>//
         else if(stationIndex >= stIndex){
           trainLine.remove(stIndex); //<>//
           stationIndex--;

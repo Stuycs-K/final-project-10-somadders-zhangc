@@ -10,7 +10,7 @@ LinkedList<Station> yellowLine = new LinkedList<Station>();
 color RED = color(178,34,34);
 color BLUE = color(0,0,205);
 color YELLOW = color(255,215,0);
-int screen = -1; //0 = ongoing game, 1 = winscreen, 2 = lose screen, -1 = start screen, more screens can be added later;
+int screen = -1; //0 = ongoing game, 1 = winscreen, 2 = lose screen, -1 = start screen, -2 = tutorial 1, -3 = tutorial 2; -4 = tutorial 3; -5 = tutorial 4, -6 = tutorial 5 more screens can be added later;
 int overcrowdedCount;
 int numClick = 0;
 int savedStIndex = -1;
@@ -148,7 +148,7 @@ void draw(){
       rect((width-sw)/2,height*3/11+100,sw,55);
     }
     fill(0);
-    String b3 = "Tutorial";
+    String b3 = "How To Play";
     textSize(50);
     text(b3,(width-sw)/2+40,height*3/11+140);
     triangle((width-sw)/2+20+5,height*3/11+127.5,(width-sw)/2+20-5*(float)Math.cos(PI/3),height*3/11+127.5-5*(float)Math.sin(PI/3),(width-sw)/2+20-5*(float)Math.cos(PI/3),height*3/11+127.5+5*(float)Math.sin(PI/3));
@@ -204,19 +204,85 @@ void draw(){
     textSize(120);
     text("GAME OVER!", width/4-65, height/2);
   }
-   if(screen == 1){
+   if(screen == 1){ //welcome + how to add
     fill(255);
     rect(width/2, height/2, 3 * width/4, height/3);
     fill(0,255,0);
     textSize(120);
     text("YOU WIN!", width/3-60, height/2);
   }
+  if(screen == -2){ //how to remove + desc
+    fill(200,200);
+    rectMode(CORNER);
+    rect(0,0,width,height);
+    fill(0);
+    text("(1)", width/20, height/10);
+    text("Press Anywhere to Continue", width/20, 9*height/10 +30);
+  }
+  if(screen == -3){ //Passengers spawn at stations and have a specific type of station they want to go to.
+    fill(200,200);
+    rectMode(CORNER);
+    rect(0,0,width,height);
+    fill(0);
+    text("(2)", width/20, height/10);
+    text("Press Anywhere to Continue", width/20, 9*height/10 +30);
+  }
+  if(screen == -4){ // press space to change train lines and pause for construction mode
+    fill(200,200);
+    rectMode(CORNER);
+    rect(0,0,width,height);
+    fill(0);
+    text("(3)", width/20, height/10);
+    text("Press Anywhere to Continue", width/20, 9*height/10 +30);
+  }
+  if(screen == -5){ //be sure to watch out for your score and overcrowded counter
+    fill(200,200);
+    rectMode(CORNER);
+    rect(0,0,width,height);
+    fill(0);
+    text("(4)", width/20, height/10);
+    text("Press Anywhere to Continue", width/20, 9*height/10 +30);
+  }
+  if(screen == -6){
+    fill(200,200);
+    rectMode(CORNER);
+    rect(0,0,width,height);
+    fill(0);
+    textSize(50);
+    text("(5)", width/20, height/10);
+    fill(220);
+    stroke(0);
+    rect(3*width/4, 3*height/4, width/4, height/4);
+    fill(0);
+    textSize(26);
+    text("Click Here to", 3*width/4+50, 3*height/4+90);
+    text("return to main menu", 3*width/4+16, 3*height/4+125);   
+
+  }
 }
 
 void mousePressed(){
+  if(screen == -6  && mouseX > 3*width/4 && mouseY > 3*height/4){
+    screen = -1;
+  }
+  if(screen == -5){
+    screen = -6;
+  }
+  if(screen == -4){
+    screen = -5;
+  }
+  if(screen == -3){
+    screen = -4;
+  }
+  if(screen == -2){
+    screen = -3;
+  }
   // start the game if screen is start screen and pressed in the right region
   if(screen == -1 && mouseX > (width-textWidthMM)/2 && mouseX < (width-textWidthMM)/2+textWidthMM && mouseY < height*3/11+95 && mouseY > height*3/11+40){
     screen = 0;
+  }
+  if(screen == -1 && mouseX > (width-textWidthMM)/2 && mouseX < (width-textWidthMM)/2+textWidthMM && mouseY < height*3/11 + 150 && mouseY > height*3/11+100){
+    screen = -2;
   }
   
   // pause the game

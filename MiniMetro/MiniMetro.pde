@@ -1,4 +1,4 @@
-import java.util.*;
+import java.util.*; //<>// //<>//
 
 ArrayList<Train> trains = new ArrayList<Train>();
 ArrayList<Station> stations = new ArrayList<Station>();
@@ -10,22 +10,24 @@ LinkedList<Station> yellowLine = new LinkedList<Station>();
 color RED = color(178,34,34);
 color BLUE = color(0,0,205);
 color YELLOW = color(255,215,0);
-int screen = -1; //0 = ongoing game, 1 = winscreen, 2 = lose screen, -1 = start screen, -2 = tutorial 1, -3 = tutorial 2; -4 = tutorial 3; -5 = tutorial 4, -6 = tutorial 5 more screens can be added later;
+int screen = -1; //0 = ongoing game, 1 = winscreen, 2 = lose screen, -1 = start screen, more screens can be added later;
 int overcrowdedCount;
+int delayedPassengers = 0;
 int numClick = 0;
 int savedStIndex = -1;
 float textWidthMM = 0;
 boolean paused = false;
 int internalClock = 0;
-int tutorialClock = 0;
 
 void setup(){
   size(1000,800);
   overcrowdedCount = 0;
-  stations.add(new Station(0));
-  stations.add(new Station(1));
-  stations.add(new Station(2));
+  spawnStation(0);
+  spawnStation(1);
+  spawnStation(2);
   
+  spawn();
+  spawn();
   /*
   // below is for fast testing purposes
   Train t = new Train(s1);
@@ -72,25 +74,6 @@ void setup(){
 }
 
 void draw(){
-  int count = 0;
-  int scoreCount = 0;
-  for(int i = 0; i < stations.size(); i++){
-    count+= stations.get(i).getOvercrowded();
-  }
-  overcrowdedCount = count;
-  
-  for(int i = 0; i < trains.size(); i++){
-    scoreCount+= trains.get(i).getDrop();
-  }
-  totalPassengers = scoreCount;
-  
-  if(overcrowdedCount > 50){
-    screen = 2;
-  }
-  if(stations.size() > 60){
-    screen = 1;
-  }
-  
   // DRAW START SCREEN
   if(screen == -1){
     // stations and train line display on start screen
@@ -149,7 +132,7 @@ void draw(){
       rect((width-sw)/2,height*3/11+100,sw,55);
     }
     fill(0);
-    String b3 = "How To Play";
+    String b3 = "Tutorial";
     textSize(50);
     text(b3,(width-sw)/2+40,height*3/11+140);
     triangle((width-sw)/2+20+5,height*3/11+127.5,(width-sw)/2+20-5*(float)Math.cos(PI/3),height*3/11+127.5-5*(float)Math.sin(PI/3),(width-sw)/2+20-5*(float)Math.cos(PI/3),height*3/11+127.5+5*(float)Math.sin(PI/3));
@@ -158,16 +141,46 @@ void draw(){
   }
   
   if(screen == 0){
+      int count = 0;
+      int scoreCount = 0;
+      int decline = internalClock/200;
+      if(internalClock % 160 - decline == 0){
+        for(int i = 0; i < stations.size(); i++){
+          Station target = stations.get(i);
+          for(int j = 0; j < target.riderSize(); j++){
+            target.get(j).addTime();
+            if(target.get(j).getWait() == 10){
+              delayedPassengers++;
+            }
+          }
+        }
+      }  
+  
+    for(int i = 0; i < stations.size(); i++){
+        count+= stations.get(i).getOvercrowded();
+    }
+    overcrowdedCount = count + delayedPassengers;
+  
+    for(int i = 0; i < trains.size(); i++){
+      scoreCount+= trains.get(i).getDrop();
+    }
+    totalPassengers = scoreCount;
+  
+  if(overcrowdedCount > 50){
+    screen = 2;
+  }
+  if(totalPassengers > 500){
+    screen = 1;
+  }
     background(255);
     if(!paused) { internalClock += 1; }
-    int decline = internalClock/200;
     if(internalClock % 600 - decline == 0){
       for(int i = 0; i < (stations.size()/2) + 1; i++){
           spawn();
       }
      }
 
-    if(internalClock % 1200 == 0){
+    if(internalClock % 1500 == 0){
       spawnStation();
     }
 
@@ -211,106 +224,18 @@ void draw(){
   }
    if(screen == 1){
     fill(255);
+    rectMode(CENTER);
     rect(width/2, height/2, 3 * width/4, height/3);
     fill(0,255,0);
     textSize(120);
     text("YOU WIN!", width/3-60, height/2);
   }
-  
-  
-  if(screen == -2){ //welcome + how to add
-    tutorialClock++;
-    if(tutorialClock > 300){
-      tutorialClock = 0;
-    }
-    fill(200,200);
-    rectMode(CORNER);
-    rect(0,0,width,height);
-    fill(0);
-    text("(1) Welcome to MiniMetro!", width/20, height/10);
-    text("Press Anywhere to Continue", width/20, 9*height/10 +30);
-  }
-  if(screen == -3){ // how to remove
-    tutorialClock++;
-    if(tutorialClock > 300){
-      tutorialClock = 0;
-    }
-    fill(200,200);
-    rectMode(CORNER);
-    rect(0,0,width,height);
-    fill(0);
-    text("(2) Removing Stations", width/20, height/10);
-    text("Press Anywhere to Continue", width/20, 9*height/10 +30);
-  }
-  if(screen == -4){ //Passengers spawn at stations and have a specific type of station they want to go to.
-    tutorialClock++;
-    if(tutorialClock > 300){
-      tutorialClock = 0;
-    }
-    fill(200,200);
-    rectMode(CORNER);
-    rect(0,0,width,height);
-    fill(0);
-    text("(3) Passengers", width/20, height/10);
-    text("Press Anywhere to Continue", width/20, 9*height/10 +30);
-  }
-  if(screen == -5){ // press space to change train lines and pause for construction mode
-    tutorialClock++;
-    if(tutorialClock > 300){
-      tutorialClock = 0;
-    }
-    fill(200,200);
-    rectMode(CORNER);
-    rect(0,0,width,height);
-    fill(0);
-    text("(4) Constructing Lines", width/20, height/10);
-    text("Press Anywhere to Continue", width/20, 9*height/10 +30);
-  }
-  if(screen == -6){ //be sure to watch out for your score and overcrowded counter
-    fill(200,200);
-    rectMode(CORNER);
-    rect(0,0,width,height);
-    fill(0);
-    textSize(50);
-    text("(5) Scoring and Crowding", width/20, height/10);
-    fill(220);
-    stroke(0);
-    rect(3*width/4, 3*height/4, width/4, height/4);
-    fill(0);
-    textSize(26);
-    text("Click Here to", 3*width/4+50, 3*height/4+90);
-    text("return to main menu", 3*width/4+16, 3*height/4+125);   
-
-  }
 }
 
 void mousePressed(){
-  if(screen == -6  && mouseX > 3*width/4 && mouseY > 3*height/4){
-    screen = -1;
-    tutorialClock = 0;
-  }
-  if(screen == -5){
-    screen = -6;
-    tutorialClock = 0;
-  }
-  if(screen == -4){
-    screen = -5;
-    tutorialClock = 0;
-  }
-  if(screen == -3){
-    screen = -4;
-    tutorialClock = 0;
-  }
-  if(screen == -2){
-    screen = -3;
-    tutorialClock = 0;
-  }
   // start the game if screen is start screen and pressed in the right region
   if(screen == -1 && mouseX > (width-textWidthMM)/2 && mouseX < (width-textWidthMM)/2+textWidthMM && mouseY < height*3/11+95 && mouseY > height*3/11+40){
     screen = 0;
-  }
-  if(screen == -1 && mouseX > (width-textWidthMM)/2 && mouseX < (width-textWidthMM)/2+textWidthMM && mouseY < height*3/11 + 150 && mouseY > height*3/11+100){
-    screen = -2;
   }
   
   // pause the game

@@ -17,6 +17,7 @@ int savedStIndex = -1;
 float textWidthMM = 0;
 boolean paused = false;
 int internalClock = 0;
+int tutorialClock = 0;
 
 void setup(){
   size(1000,800);
@@ -24,10 +25,6 @@ void setup(){
   stations.add(new Station(0));
   stations.add(new Station(1));
   stations.add(new Station(2));
-
-  Station s1 = stations.get(0);
-  Station s2 = stations.get(1);
-  Station s3 = stations.get(2);
   
   /*
   // below is for fast testing purposes
@@ -167,7 +164,7 @@ void draw(){
       }
      }
 
-    if(internalClock % 400 == 0){
+    if(internalClock % 1200 == 0){
       spawnStation();
     }
 
@@ -209,52 +206,70 @@ void draw(){
     textSize(120);
     text("GAME OVER!", width/4-65, height/2);
   }
-   if(screen == 1){ //welcome + how to add
+   if(screen == 1){
     fill(255);
     rect(width/2, height/2, 3 * width/4, height/3);
     fill(0,255,0);
     textSize(120);
     text("YOU WIN!", width/3-60, height/2);
   }
-  if(screen == -2){ //how to remove + desc
+  
+  
+  if(screen == -2){ //welcome + how to add
+    tutorialClock++;
+    if(tutorialClock > 300){
+      tutorialClock = 0;
+    }
     fill(200,200);
     rectMode(CORNER);
     rect(0,0,width,height);
     fill(0);
-    text("(1)", width/20, height/10);
+    text("(1) Welcome to MiniMetro!", width/20, height/10);
     text("Press Anywhere to Continue", width/20, 9*height/10 +30);
   }
-  if(screen == -3){ //Passengers spawn at stations and have a specific type of station they want to go to.
+  if(screen == -3){ // how to remove
+    tutorialClock++;
+    if(tutorialClock > 300){
+      tutorialClock = 0;
+    }
     fill(200,200);
     rectMode(CORNER);
     rect(0,0,width,height);
     fill(0);
-    text("(2)", width/20, height/10);
+    text("(2) Removing Stations", width/20, height/10);
     text("Press Anywhere to Continue", width/20, 9*height/10 +30);
   }
-  if(screen == -4){ // press space to change train lines and pause for construction mode
+  if(screen == -4){ //Passengers spawn at stations and have a specific type of station they want to go to.
+    tutorialClock++;
+    if(tutorialClock > 300){
+      tutorialClock = 0;
+    }
     fill(200,200);
     rectMode(CORNER);
     rect(0,0,width,height);
     fill(0);
-    text("(3)", width/20, height/10);
+    text("(3) Passengers", width/20, height/10);
     text("Press Anywhere to Continue", width/20, 9*height/10 +30);
   }
-  if(screen == -5){ //be sure to watch out for your score and overcrowded counter
+  if(screen == -5){ // press space to change train lines and pause for construction mode
+    tutorialClock++;
+    if(tutorialClock > 300){
+      tutorialClock = 0;
+    }
     fill(200,200);
     rectMode(CORNER);
     rect(0,0,width,height);
     fill(0);
-    text("(4)", width/20, height/10);
+    text("(4) Constructing Lines", width/20, height/10);
     text("Press Anywhere to Continue", width/20, 9*height/10 +30);
   }
-  if(screen == -6){
+  if(screen == -6){ //be sure to watch out for your score and overcrowded counter
     fill(200,200);
     rectMode(CORNER);
     rect(0,0,width,height);
     fill(0);
     textSize(50);
-    text("(5)", width/20, height/10);
+    text("(5) Scoring and Crowding", width/20, height/10);
     fill(220);
     stroke(0);
     rect(3*width/4, 3*height/4, width/4, height/4);
@@ -269,18 +284,23 @@ void draw(){
 void mousePressed(){
   if(screen == -6  && mouseX > 3*width/4 && mouseY > 3*height/4){
     screen = -1;
+    tutorialClock = 0;
   }
   if(screen == -5){
     screen = -6;
+    tutorialClock = 0;
   }
   if(screen == -4){
     screen = -5;
+    tutorialClock = 0;
   }
   if(screen == -3){
     screen = -4;
+    tutorialClock = 0;
   }
   if(screen == -2){
     screen = -3;
+    tutorialClock = 0;
   }
   // start the game if screen is start screen and pressed in the right region
   if(screen == -1 && mouseX > (width-textWidthMM)/2 && mouseX < (width-textWidthMM)/2+textWidthMM && mouseY < height*3/11+95 && mouseY > height*3/11+40){

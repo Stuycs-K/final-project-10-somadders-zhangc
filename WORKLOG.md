@@ -47,6 +47,20 @@
 ### 6/1/2023
 - Tested new code both with print statements and playtested demo. Worked on separate doc for demo presentation.
 
+### 6/5/2023
+- Added tutorial screens and bound them to How to Play button on main menu.
+
+### 6/6/2023
+- implemented mousePressed at specific location to scroll through tutorial screen.
+- created outlines for 5 tutorial screens that use a specific tutorial internal clock for animation.
+
+### 6/7/2023
+- fixed bug in which tutorial would repeating after player exited tutorial, added extra button to last tutorial screen to stop from happening.
+- Also tweaked 
+
+### 6/8/2023
+- fixed station spawning bug where initial three trains overlap.
+- modified station spawning conditions so that trainLine indicators (colored circled at bottom) do not overlap with station icons.
 
 ## Calvin Zhang
 

@@ -112,6 +112,11 @@
 - Add a tutorial button.
 - Add a working pause button that toggles a paused boolean. Currently, only the trains stop moving but everything else still moves. This is more complicated than anticipated due to us using frame rate as a measurement of time.
 
+### 6/6/2023
+
+- Complete the pause mechanism using a new internal clock, replacing the old clock (frameRate). Pausing should pause all spawning now.
+- Modify and complete visitStation() and drawLine() to make the train curve in 45 degree angles like the original game. Also redrew the lines to reflect these changes.
+
 ### date y
 
 info

@@ -504,8 +504,43 @@ void drawLines(){
 void drawLine(Station s1, Station s2, color c){
   strokeWeight(10);
   stroke(c);
-
-  line(s1.getX(), s1.getY(), s2.getX(), s2.getY());
+  
+  if(s2.getX() >= s1.getX() && s2.getY() >= s1.getY()){
+    if(s2.getX() - s1.getX() > s2.getY() - s1.getY()){
+      line(s1.getX(),s1.getY(), s1.getX()+s2.getY()-s1.getY(),s2.getY());
+      line(s1.getX()+s2.getY()-s1.getY(),s2.getY(), s2.getX(),s2.getY());
+    } else {
+      line(s1.getX(),s1.getY(), s2.getX(),s1.getY()+s2.getX()-s1.getX());
+      line(s2.getX(),s1.getY()+s2.getX()-s1.getX(), s2.getX(),s2.getY());
+    }
+  }
+  else if(s2.getX() >= s1.getX() && s2.getY() <= s1.getY()){
+    if(s2.getX() - s1.getX() > s1.getY() - s2.getY()){
+      line(s1.getX(),s1.getY(), s1.getX()-(s2.getY()-s1.getY()),s2.getY());
+      line(s1.getX()-(s2.getY()-s1.getY()),s2.getY(), s2.getX(),s2.getY());
+    } else {
+      line(s1.getX(),s1.getY(), s2.getX(),s1.getY()-s2.getX()+s1.getX());
+      line(s2.getX(),s1.getY()-s2.getX()+s1.getX(), s2.getX(),s2.getY());
+    }
+  }
+  else if(s2.getX() <= s1.getX() && s2.getY() >= s1.getY()){
+    if(s1.getX() - s2.getX() > s2.getY() - s1.getY()){
+      line(s1.getX(),s1.getY(), s1.getX()-(s2.getY()-s1.getY()),s2.getY());
+      line(s1.getX()-(s2.getY()-s1.getY()),s2.getY(), s2.getX(),s2.getY());
+    } else {
+      line(s1.getX(),s1.getY(), s2.getX(),s1.getY()-s2.getX()+s1.getX());
+      line(s2.getX(),s1.getY()-s2.getX()+s1.getX(), s2.getX(),s2.getY());
+    }
+  }
+  else if(s2.getX() <= s1.getX() && s2.getY() <= s1.getY()){
+    if(s1.getX() - s2.getX() > s1.getY() - s2.getY()){
+      line(s1.getX(),s1.getY(), s1.getX()+s2.getY()-s1.getY(),s2.getY());
+      line(s1.getX()+s2.getY()-s1.getY(),s2.getY(), s2.getX(),s2.getY());
+    } else {
+      line(s1.getX(),s1.getY(), s2.getX(),s1.getY()+s2.getX()-s1.getX());
+      line(s2.getX(),s1.getY()+s2.getX()-s1.getX(), s2.getX(),s2.getY());
+    }
+  }
 
   strokeWeight(4);
   stroke(0);

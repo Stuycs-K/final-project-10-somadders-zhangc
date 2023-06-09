@@ -100,11 +100,14 @@ void draw(){
     rectMode(CENTER);
     strokeWeight(10);
     stroke(RED);
-    line(width/5,height/3,width*6/7,height/2);
+    line(width/5,height/3,width*6/7-height/6,height/3);
+    line(width*6/7-height/6,height/3,width*6/7,height/2);
     stroke(YELLOW);
-    line(width*6/7,height/2,width*1/7,height*2/3);
+    line(width*6/7,height/2,width*1/7+height/6,height/2);
+    line(width*1/7+height/6,height/2,width*1/7,height*2/3);
     stroke(BLUE);
-    line(width/5,height/3,width*1/7,height*2/3);
+    line(width/5,height/3,width*1/7,height/3+width/5-width*1/7);
+    line(width*1/7,height/3+width/5-width*1/7,width*1/7,height*2/3);
     stroke(0);
     strokeWeight(4);
     circle(width/5,height/3,50);

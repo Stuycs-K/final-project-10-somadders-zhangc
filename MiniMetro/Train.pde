@@ -64,18 +64,7 @@ public class Train{
         }
       }
       else if(direction && visitFlag){
-        if(nextX > position.x){
-          displacement = new PVector(1,0);
-        }
-        else if(nextX < position.x){
-          displacement = new PVector(-1,0);
-        }
-        else if(nextY > position.y){
-          displacement = new PVector(0,1);
-        }
-        else if(nextY < position.y){
-          displacement = new PVector(0,-1);
-        }
+        displacement = PVector.sub(new PVector(nextX,nextY), position);
       }
       // reverse the directions following the path it came from basically
       else if(!direction && !visitFlag){
@@ -211,7 +200,7 @@ public class Train{
     } else if (selectedRoute == 2){
       yellowLine.addLast(st);
     }
-  } //<>// //<>// //<>//
+  } //<>// //<>//
     public void addStationFIRST(Station st){
     stationIndex++;
     if(selectedRoute == 0){
@@ -222,12 +211,10 @@ public class Train{
       yellowLine.addFirst(st);
     }
   }
-  
+   //<>//
   // NOTE:
   // special cases: 2 stations, removed station is at very start or end (in which case, continue to next station)
   public void removeStation(Station st){
-    // TEMP SOLUTION STILL BUGGY ELSEWHERE
-    visitFlag = false;
     LinkedList<Station> trainLine = getTrainLine(trainLineNum);
     // delete train line and train when train line is too small
     if(trainLine.size() <= 2){
@@ -257,8 +244,11 @@ public class Train{
         // train is approaching a station and the station to be removed is ahead of it
         else if(stationIndex < stIndex){
           trainLine.remove(stIndex);
+          if(stationIndex == stIndex - 1){     
+            visitFlag = true;
+          }
         }
-        // train is approaching a station but the station to be removed is behind it //<>//
+        // train is approaching a station but the station to be removed is behind it
         else if(stationIndex >= stIndex){
           trainLine.remove(stIndex); //<>//
           stationIndex--;
@@ -268,7 +258,7 @@ public class Train{
         // train is approaching the first station and the station to be removed is the first station
         if(stationIndex == 1 && stIndex == 0){
           trainLine.remove(stIndex);
-          stationIndex = -1;
+          stationIndex = -1; //<>//
           direction = true;
         }
         // train is approaching a station and the station to be removed is behind it
@@ -278,6 +268,9 @@ public class Train{
         // train is approaching a station but the station to be removed is ahead of it
         else if(stationIndex > stIndex){
           trainLine.remove(stIndex);
+          if(stationIndex == stIndex + 1){     
+            visitFlag = true;
+          }
           stationIndex--;
         }
       } 

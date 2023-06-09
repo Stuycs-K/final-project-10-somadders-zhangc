@@ -56,11 +56,16 @@
 
 ### 6/7/2023
 - fixed bug in which tutorial would repeating after player exited tutorial, added extra button to last tutorial screen to stop from happening.
-- Also tweaked 
+- Also tweaked
 
 ### 6/8/2023
 - fixed station spawning bug where initial three trains overlap.
 - modified station spawning conditions so that trainLine indicators (colored circled at bottom) do not overlap with station icons.
+
+### 6/9/2023
+- Uses internalClock counter to add waitTime to each passenger currently at a station. If passenger reaches a value of 10 for their wait time, they add 1 value to crowd counter.
+- added "int waitTime" instance to passenger class and appropriate accessors/mutators.
+- Check for waitTime added to the start of each draw call when screen == 0 (main game); one unit added to each wait time every 2.5 to 3 seconds.
 
 ## Calvin Zhang
 

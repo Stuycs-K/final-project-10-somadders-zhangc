@@ -1,4 +1,4 @@
-import java.util.*;
+import java.util.*; //<>// //<>//
 
 ArrayList<Train> trains = new ArrayList<Train>();
 ArrayList<Station> stations = new ArrayList<Station>();
@@ -12,6 +12,7 @@ color BLUE = color(0,0,205);
 color YELLOW = color(255,215,0);
 int screen = -1; //0 = ongoing game, 1 = winscreen, 2 = lose screen, -1 = start screen, more screens can be added later;
 int overcrowdedCount;
+int delayedPassengers = 0;
 int numClick = 0;
 int savedStIndex = -1;
 float textWidthMM = 0;
@@ -21,14 +22,12 @@ int internalClock = 0;
 void setup(){
   size(1000,800);
   overcrowdedCount = 0;
-  stations.add(new Station(0));
-  stations.add(new Station(1));
-  stations.add(new Station(2));
-
-  Station s1 = stations.get(0);
-  Station s2 = stations.get(1);
-  Station s3 = stations.get(2);
+  spawnStation(0);
+  spawnStation(1);
+  spawnStation(2);
   
+  spawn();
+  spawn();
   /*
   // below is for fast testing purposes
   Train t = new Train(s1);
@@ -75,25 +74,6 @@ void setup(){
 }
 
 void draw(){
-  int count = 0;
-  int scoreCount = 0;
-  for(int i = 0; i < stations.size(); i++){
-    count+= stations.get(i).getOvercrowded();
-  }
-  overcrowdedCount = count;
-  
-  for(int i = 0; i < trains.size(); i++){
-    scoreCount+= trains.get(i).getDrop();
-  }
-  totalPassengers = scoreCount;
-  
-  if(overcrowdedCount > 50){
-    screen = 2;
-  }
-  if(stations.size() > 60){
-    screen = 1;
-  }
-  
   // DRAW START SCREEN
   if(screen == -1){
     // stations and train line display on start screen
@@ -161,16 +141,46 @@ void draw(){
   }
   
   if(screen == 0){
+      int count = 0;
+      int scoreCount = 0;
+      int decline = internalClock/200;
+      if(internalClock % 160 - decline == 0){
+        for(int i = 0; i < stations.size(); i++){
+          Station target = stations.get(i);
+          for(int j = 0; j < target.riderSize(); j++){
+            target.get(j).addTime();
+            if(target.get(j).getWait() == 10){
+              delayedPassengers++;
+            }
+          }
+        }
+      }  
+  
+    for(int i = 0; i < stations.size(); i++){
+        count+= stations.get(i).getOvercrowded();
+    }
+    overcrowdedCount = count + delayedPassengers;
+  
+    for(int i = 0; i < trains.size(); i++){
+      scoreCount+= trains.get(i).getDrop();
+    }
+    totalPassengers = scoreCount;
+  
+  if(overcrowdedCount > 50){
+    screen = 2;
+  }
+  if(totalPassengers > 500){
+    screen = 1;
+  }
     background(255);
     if(!paused) { internalClock += 1; }
-    int decline = internalClock/200;
     if(internalClock % 600 - decline == 0){
       for(int i = 0; i < (stations.size()/2) + 1; i++){
           spawn();
       }
      }
 
-    if(internalClock % 400 == 0){
+    if(internalClock % 1500 == 0){
       spawnStation();
     }
 
@@ -214,6 +224,7 @@ void draw(){
   }
    if(screen == 1){
     fill(255);
+    rectMode(CENTER);
     rect(width/2, height/2, 3 * width/4, height/3);
     fill(0,255,0);
     textSize(120);

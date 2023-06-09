@@ -22,8 +22,8 @@ public class Station{
     if(y < 125){
       y = 125;
     }
-    if(y > height-50){
-      y = height-50;
+    if(y > height-100){
+      y = height-100;
     }
     maxCapacity = 6;
     overcrowdedTime = 0;
@@ -45,8 +45,8 @@ public class Station{
     if(y < 100){
       y = 100;
     }
-    if(y > height-50){
-      y = height -50;
+    if(y > height-100){
+      y = height -100;
     }
     maxCapacity = 6;
     overcrowdedTime = 0;

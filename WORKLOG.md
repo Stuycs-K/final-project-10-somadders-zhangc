@@ -117,6 +117,15 @@
 - Complete the pause mechanism using a new internal clock, replacing the old clock (frameRate). Pausing should pause all spawning now.
 - Modify and complete visitStation() and drawLine() to make the train curve in 45 degree angles like the original game. Also redrew the lines to reflect these changes.
 
+### 6/7/2023
+
+- Found bug where the train would move in an unexpected path and sometimes get stuck. Worked on debugging it, but ended up not fixing it.
+
+### 6/8/2023
+
+- Fixed the bug described in the previous entry. I ended up modifying the removeStation() method to change visitFlag's truth value depending on where the train was.
+- Modified/shortened a section of visitStation's code because it was unnecessary.
+
 ### date y
 
 info

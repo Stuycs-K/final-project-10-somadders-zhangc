@@ -10,7 +10,7 @@ LinkedList<Station> yellowLine = new LinkedList<Station>();
 color RED = color(178,34,34);
 color BLUE = color(0,0,205);
 color YELLOW = color(255,215,0);
-int screen = -1; //0 = ongoing game, 1 = winscreen, 2 = lose screen, -1 = start screen, more screens can be added later;
+int screen = -1; //0 = ongoing game, 1 = winscreen, 2 = lose screen, -1 = start screen, -2 to -6 are tutorial screens;
 int overcrowdedCount;
 int delayedPassengers = 0;
 int numClick = 0;
@@ -18,6 +18,7 @@ int savedStIndex = -1;
 float textWidthMM = 0;
 boolean paused = false;
 int internalClock = 0;
+int tutorialClock = 0;
 
 void setup(){
   size(1000,800);
@@ -230,12 +231,43 @@ void draw(){
     textSize(120);
     text("YOU WIN!", width/3-60, height/2);
   }
+  if(screen == -2){
+    background(220);
+    textSize(40);
+    fill(0);
+    text("(1) Welcome to MiniMetro!", width/20, height/10);
+    text("Press any key to continue", width/20, 9*height/10+10);
+  }
+  if(screen == -3){
+    background(220);
+    text("(2) Removing Stations", width/20, height/10);
+    text("Press any key to continue", width/20, 9*height/10+10);
+  }
+  if(screen == -4){
+    background(220);
+    text("(3) Passengers", width/20, height/10);
+    text("Press any key to continue", width/20, 9*height/10+10);
+  }
+  if(screen == -5){
+    background(220);
+    text("(4) Construction Mode", width/20, height/10);
+    text("Press any key to continue", width/20, 9*height/10+10);
+  }
+  if(screen == -6){
+    background(220);
+    text("(5) Score", width/20, height/10);
+    text("Press any key to exit tutorial", width/20, 9*height/10+10);
+  }
 }
 
 void mousePressed(){
   // start the game if screen is start screen and pressed in the right region
   if(screen == -1 && mouseX > (width-textWidthMM)/2 && mouseX < (width-textWidthMM)/2+textWidthMM && mouseY < height*3/11+95 && mouseY > height*3/11+40){
     screen = 0;
+  }
+  
+  if(screen == -1 && mouseX > (width-textWidthMM)/2 && mouseX < (width-textWidthMM)/2+textWidthMM && mouseY < height*3/11+155 && mouseY > height*3/11+100){
+    screen = -2;
   }
   
   // pause the game
@@ -306,8 +338,17 @@ void mousePressed(){
 
 void keyPressed(){
   if(keyCode == ' '){
-    selectedRoute = (selectedRoute + 1) % 3;
+    if(screen <= -2 && screen >= -6){
+      screen--;
+      if(screen == -7){
+        screen = -1;
+      }
+    }
+    else{
+      selectedRoute = (selectedRoute + 1) % 3;
+    }
   }
+  
 }
 
 void spawn(){

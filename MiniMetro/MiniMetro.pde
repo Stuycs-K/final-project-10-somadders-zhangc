@@ -417,20 +417,25 @@ void displayStations(){
 
 void drawLines(){
   // go through all three lines and draw connected stations
-  for(int i = 0; i < redLine.size()-1; i++){
-    drawLine(redLine.get(i),redLine.get(i+1),RED);
+  for(int i = 0; i < yellowLine.size()-1; i++){
+    drawLine(yellowLine.get(i),yellowLine.get(i+1),YELLOW);
   }
   for(int i = 0; i < blueLine.size()-1; i++){
     drawLine(blueLine.get(i),blueLine.get(i+1),BLUE);
   }
-  for(int i = 0; i < yellowLine.size()-1; i++){
-    drawLine(yellowLine.get(i),yellowLine.get(i+1),YELLOW);
+  for(int i = 0; i < redLine.size()-1; i++){
+    drawLine(redLine.get(i),redLine.get(i+1),RED);
   }
 }
 
 // helper for drawLines()
 void drawLine(Station s1, Station s2, color c){
+  if(c == YELLOW)
   strokeWeight(10);
+  if(c == BLUE)
+  strokeWeight(6);
+  if(c == RED)
+  strokeWeight(2);
   stroke(c);
   
   if(s2.getX() >= s1.getX() && s2.getY() >= s1.getY()){

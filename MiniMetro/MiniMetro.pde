@@ -180,7 +180,7 @@ void draw(){
       }
      }
 
-    if(internalClock % 1500 == 0){
+    if(internalClock % 1000 == 0){
       spawnStation();
     }
 

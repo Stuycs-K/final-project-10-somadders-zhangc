@@ -30,7 +30,7 @@ public class Train{
       } else {return false;}
     }
     
-    if(Math.abs(position.x-nextSt.getX()) < 1 && Math.abs(position.y-nextSt.getY()) < 1){
+    if(Math.abs(position.x-nextSt.getX()) < 2 && Math.abs(position.y-nextSt.getY()) < 2){
       // set train position to station position when train is close to the station to avoid float errors
       position = new PVector(nextSt.getX(), nextSt.getY());
       visitFlag = false;
@@ -42,11 +42,11 @@ public class Train{
       float nextY = nextSt.getY();
       PVector displacement = new PVector(0,0);
       if(direction && !visitFlag){
-        if(Math.abs(position.x-nextX) < 1){
+        if(Math.abs(position.x-nextX) < 2){
           visitFlag = true;
           position = new PVector(nextX, position.y); // set train x position to station x to align the train correctly
         }
-        else if(Math.abs(position.y-nextY) < 1){
+        else if(Math.abs(position.y-nextY) < 2){
           visitFlag = true;
           position = new PVector(position.x, nextY); // set train y position to station y to align the train correctly
         }
@@ -283,8 +283,10 @@ public class Train{
     direction = true;
     stationIndex = 0;
     riders = new Passenger[6];
+    if(selectedRoute == 1) riders = new Passenger[10];
     position = new PVector(st.getX(),st.getY());
     speed = 2;
+    if(selectedRoute == 2) speed = 4;
     trains.add(this);
   }
   

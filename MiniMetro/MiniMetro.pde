@@ -255,15 +255,15 @@ void mousePressed(){
   */
   for(int i = 0; i < stations.size(); i++){
     Station target = stations.get(i);
-    if(mouseX > target.getX() - 50 && mouseX < target.getX() + 50 && mouseY > target.getY() - 50 && mouseY < target.getY() + 50){
+    if(mouseX > target.getX() - 25 && mouseX < target.getX() + 25 && mouseY > target.getY() - 25 && mouseY < target.getY() + 25){
       if(numClick == 0){
         stations.get(i).setStatus(true);
         numClick++;
         savedStIndex = i;
       }
       else if(numClick == 1){
-        if(mouseX > stations.get(savedStIndex).getX() - 50 && mouseX < stations.get(savedStIndex).getX() 
-        + 50 && mouseY > stations.get(savedStIndex).getY() - 50 && mouseY < stations.get(savedStIndex).getY() + 50){
+        if(mouseX > stations.get(savedStIndex).getX() - 25 && mouseX < stations.get(savedStIndex).getX() 
+        + 50 && mouseY > stations.get(savedStIndex).getY() - 25 && mouseY < stations.get(savedStIndex).getY() + 25){
             stations.get(savedStIndex).setStatus(false);
             numClick = 0;
             if(getTrainLine(selectedRoute).size() > 2){

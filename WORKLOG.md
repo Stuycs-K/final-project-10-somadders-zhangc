@@ -152,6 +152,11 @@
 - Fixed the bug described in the previous entry. I ended up modifying the removeStation() method to change visitFlag's truth value depending on where the train was.
 - Modified/shortened a section of visitStation's code because it was unnecessary.
 
+### 6/9/2023
+
+- Edit stroke size for train lines to make them all visible when they overlap each other.
+- Create the three different types of trains (red = normal, blue = larger capacity, yellow = faster speed).
+
 ### date y
 
 info

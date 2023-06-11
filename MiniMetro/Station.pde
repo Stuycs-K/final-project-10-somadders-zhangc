@@ -54,6 +54,29 @@ public class Station{
     type = Type;
   }
   
+  // FOR BUG TESTING PURPOSES
+  public Station(float x, float y){
+    this.x = x;
+    this.y = y;
+    if(x < 50){
+      x = 50;
+    }
+    if(x > width-125){
+      x = width-125;
+    }
+    if(y < 100){
+      y = 100;
+    }
+    if(y > height-100){
+      y = height -100;
+    }
+    maxCapacity = 6;
+    overcrowdedTime = 0;
+    riders = new ArrayDeque<Passenger>();
+    int rand = (int) (Math.random() * 3);
+    type = rand;
+  }
+  
   public void addPassengers(){
     if(!overcrowded()){
       riders.addFirst(new Passenger());

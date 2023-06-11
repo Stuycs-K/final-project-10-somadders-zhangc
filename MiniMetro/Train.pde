@@ -68,7 +68,7 @@ public class Train{
       }
       // reverse the directions following the path it came from basically
       else if(!direction && !visitFlag){
-        if(Math.abs((position.y-nextY)/(position.x-nextX)) < 1.01 && Math.abs((position.y-nextY)/(position.x-nextX)) > 0.99){
+        if((Math.abs((position.y-nextY)/(position.x-nextX)) < 1.01 && Math.abs((position.y-nextY)/(position.x-nextX)) > 0.99) || position.y-nextY == 0 || position.x-nextX == 0){
           visitFlag = true;
         }
         else if(nextX > position.x && nextY > position.y){

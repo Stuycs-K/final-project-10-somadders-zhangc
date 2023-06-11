@@ -419,6 +419,13 @@ void spawnStation(int type){
   stations.add(ST);
 }
 
+// BUG TESTING PURPOSES ONLY
+void spawnStation(float x, float y){
+  Station ST = new Station(x,y);
+  ST.addPassengers();
+  stations.add(ST);
+}
+
 void displayStations(){
   stroke(0);
   for(int i = 0; i < stations.size(); i++){

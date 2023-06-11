@@ -246,6 +246,8 @@ void draw(){
     text("First, click on a station already on a train route. If you have no stations already on a route, ", width/20+20, height/10+130);
     text("use this procedure to create the route of that color.", width/20+20, height/10+155);
     text("Next, click on another station that isn't already on the selected color's route.", width/20+20, height/10+195);
+    text("Once a station is connected, a train of that color will have access to it and its riders", width/20+20, height/10+445);
+
     
     stroke(RED);
     strokeWeight(10);
@@ -305,9 +307,68 @@ void draw(){
     fill(0);
     text("(2) Removing Stations", width/20, height/10);
     text("Press any key to continue", width/20, 9*height/10+10);
-    text(tutorialClock, width/2, height/2);
+    
+    textSize(24);
+    text("Removing stations from a line is just as easy!", width/20+20, height/10+50);
+    text("Simply double click a station that is connected to a train route.", width/20+20, height/10+90);
+    text("Stations before and after the removed station will automatically connect.", width/20+20, height/10+130);
+    text("Trains on stations about to be removed will automatically shift over to the next", width/20+20, height/10+170);
+    text("station in line.", width/20+20, height/10+195);
+    
+    stroke(RED);
+    strokeWeight(10);
+    line(0, height/2, width/3-30, height/2);
+    if(tutorialClock < 200){
+      line(width/3-30, height/2, width/2, 3*height/4);
+      line(width/2, 3*height/4, 2*width/3+30, height/2);
+    }
+    else{
+        line(2*width/3+30, height/2, width/3-30, height/2);
+    }
+    line(2*width/3+30, height/2, width, height/2);
+    if(tutorialClock >375){
+    line(width/3-30, height/2, 2*width/3+30, height/2);
+    }
+    stroke(0);
+    fill(255);
+    strokeWeight(4);
+    circle(width/3-30, height/2, 80);
+    circle(width/2, 3*height/4, 80);
+    circle(2*width/3+30, height/2, 80);
+    if(tutorialClock >= 160){
+      fill(YELLOW);
+      circle(width/2, 3*height/4, 80);
+    }
+    if(tutorialClock >= 200){
+      fill(255);
+      circle(width/2, 3*height/4, 80);
+    }
+    fill(255);
+    
+     if(tutorialClock < 125){
+      triangle((width/2) + ((100.0) - tutorialClock), ((3*height/4)-200+tutorialClock*1.5), (width/2) + ((120.0) - tutorialClock), ((3*height/4)-160+tutorialClock*1.5), (width/2) + ((140.0) - tutorialClock), ((3*height/4)-180+tutorialClock*1.5));
+    }
+    if(tutorialClock >= 125 && tutorialClock < 150){
+      triangle((width/2)-20, (3*height/4)-20, (width/2)+20, (3*height/4), (width/2), (3*height/4)+20);
+    }
+    if(tutorialClock >= 150 && tutorialClock < 160){
+      triangle((width/2)-12, (3*height/4)-12, (width/2)+12, (3*height/4), (width/2), (3*height/4)+12);
+    }
+    if(tutorialClock >= 160 && tutorialClock < 190){
+      triangle((width/2)-20, (3*height/4)-20, (width/2)+20, (3*height/4), (width/2), (3*height/4)+20);
+    }
+    if(tutorialClock >= 190 && tutorialClock < 200){
+      triangle((width/2)-12, (3*height/4)-12, (width/2)+12, (3*height/4), (width/2), (3*height/4)+12);
+    }
+    if(tutorialClock >= 200 && tutorialClock < 220){
+      triangle((width/2)-20, (3*height/4)-20, (width/2)+20, (3*height/4), (width/2), (3*height/4)+20);
+    }
+    if(tutorialClock >= 220){
+      triangle((width/2)-20+((tutorialClock - 220)*7), (3*height/4)-20+((tutorialClock - 220)*4), (width/2)+20+((tutorialClock - 220)*7), (3*height/4)+((tutorialClock - 220)*4), (width/2)+((tutorialClock - 220)*7), (3*height/4)+20+((tutorialClock - 220)*4));
+    }  
+    
     tutorialClock++;
-    if(tutorialClock >= 1200){
+    if(tutorialClock >= 360){
       tutorialClock = 0;
     }
   }

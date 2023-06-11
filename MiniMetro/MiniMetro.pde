@@ -564,9 +564,9 @@ void drawTrains(){
         if(riders[j].getType() == 0){
           circle(t.position.x+adjustment, t.position.y, 3);
         } else if (riders[j].getType() == 1){
-          triangle(t.position.x+adjustment, t.position.y+1.5,
-            t.position.x+adjustment+1.5*(float)Math.sin(PI/3), t.position.y-1.5*(float)Math.cos(PI/3),
-            t.position.x+adjustment-1.5*(float)Math.sin(PI/3), t.position.y-1.5*(float)Math.cos(PI/3));
+          triangle(t.position.x+adjustment, t.position.y+0.5,
+            t.position.x+adjustment+1, t.position.y-1.5,
+            t.position.x+adjustment-1, t.position.y-1.5);
         } else if (riders[j].getType() == 2){
           square(t.position.x+adjustment, t.position.y, 3);
         }

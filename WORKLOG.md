@@ -153,6 +153,18 @@
 - Fixed the bug described in the previous entry. I ended up modifying the removeStation() method to change visitFlag's truth value depending on where the train was.
 - Modified/shortened a section of visitStation's code because it was unnecessary.
 
+### 6/9/2023
+
+- Edit stroke size for train lines to make them all visible when they overlap each other.
+- Create the three different types of trains (red = normal, blue = larger capacity, yellow = faster speed).
+
+### 6/10/2023
+
+- Fixed bug where the train would stop moving between two stations if they had the same x or y value.
+- Fixed bug where blue train would not unload all its passengers.
+- Add passengers to the train the moment the train spawns at a station.
+- Prevent the triangle passengers from wobbling.
+
 ### date y
 
 info

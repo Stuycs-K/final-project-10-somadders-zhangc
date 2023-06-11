@@ -174,15 +174,16 @@ void draw(){
     screen = 1;
   }
     background(255);
-    if(!paused) { internalClock += 1; }
-    if(internalClock % 600 - decline == 0){
-      for(int i = 0; i < (stations.size()/2) + 1; i++){
-          spawn();
+    if(!paused) { 
+      internalClock += 1; 
+      if(internalClock % 600- decline == 0){
+        for(int i = 0; i < (stations.size()/2) + 1; i++){
+            spawn();
+        }
       }
-     }
-
-    if(internalClock % 1500 == 0){
-      spawnStation();
+      if(internalClock % 1500 == 0){
+        spawnStation();
+      }
     }
 
     drawLines();
@@ -218,6 +219,7 @@ void draw(){
    }
   if(screen == 2){
     fill(255);
+    rectMode(CENTER);
     rect(width/2, height/2, 3 * width/4, height/3);
     fill(255,0,0);
     textSize(120);

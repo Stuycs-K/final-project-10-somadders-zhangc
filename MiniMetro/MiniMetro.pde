@@ -1,4 +1,4 @@
-import java.util.*; //<>// //<>//
+import java.util.*; //<>// //<>// //<>//
 
 ArrayList<Train> trains = new ArrayList<Train>();
 ArrayList<Station> stations = new ArrayList<Station>();
@@ -239,14 +239,70 @@ void draw(){
     fill(0);
     text("(1) Welcome to MiniMetro!", width/20, height/10);
     text("Press any key to continue", width/20, 9*height/10+10);
-    text(tutorialClock, width/2, height/2);
+    
+    textSize(24);
+    text("This is a recreation of the real MiniMetro in processing.", width/20+20, height/10+50);
+    text("To get started, lets learn how to add stations to train lines.", width/20+20, height/10+90);
+    text("First, click on a station already on a train route. If you have no stations already on a route, ", width/20+20, height/10+130);
+    text("use this procedure to create the route of that color.", width/20+20, height/10+155);
+    text("Next, click on another station that isn't already on the selected color's route.", width/20+20, height/10+195);
+    
+    stroke(RED);
+    strokeWeight(10);
+    line(0, height/2, width/3-30, height/2);
+    if(tutorialClock >375){
+    line(width/3-30, height/2, 2*width/3+30, height/2);
+    }
+    stroke(0);
+    fill(255);
+    strokeWeight(4);
+    circle(width/3-30, height/2, 80);
+    if(tutorialClock > 160){
+      fill(YELLOW);
+      circle(width/3-30, height/2, 80);
+    }
+    if(tutorialClock > 375){
+      fill(255);
+      circle(width/3-30, height/2, 80);
+    }
+    fill(255);
+    rectMode(CENTER);
+    square(2*width/3+30, height/2, 80);
+    
+    if(tutorialClock < 125){
+      triangle((width/3-20) + ((100.0) - tutorialClock), ((height/2)-200+tutorialClock*1.5), (width/3-20) + ((120.0) - tutorialClock), ((height/2)-160+tutorialClock*1.5), (width/3-20) + ((140.0) - tutorialClock), ((height/2)-180+tutorialClock*1.5));
+    }
+    if(tutorialClock >= 125 && tutorialClock < 150){
+      triangle((width/3-20)-25, (height/2)-12.5, (width/3-20)-5, (height/2)+27.5, (width/3-20)+15, (height/2)+7.5);
+    }
+    if(tutorialClock >= 150 && tutorialClock < 160){
+      triangle((width/3-20)-15, (height/2)-7.5, (width/3-20)-3, (height/2)+16.5, (width/3-20)+9, (height/2)+4.5);
+    }
+    if(tutorialClock >= 160 && tutorialClock < 190){
+      triangle((width/3-20)-25, (height/2)-12.5, (width/3-20)-5, (height/2)+27.5, (width/3-20)+15, (height/2)+7.5);
+    }
+    if(tutorialClock > 190 && tutorialClock < 340){
+      triangle((2*width/3-20)-359+(tutorialClock-190)*2.65, (height/2)-12.5, (2*width/3-20)-339+(tutorialClock-190)*2.65, (height/2)+27.5, (2*width/3-20)-319+(tutorialClock-190)*2.65, (height/2)+7.5);
+    }
+    if(tutorialClock >= 340 && tutorialClock < 365){
+      triangle((2*width/3+30)-15, (height/2)-12.5, (2*width/3+30)+5, (height/2)+27.5, (2*width/3+30)+25, (height/2)+7.5);
+    }
+    if(tutorialClock >= 365 && tutorialClock < 375){
+      triangle((2*width/3+30)-5, (height/2)-7.5, (2*width/3+30)+7, (height/2)+16.5, (2*width/3+30)+19, (height/2)+4.5);
+    }
+    if(tutorialClock >= 375){
+      triangle((2*width/3+30)-15+((tutorialClock - 375)*7), (height/2)-12.5+((tutorialClock - 375)*4), (2*width/3+30)+5+((tutorialClock - 375)*7), (height/2)+27.5+((tutorialClock - 375)*4), (2*width/3+30)+25+((tutorialClock - 375)*7), (height/2)+7.5+((tutorialClock - 375)*4));
+    }
+    
     tutorialClock++;
-    if(tutorialClock >= 1200){
+    if(tutorialClock >= 500){
       tutorialClock = 0;
     }
   }
   if(screen == -3){
     background(220);
+    textSize(40);
+    fill(0);
     text("(2) Removing Stations", width/20, height/10);
     text("Press any key to continue", width/20, 9*height/10+10);
     text(tutorialClock, width/2, height/2);
@@ -257,6 +313,8 @@ void draw(){
   }
   if(screen == -4){
     background(220);
+    textSize(40);
+    fill(0);
     text("(3) Passengers", width/20, height/10);
     text("Press any key to continue", width/20, 9*height/10+10);
     text(tutorialClock, width/2, height/2);
@@ -267,6 +325,8 @@ void draw(){
   }
   if(screen == -5){
     background(220);
+    fill(0);
+    textSize(40);
     text("(4) Construction Mode", width/20, height/10);
     text("Press any key to continue", width/20, 9*height/10+10);
     text(tutorialClock, width/2, height/2);
@@ -277,6 +337,8 @@ void draw(){
   }
   if(screen == -6){
     background(220);
+    textSize(40);
+    fill(0);
     text("(5) Score", width/20, height/10);
     text("Press any key to exit tutorial", width/20, 9*height/10+10);
     text(tutorialClock, width/2, height/2);

@@ -287,6 +287,7 @@ public class Train{
     position = new PVector(st.getX(),st.getY());
     speed = 2;
     if(selectedRoute == 2) speed = 4;
+    st.loadTrain(this);
     trains.add(this);
   }
   

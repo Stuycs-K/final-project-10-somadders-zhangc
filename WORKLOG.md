@@ -73,6 +73,7 @@
 - Fixed game over rectangle to be center mode and not corner mode.
 - Fixed bug in which pausing at a specific frame spawned passengers every frame while in the pause menu (1/600 chance) and spawned stations every frame (1/1500 chance)
 - Play tested the actual game, encountered bug in which trains pause at their station- only continuing when their original next station is removed- seems to be station specific and lasts throughout the game.
+- Added tutorial screens 1, 2, 3.
 
 ## Calvin Zhang
 

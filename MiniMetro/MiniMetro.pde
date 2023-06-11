@@ -26,7 +26,7 @@ void setup(){
   spawnStation(0);
   spawnStation(1);
   spawnStation(2);
-  
+
   spawn();
   spawn();
   /*
@@ -36,7 +36,7 @@ void setup(){
   Passenger p = new Passenger();
   t.add(p);
   */
-  
+
   /* //TESTING VISIT STATION
   System.out.println(t.position);
   System.out.println(s1.x + " " + s1.y);
@@ -94,12 +94,12 @@ void draw(){
     circle(width/5,height/3,50);
     square(width*6/7,height/2,50);
     triangle(width*1/7+25,height*2/3+25,width*1/7,height*2/3-25,width*1/7-25,height*2/3+25);
-    
+
     // create cover over background objects
     fill(200,200);
     rectMode(CORNER);
     rect(0,0,width,height);
-    
+
     // text on screen
     fill(0);
     stroke(0);
@@ -111,7 +111,7 @@ void draw(){
     String b1 = "Game remade by Calvin Zhang and Siddhartha Somadder";
     textSize(15);
     text(b1,(width-sw)/2+10,height*3/11+20);
-    
+
     // button for play
     fill(100,100);
     if(mouseX > (width-sw)/2 && mouseX < (width-sw)/2+sw && mouseY < height*3/11+95 && mouseY > height*3/11+40){
@@ -125,7 +125,7 @@ void draw(){
     triangle((width-sw)/2+20+5,height*3/11+67.5,(width-sw)/2+20-5*(float)Math.cos(PI/3),height*3/11+67.5-5*(float)Math.sin(PI/3),(width-sw)/2+20-5*(float)Math.cos(PI/3),height*3/11+67.5+5*(float)Math.sin(PI/3));
     stroke(0);
     fill(255);
-    
+
     // button for tutorial
     fill(100,100);
     if(mouseX > (width-sw)/2 && mouseX < (width-sw)/2+sw && mouseY < height*3/11+155 && mouseY > height*3/11+100){
@@ -140,7 +140,7 @@ void draw(){
     stroke(0);
     fill(255);
   }
-  
+
   if(screen == 0){
       int count = 0;
       int scoreCount = 0;
@@ -155,18 +155,18 @@ void draw(){
             }
           }
         }
-      }  
-  
+      }
+
     for(int i = 0; i < stations.size(); i++){
         count+= stations.get(i).getOvercrowded();
     }
     overcrowdedCount = count + delayedPassengers;
-  
+
     for(int i = 0; i < trains.size(); i++){
       scoreCount+= trains.get(i).getDrop();
     }
     totalPassengers = scoreCount;
-  
+
   if(overcrowdedCount > 50){
     screen = 2;
   }
@@ -174,8 +174,8 @@ void draw(){
     screen = 1;
   }
     background(255);
-    if(!paused) { 
-      internalClock += 1; 
+    if(!paused) {
+      internalClock += 1;
       if(internalClock % 600- decline == 0){
         for(int i = 0; i < (stations.size()/2) + 1; i++){
             spawn();
@@ -188,7 +188,7 @@ void draw(){
 
     drawLines();
     displayStations();
-    
+
     drawTrains();
     fill(0);
     textSize(32);
@@ -196,7 +196,7 @@ void draw(){
     text("Overcrowded Counter: " + overcrowdedCount, width/25, height/24);
     line(0, 60, width, 60);
     drawSelectedLines();
-    
+
     // pause button
     if(paused == true){
       stroke(0);
@@ -415,12 +415,12 @@ void mousePressed(){
   if(screen == -1 && mouseX > (width-textWidthMM)/2 && mouseX < (width-textWidthMM)/2+textWidthMM && mouseY < height*3/11+95 && mouseY > height*3/11+40){
     screen = 0;
   }
-  
+
   if(screen == -1 && mouseX > (width-textWidthMM)/2 && mouseX < (width-textWidthMM)/2+textWidthMM && mouseY < height*3/11+155 && mouseY > height*3/11+100){
     tutorialClock = 0;
     screen = -2;
   }
-  
+
   // pause the game
   if(screen == 0 && mouseX > width/2-15 && mouseX < width/2+15 && mouseY > 15 && mouseY < 45){
     if(paused){
@@ -429,7 +429,7 @@ void mousePressed(){
       paused = true;
     }
   }
-  
+
   //trains.get(0).removeStation(redLine.get(1));
   /*
   for(int i = 0; i < trains.size(); i++){
@@ -445,7 +445,7 @@ void mousePressed(){
         savedStIndex = i;
       }
       else if(numClick == 1){
-        if(mouseX > stations.get(savedStIndex).getX() - 25 && mouseX < stations.get(savedStIndex).getX() 
+        if(mouseX > stations.get(savedStIndex).getX() - 25 && mouseX < stations.get(savedStIndex).getX()
         + 50 && mouseY > stations.get(savedStIndex).getY() - 25 && mouseY < stations.get(savedStIndex).getY() + 25){
             stations.get(savedStIndex).setStatus(false);
             numClick = 0;
@@ -462,7 +462,7 @@ void mousePressed(){
           for(int j = 0; j < trains.size(); j++){
             if(selectedRoute == trains.get(j).trainLineNum){
               flag = false;
-              
+
               if(stations.get(savedStIndex) == getTrainLine(selectedRoute).get(0)){
                 trains.get(j).addStationFIRST(target);
               }
@@ -500,7 +500,7 @@ void keyPressed(){
       selectedRoute = (selectedRoute + 1) % 3;
     }
   }
-  
+
 }
 
 void spawn(){
@@ -538,6 +538,13 @@ void spawnStation(int type){
       }
     }
   }
+  ST.addPassengers();
+  stations.add(ST);
+}
+
+// BUG TESTING PURPOSES ONLY
+void spawnStation(float x, float y){
+  Station ST = new Station(x,y);
   ST.addPassengers();
   stations.add(ST);
 }
@@ -610,22 +617,27 @@ void displayStations(){
 
 void drawLines(){
   // go through all three lines and draw connected stations
-  for(int i = 0; i < redLine.size()-1; i++){
-    drawLine(redLine.get(i),redLine.get(i+1),RED);
+  for(int i = 0; i < yellowLine.size()-1; i++){
+    drawLine(yellowLine.get(i),yellowLine.get(i+1),YELLOW);
   }
   for(int i = 0; i < blueLine.size()-1; i++){
     drawLine(blueLine.get(i),blueLine.get(i+1),BLUE);
   }
-  for(int i = 0; i < yellowLine.size()-1; i++){
-    drawLine(yellowLine.get(i),yellowLine.get(i+1),YELLOW);
+  for(int i = 0; i < redLine.size()-1; i++){
+    drawLine(redLine.get(i),redLine.get(i+1),RED);
   }
 }
 
 // helper for drawLines()
 void drawLine(Station s1, Station s2, color c){
+  if(c == YELLOW)
   strokeWeight(10);
+  if(c == BLUE)
+  strokeWeight(6);
+  if(c == RED)
+  strokeWeight(2);
   stroke(c);
-  
+
   if(s2.getX() >= s1.getX() && s2.getY() >= s1.getY()){
     if(s2.getX() - s1.getX() > s2.getY() - s1.getY()){
       line(s1.getX(),s1.getY(), s1.getX()+s2.getY()-s1.getY(),s2.getY());
@@ -682,9 +694,9 @@ void drawTrains(){
         if(riders[j].getType() == 0){
           circle(t.position.x+adjustment, t.position.y, 3);
         } else if (riders[j].getType() == 1){
-          triangle(t.position.x+adjustment, t.position.y+1.5,
-            t.position.x+adjustment+1.5*(float)Math.sin(PI/3), t.position.y-1.5*(float)Math.cos(PI/3),
-            t.position.x+adjustment-1.5*(float)Math.sin(PI/3), t.position.y-1.5*(float)Math.cos(PI/3));
+          triangle(t.position.x+adjustment, t.position.y+0.5,
+            t.position.x+adjustment+1, t.position.y-1.5,
+            t.position.x+adjustment-1, t.position.y-1.5);
         } else if (riders[j].getType() == 2){
           square(t.position.x+adjustment, t.position.y, 3);
         }

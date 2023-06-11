@@ -18,7 +18,7 @@ public class Train{
     if(stopTime != 0){
       stopTime++;
       // unload train when stopped at a station one passenger at a time
-      if(stopTime % 4 == 0){
+      if(stopTime % 2 == 0){
         unload(nextSt);
       }
       // set next station once time limit is up and load the train

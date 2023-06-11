@@ -237,26 +237,51 @@ void draw(){
     fill(0);
     text("(1) Welcome to MiniMetro!", width/20, height/10);
     text("Press any key to continue", width/20, 9*height/10+10);
+    text(tutorialClock, width/2, height/2);
+    tutorialClock++;
+    if(tutorialClock >= 1200){
+      tutorialClock = 0;
+    }
   }
   if(screen == -3){
     background(220);
     text("(2) Removing Stations", width/20, height/10);
     text("Press any key to continue", width/20, 9*height/10+10);
+    text(tutorialClock, width/2, height/2);
+    tutorialClock++;
+    if(tutorialClock >= 1200){
+      tutorialClock = 0;
+    }
   }
   if(screen == -4){
     background(220);
     text("(3) Passengers", width/20, height/10);
     text("Press any key to continue", width/20, 9*height/10+10);
+    text(tutorialClock, width/2, height/2);
+    tutorialClock++;
+    if(tutorialClock >= 1200){
+      tutorialClock = 0;
+    }
   }
   if(screen == -5){
     background(220);
     text("(4) Construction Mode", width/20, height/10);
     text("Press any key to continue", width/20, 9*height/10+10);
+    text(tutorialClock, width/2, height/2);
+    tutorialClock++;
+    if(tutorialClock >= 1200){
+      tutorialClock = 0;
+    }
   }
   if(screen == -6){
     background(220);
     text("(5) Score", width/20, height/10);
     text("Press any key to exit tutorial", width/20, 9*height/10+10);
+    text(tutorialClock, width/2, height/2);
+    tutorialClock++;
+    if(tutorialClock >= 1200){
+      tutorialClock = 0;
+    }
   }
 }
 
@@ -267,6 +292,7 @@ void mousePressed(){
   }
   
   if(screen == -1 && mouseX > (width-textWidthMM)/2 && mouseX < (width-textWidthMM)/2+textWidthMM && mouseY < height*3/11+155 && mouseY > height*3/11+100){
+    tutorialClock = 0;
     screen = -2;
   }
   
@@ -340,6 +366,7 @@ void keyPressed(){
   if(keyCode == ' '){
     if(screen <= -2 && screen >= -6){
       screen--;
+      tutorialClock = 0;
       if(screen == -7){
         screen = -1;
       }

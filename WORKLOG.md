@@ -170,6 +170,10 @@
 - Add passengers to the train the moment the train spawns at a station.
 - Prevent the triangle passengers from wobbling.
 
+### 6/11/2023
+
+- Minor code cleanup and re-fix bug where triangle passengers wobbled a lot.
+
 ### date y
 
 info

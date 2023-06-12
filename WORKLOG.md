@@ -75,6 +75,11 @@
 - Play tested the actual game, encountered bug in which trains pause at their station- only continuing when their original next station is removed- seems to be station specific and lasts throughout the game.
 - Added tutorial screens 1, 2, 3.
 
+### 6/11/2023
+- Fixed animation bug on tutorial screen 1.
+- Finished tutorial.
+- Fixed small bug in the order to which new lines were drawn.
+
 ## Calvin Zhang
 
 ### 5/22/2023

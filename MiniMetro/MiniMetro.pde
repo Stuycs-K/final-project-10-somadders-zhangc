@@ -1,4 +1,4 @@
-import java.util.*; //<>// //<>// //<>// //<>//
+import java.util.*; //<>// //<>// //<>// //<>// //<>//
 
 ArrayList<Train> trains = new ArrayList<Train>();
 ArrayList<Station> stations = new ArrayList<Station>();
@@ -490,7 +490,7 @@ void draw(){
     textSize(24);
     text("Finally, in order to prove your worth, you must reach a score of 500 or more!", width/20+20, height/10+50);
     text("When a passenger is successfully dropped off into their station of choice, you get a point.", width/20+20, height/10+90);
-    text("However, be wary that if you overcrowd too much, you lose!", width/20+20, height/10+130);
+    text("However, be wary that if you overcrowd too much (>50), you lose!", width/20+20, height/10+130);
     text("Hence, make sure passengers aren't waiting at a station for too long,", width/20+20, height/10+170);
     text("and that stations don't fill up to their capacity (6 passengers)!", width/20+20, height/10+210);
     

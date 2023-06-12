@@ -1,4 +1,4 @@
-import java.util.*; //<>// //<>// //<>//
+import java.util.*; //<>// //<>// //<>// //<>//
 
 ArrayList<Train> trains = new ArrayList<Train>();
 ArrayList<Station> stations = new ArrayList<Station>();
@@ -238,7 +238,7 @@ void draw(){
     textSize(40);
     fill(0);
     text("(1) Welcome to MiniMetro!", width/20, height/10);
-    text("Press any key to continue", width/20, 9*height/10+10);
+    text("Press space to continue", width/20, 9*height/10+10);
     
     textSize(24);
     text("This is a recreation of the real MiniMetro in processing.", width/20+20, height/10+50);
@@ -306,7 +306,7 @@ void draw(){
     textSize(40);
     fill(0);
     text("(2) Removing Stations", width/20, height/10);
-    text("Press any key to continue", width/20, 9*height/10+10);
+    text("Press space to continue", width/20, 9*height/10+10);
     
     textSize(24);
     text("Removing stations from a line is just as easy!", width/20+20, height/10+50);
@@ -377,7 +377,7 @@ void draw(){
     textSize(40);
     fill(0);
     text("(3) Passengers", width/20, height/10);
-    text("Press any key to continue", width/20, 9*height/10+10);
+    text("Press space to continue", width/20, 9*height/10+10);
     
     textSize(24);
     text("Passengers come in three types corresponding to the station they want to go to.", width/20+20, height/10+50);
@@ -412,10 +412,71 @@ void draw(){
     fill(0);
     textSize(40);
     text("(4) Construction Mode", width/20, height/10);
-    text("Press any key to continue", width/20, 9*height/10+10);
-    text(tutorialClock, width/2, height/2);
+    text("Press space to continue", width/20, 9*height/10+10);
+    textSize(24);
+    text("At times, you may need to reconstruct your entire network to be more efficient.", width/20+20, height/10+50);
+    text("Then, you may want to use the pause button! It is found on the top of the screen in game.", width/20+20, height/10+90);
+    text("When the game is paused, all trains stop and no new passengers or stations spawn.", width/20+20, height/10+130);
+    text("However you still have free reign to add or remove stations however you please.", width/20+20, height/10+170);
+    text("In addition, you may change what color line you are editing using the spacebar!", width/20+20, height/10+500);
+    text("Remember, stations of a particular color are only able to be", width/20+20, height/10+540);
+    text("removed from that color if it is selected.", width/20+20, height/10+565);
+    text("The blue line holds more passengers, yellow line is faster, and red line is average.", width/20+20, height/10+605);
+    
+    stroke(RED);
+    line(width/3-3, 2*height/3-30, width/2-50, height/3+40);
+    stroke(0);
+    fill(255); 
+    rectMode(CENTER); 
+    circle(width/3-3, 2*height/3-30, 50);
+    square(width/2-50, height/3+40, 45);
+    if(tutorialClock < 120){
+      rect((width/2-50)-120+tutorialClock/2, (height/3+40)+((height/3-70))-tutorialClock*0.85, 30, 30, 10, 10, 10, 10);
+    }
+    if(tutorialClock >=120 && tutorialClock < 240){
+      rect((width/2-50)-60, (height/3+40)+((height/3-70))-120*0.85, 30, 30, 10, 10, 10, 10);
+    }
+    if(tutorialClock >= 240 && tutorialClock < 360){
+      rect((width/2-50)-120+(tutorialClock-120)/2, (height/3+40)+((height/3-70))-(tutorialClock-120)*0.85, 30, 30, 10, 10, 10, 10);
+    }
+    if(tutorialClock >=360){
+      rect(width/2-50, height/3+40, 30, 30, 10, 10, 10, 10);
+    }
+    
+        
+    if(tutorialClock >= 0 && tutorialClock < 120){
+      fill(255);
+      circle(width/5, height/2, 80);
+      rect(width/5-10, height/2, 15, 40);
+      rect(width/5+10, height/2, 15, 40);
+      fill(0);
+      circle(2*width/3, height/3+30, 50);
+    }
+    if(tutorialClock >= 120 && tutorialClock < 240){
+      fill(255);
+      circle(width/5, height/2, 80);
+      triangle(width/5+30, height/2, width/5-20, height/2-30, width/5-20, height/2+30);
+      fill(0);
+      circle(2*width/3, 2*height/3-30, 50);
+    }
+    if(tutorialClock >= 240){
+      fill(255);
+      circle(width/5, height/2, 80);
+      rect(width/5-10, height/2, 15, 40);
+      rect(width/5+10, height/2, 15, 40);
+      fill(0);
+      circle(2*width/3, height/2, 50);
+    }
+    noStroke();
+    fill(RED);
+    circle(2*width/3, height/3+30, 40);
+    fill(BLUE);
+    circle(2*width/3, height/2, 40);
+    fill(YELLOW);
+    circle(2*width/3, 2*height/3-30, 40);
+    
     tutorialClock++;
-    if(tutorialClock >= 1200){
+    if(tutorialClock >= 400  ){
       tutorialClock = 0;
     }
   }
@@ -424,7 +485,15 @@ void draw(){
     textSize(40);
     fill(0);
     text("(5) Score", width/20, height/10);
-    text("Press any key to exit tutorial", width/20, 9*height/10+10);
+    text("Press space to exit tutorial", width/20, 9*height/10+10);
+    
+    textSize(24);
+    text("Finally, in order to prove your worth, you must reach a score of 500 or more!", width/20+20, height/10+50);
+    text("When a passenger is successfully dropped off into their station of choice, you get a point.", width/20+20, height/10+90);
+    text("However, be wary that if you overcrowd too much, you lose!", width/20+20, height/10+130);
+    text("Hence, make sure passengers aren't waiting at a station for too long,", width/20+20, height/10+170);
+    text("and that stations don't fill up to their capacity (6 passengers)!", width/20+20, height/10+210);
+    
 
   }
 }
@@ -642,6 +711,11 @@ void drawLines(){
 
 // helper for drawLines()
 void drawLine(Station s1, Station s2, color c){
+  if(c == YELLOW)
+  strokeWeight(2);
+  if(c == BLUE)
+  strokeWeight(6);
+  if(c == RED)
   strokeWeight(10);
   stroke(c);
   

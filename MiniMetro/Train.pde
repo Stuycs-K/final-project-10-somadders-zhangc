@@ -188,10 +188,6 @@ public class Train{
     } else {return null;}
   }
   
-  private float calculateStationDist(Station st1, Station st2){
-    return Math.abs(st1.getX() - st2.getY()) + Math.abs(st1.getY() - st2.getY());
-  }
-  
   public void addStation(Station st){
     if(selectedRoute == 0){
       redLine.addLast(st);

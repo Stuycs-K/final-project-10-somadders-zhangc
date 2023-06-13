@@ -9,7 +9,7 @@ THIS DOCUMENT IS REQUIRED
 - This project will be recreating the game Mini Metro in Processing. The game will involve spawning train stations of a certain shape (circle, triangle, or square) in a certain interval of time. At each station, passengers will spawn wanting to go to another station which will be indicated by the shape of the passenger. The goal of the player is to connect train routes through the train stations to avoid overcrowding at any station. If overcrowding occurs too frequently, then it is game over and the score is the number of passengers served.
 
 ## Instructions
-- Press Play or How to Play to enter the game or read a tutorial, respectively.
+- Press Play or Tutorial to enter the game or read a tutorial, respectively.
 - Joining Stations: Click on one station and then another to connect them to the selected train route. A station cannot be added to a route if it is already in the middle of that route. Stations can be a part of two or more different routes at the same time.
 - Removing Stations: Double click on a station to remove it from a train line. Removing a station from a type of route color requires you to have that route color to be selected.
 - Switching Routes: Press spacebar to cycle through which train route you are editing (RED, BLUE, YELLOW).
